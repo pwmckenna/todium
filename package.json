@@ -1,6 +1,14 @@
 {
-  "author": "",
-  "name": "",
+  "author": {
+    "name": "Patrick Williams",
+    "email": "pwmckenna@gmail.com",
+    "url": "pwmckenna.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pwmckenna/todium.git"
+  },
+  "name": "todium",
   "version": "0.0.0",
   "dependencies": {},
   "devDependencies": {}
