@@ -2,6 +2,6 @@
   "name": "featureable",
   "dependencies": {
     "backbone": "0.9.9",
-    "bt-labs": "git://github.com/slightlyoffbeat/bt-labs.git"
+    "underscore": "~1.4.3"
   }
 }
