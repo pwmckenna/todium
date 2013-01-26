@@ -30,12 +30,11 @@ before_script:
   - gem install jpegtran
   - gem install optipng
   - npm install yeoman -g
-  - yeoman --version
 script:
   # We want to gate on passing tests and a successful build
-  - yeoman install
+  - yeoman install --disable-insight
   - ls -R app/
-  - yeoman test
+  - yeoman test --disable-insight
   - yeoman build --disable-insight
   - ls dist
 after_script:
