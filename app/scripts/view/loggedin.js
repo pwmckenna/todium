@@ -54,7 +54,7 @@ define([
 
 
             var userTracker = this.model.firebase.child('trackers').push();
-            magnetLink += '&tr=http://featureable.herokuapp.com/' + userTracker.name() + '/announce';
+            magnetLink += '&tr=http://tracker.todium.com/' + userTracker.name() + '/announce';
             userTracker.set({
                 owner: this.model.get('user').id,
                 info_hash: info_hash,
