@@ -33,6 +33,8 @@ before_script:
   - yeoman --version
 script:
   # We want to gate on passing tests and a successful build
+  - yeoman install
+  - ls -R app/
   - yeoman test
   - yeoman build --disable-insight
   - ls dist
