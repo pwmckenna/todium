@@ -1,5 +1,5 @@
 {
-  "name": "featureable",
+  "name": "todium",
   "dependencies": {
     "backbone": "0.9.9",
     "underscore": "~1.4.3"
