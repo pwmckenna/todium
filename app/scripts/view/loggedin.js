@@ -59,7 +59,7 @@ define([
                 owner: this.model.get('user').id,
                 info_hash: info_hash,
                 completed: 0,
-                size: 0,
+                transferred: 0,
                 url: magnetLink,
                 labels: []
             });

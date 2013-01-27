@@ -60,7 +60,7 @@
                     <input class="span11 shorty" type="text" url="<%= url %>" placeholder="<%= url %>" disabled></input>
                 </div>
                 <span class="label label-inverse">Downloads: <span class="badge"><%= completed %></span></span>
-                <span class="label label-inverse">Bytes: <span class="badge"><%= size * completed %></span></span>
+                <span class="label label-inverse">Transferred: <span class="badge"><%= transferred %></span></span>
                 <% if(typeof labels !== 'undefined') { _.each(labels, function(label) { %> 
                     <span class="label label-success">label</span>
                 <% }); } %>
