@@ -25,12 +25,14 @@
         <script type="text/template" id="app_template">
             <header class="jumbotron subhead row" id="overview">
                 <div class="container">
-                    <h1>Todium</h1>
+                    <h1>
+                        <span>Todium</span>
+                        <span class="login" style="float:right"></span>
+                    </h1>
                     <p class="lead">bit.ly for torrent/magnet links...see how many people download your content.</p>
                 </div>
             </header>
             <div class="container" style="margin-top:50px">
-                <div class="login"></div>
                 <div class="loggedin"></div>
             </div>
         </script>
@@ -50,7 +52,9 @@
         </script>
 
         <script type="text/template" id="login_template">
-            <button class="btn btn-large btn-block" type="button">Login to Facebook</button>
+            <button class="btn facebook" type="button"><i class="icon-facebook"></i></button>
+            <button class="btn github" type="button"><i class="icon-github"></i></button>
+            <button class="btn twitter" type="button"><i class="icon-twitter"></i></button>
         </script>
 
         <script type="text/template" id="tracker_template">
