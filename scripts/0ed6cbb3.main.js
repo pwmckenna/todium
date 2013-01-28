@@ -19,6 +19,7 @@ require.config({
         hm: 'vendor/hm',
         esprima: 'vendor/esprima',
         jquery: 'vendor/jquery.min',
+        smoothie: 'vendor/smoothie',
         underscore: 'components/underscore/underscore-min',
         backbone: 'components/backbone/backbone-min'
     }
