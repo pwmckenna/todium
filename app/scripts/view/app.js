@@ -3,8 +3,8 @@ define([
     'underscore',
     './view',
     './login',
-    './loggedin'
-], function($, _, View, LoginView, LoggedInView) {
+    './user'
+], function($, _, View, LoginView, UserView) {
     'use strict';
     var AppView = View.extend({
         initialize: function() {
@@ -13,14 +13,14 @@ define([
             this.loginView = new LoginView({
                 model: this.model
             });
-            this.loggedInView = new LoggedInView({
+            this.userView = new UserView({
                 model: this.model
             });
         },
         render: function() {
             this.$el.html(this.template());
 
-            this.assign(this.loggedInView, '.loggedin');                
+            this.assign(this.userView, '.user');                
             this.assign(this.loginView, '.login');
 
             return this;
