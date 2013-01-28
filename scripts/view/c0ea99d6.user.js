@@ -55,7 +55,7 @@ define([
 
             var user = this.model.get('user');
             var info_hash = magnetLink.substr(magnetLinkIdentifier.length, 40);
-            var globalTracker = this.model.firebase.child('users').child(user.id).child('trackers').push();
+            var globalTracker = this.model.firebase.child('users').child(user.provider).child(user.id).child('trackers').push();
             console.log('tracker id', globalTracker.name());
             console.log('info_hash', info_hash);
 
@@ -77,7 +77,7 @@ define([
             console.log('onUser', this.model.get('user'));
             var user = this.model.get('user');
             if(user) {
-                var trackers = this.model.firebase.child('users').child(user.id).child('trackers');
+                var trackers = this.model.firebase.child('users').child(user.provider).child(user.id).child('trackers');
                 trackers.on('child_added', this.onTrackerAdded, this);
                 trackers.on('child_removed', this.onTrackerRemoved, this);
                 if(this.removeCallbacks) {
