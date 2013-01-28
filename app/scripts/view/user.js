@@ -5,6 +5,9 @@ define([
     './tracker'
 ], function($, _, View, TrackerView) {
     'use strict';
+
+    var MAGNET_LINK_IDENTIFIER = 'magnet:?xt=urn:btih:';
+
     var LoggedInView = View.extend({
         events: {
             'click .addTracker': 'onAddTracker'
@@ -31,35 +34,10 @@ define([
             view.remove();
             delete this.views[trackerName];
         },
-        onAddTracker: function(ev) {
-            var button = this.$('.btn');
-            if(button.hasClass('disabled')) {
-                return;
-            }
-            button.addClass('disabled');
-            setTimeout(function() {
-                button.removeClass('disabled');
-            }, 3000);
-
-            var magnetLink = this.$('.createTorrentLink').val();
-            if(!magnetLink) {
-                return;
-            }
-            this.$('.createTorrentLink').val('');            
-
-            var magnetLinkIdentifier = 'magnet:?xt=urn:btih:';
-            if(magnetLink.indexOf(magnetLinkIdentifier) !== 0) {
-                console.log('bad torrent link');
-                return;
-            }
-
+        addMagnetLink: function(magnetLink) {
+            var info_hash = magnetLink.substr(MAGNET_LINK_IDENTIFIER.length, 40);
             var user = this.model.get('user');
-            var info_hash = magnetLink.substr(magnetLinkIdentifier.length, 40);
             var globalTracker = this.model.firebase.child('users').child(user.provider).child(user.id).child('trackers').push();
-            console.log('tracker id', globalTracker.name());
-            console.log('info_hash', info_hash);
-
-
             var userTracker = this.model.firebase.child('trackers').push();
             magnetLink += '&tr=http://tracker.todium.com/' + userTracker.name() + '/announce';
             userTracker.set({
@@ -71,7 +49,31 @@ define([
                 labels: []
             });
             globalTracker.set(userTracker.name());
+        },
+        onAddTracker: function(ev) {
+            var button = this.$('.btn');
+            if(button.hasClass('disabled')) {
+                return;
+            }
+            button.addClass('disabled');
+            setTimeout(function() {
+                button.removeClass('disabled');
+            }, 3000);
 
+            var torrentLink = this.$('.createTorrentLink').val();
+            if(!torrentLink) {
+                return;
+            }
+            this.$('.createTorrentLink').val('');            
+
+            if(torrentLink.indexOf(MAGNET_LINK_IDENTIFIER) === 0) {
+                this.addMagnetLink(torrentLink);
+            } else {
+                var hashRequest = $.getJSON('http://hasher.todium.com?torrent=' + torrentLink);
+                hashRequest.then(_.bind(function(info_hash) {
+                    this.addMagnetLink(MAGNET_LINK_IDENTIFIER + info_hash);
+                }, this));
+            } 
         },
         onUser: function() {
             console.log('onUser', this.model.get('user'));
