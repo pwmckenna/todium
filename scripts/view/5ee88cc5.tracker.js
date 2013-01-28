@@ -15,6 +15,13 @@ define([
         }, 1000);
     });
 
+    var bytesToSize = function(bytes) {
+        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        if (bytes == 0) return 'n/a';
+        var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+        return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+    }
+
     var TrackerView = View.extend({
         events: {
             'mouseover .copy': 'onCopy'
@@ -24,7 +31,7 @@ define([
             this.template = _.template($('#tracker_template').html());
             this.model.on('value', function(valueSnapshot) {
                 var val = valueSnapshot.val();
-                this.url = val.url;
+                val.transferred = bytesToSize(val.transferred);
                 this.$el.html(this.template(val));
             }, this);
         },
