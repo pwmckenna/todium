@@ -8,7 +8,7 @@ define([
 
     var MAGNET_LINK_IDENTIFIER = 'magnet:?xt=urn:btih:';
 
-    var LoggedInView = View.extend({
+    var UserView = View.extend({
         events: {
             'click .addTracker': 'onAddTracker'
         },
@@ -113,5 +113,5 @@ define([
             return this;
         }
     });
-    return LoggedInView;
+    return UserView;
 });
