@@ -9,8 +9,8 @@ define([
             this.firebase = new Firebase('https://featuredcontent.firebaseIO.com/');
             this.auth = new FirebaseAuthClient(this.firebase);
         },
-        login: function() {
-            this.auth.login('facebook', _.bind(this.onLogin, this));
+        login: function(provider) {
+            this.auth.login(provider, _.bind(this.onLogin, this));
         },
         onLogin: function(error, token, user) {
             console.log('onLogin', error, token, user);
