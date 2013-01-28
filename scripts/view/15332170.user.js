@@ -10,19 +10,26 @@ define([
             'click .addTracker': 'onAddTracker'
         },
         initialize: function() {
-            _.bindAll(this, 'onTrackerAdded');
-            this.template = _.template($('#logged_in_template').html());
+            this.template = _.template($('#user_template').html());
             this.model.on('change:user', this.onUser, this);
-            this.views = [];
+            this.views = {};
         },
         onTrackerAdded: function(dataSnapshot) {
+            console.log('onTrackerAdded', dataSnapshot.val());
             var trackerName = dataSnapshot.val();
             var tracker = this.model.firebase.child('trackers').child(trackerName);
             var view = new TrackerView({
                 model: tracker
             });
-            this.views[tracker] = view;
+            this.views[trackerName] = view;
             this.$('.trackers').append(view.$el);
+        },
+        onTrackerRemoved: function(dataSnapshot) {
+            console.log('onTrackerRemoved', dataSnapshot.val());
+            var trackerName = dataSnapshot.val();
+            var view = this.views[trackerName];
+            view.remove();
+            delete this.views[trackerName];
         },
         onAddTracker: function(ev) {
             var button = this.$('.btn');
@@ -67,14 +74,35 @@ define([
 
         },
         onUser: function() {
+            console.log('onUser', this.model.get('user'));
             var user = this.model.get('user');
             if(user) {
-                this.model.firebase.child('users').child(user.id).child('trackers').on('child_added', this.onTrackerAdded);
+                var trackers = this.model.firebase.child('users').child(user.id).child('trackers');
+                trackers.on('child_added', this.onTrackerAdded, this);
+                trackers.on('child_removed', this.onTrackerRemoved, this);
+                if(this.removeCallbacks) {
+                    throw 'leaking callbacks';
+                }
+                this.removeCallbacks = _.bind(function() {
+                    trackers.off('child_added', this.onTrackerAdded, this);
+                    trackers.off('child_removed', this.onTrackerRemoved, this);                    
+                }, this);
+            } else if(this.removeCallbacks) {
+                _.each(this.views, function(view) {
+                    view.destroy();
+                    view.remove();
+                });
+                this.views = {};
+                this.removeCallbacks();
+                this.removeCallbacks = undefined;
             }
             this.render();
         },
         render: function() {
+            var trackers = this.$('.trackers').children().detach();
             this.$el.html(this.template());
+            this.$('.trackers').append(trackers);
+
             if(this.model.get('user')) {
                 this.$el.show();
             } else {

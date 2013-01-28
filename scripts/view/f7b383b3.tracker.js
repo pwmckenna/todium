@@ -29,12 +29,17 @@ define([
         initialize: function() {
             this.url = '...';
             this.template = _.template($('#tracker_template').html());
-            this.model.on('value', function(valueSnapshot) {
-                var val = valueSnapshot.val();
-                this.url = val.url;
-                val.transferred = bytesToSize(val.transferred);
-                this.$el.html(this.template(val));
-            }, this);
+            this.model.on('value', this.onValue, this);
+        },
+        destroy: function() {
+            this.model.off('value', this.onValue, this);
+        },
+        onValue: function(valueSnapshot) {
+            console.log('onValue', valueSnapshot.val());
+            var val = valueSnapshot.val();
+            this.url = val.url;
+            val.transferred = bytesToSize(val.transferred);
+            this.$el.html(this.template(val));
         },
         onCopy: function(ev) {
             console.log('onCopy', this.url);
