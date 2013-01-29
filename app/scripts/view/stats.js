@@ -20,7 +20,11 @@ define([
 
             this.model.on('change:user', this.onUser, this);
             this.model.firebase.child('transferred').on('value', this.onValue, this);
-
+            window.addEventListener('resize', _.bind(this.resizeCanvas, this), false);
+            setTimeout(_.bind(this.resizeCanvas, this));
+        },
+        resizeCanvas: function() {
+            this.$('.chart')[0].width = this.$el.parent().innerWidth();
         },
         onValue: function(valueSnapshot) {
             var transferredDays = valueSnapshot.val();
@@ -47,8 +51,8 @@ define([
             var zero = new Smoothie.TimeSeries();
             zero.append(new Date().getTime(), 0);
             chart.addTimeSeries(this.series, { strokeStyle:'rgb(0, 255, 0)', fillStyle: 'rgba(255, 255, 255, 0.2)', lineWidth: 5 });
-            chart.addTimeSeries(goal, { lineWidth: 0 });
-            chart.addTimeSeries(zero, { lineWidth: 0 });
+            //chart.addTimeSeries(goal, { lineWidth: 0 });
+            //chart.addTimeSeries(zero, { lineWidth: 0 });
             chart.streamTo(this.$('.chart')[0], 1000);
 
             return this;
