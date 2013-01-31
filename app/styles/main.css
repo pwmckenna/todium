@@ -1,14 +1,34 @@
 .jumbotron {
     background-color: #EA5B54;
-    color: #f8f8f8;
+    color: #333;
     border-bottom: 1px solid #838383;
 }
 .jumbotron h1 {
     font-family: 'Oswald', sans-serif;
     margin-top: 25px;
+    font-size: 80px;
+    line-height: 70px;
+    float: left;
+}
+.jumbotron .lead {
+  float: left;
+  margin: 30px;
+}
+.jumbotron .login .btn {
+  margin-top: 20px;
+  width: 80px;
+  height: 80px;
 }
 .jumbotron > .container > * {
     margin-left: 30px;
+}
+.jumbotron .btn i {
+  margin: 10px;
+  line-height: 40px;
+}
+.jumbotron .btn i::before {
+  font-size: 40px;
+  margin-top: 20px;
 }
 body {
 	background: url(/images/grey.png);
