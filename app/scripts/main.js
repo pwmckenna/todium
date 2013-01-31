@@ -13,6 +13,9 @@ require.config({
           "exports": "Backbone"
 
         },
+        "humane": {
+          "exports": "humaneDate"
+        }
     },
 
     paths: {
@@ -21,7 +24,8 @@ require.config({
         jquery: 'vendor/jquery.min',
         smoothie: 'vendor/smoothie',
         underscore: 'components/underscore/underscore-min',
-        backbone: 'components/backbone/backbone-min'
+        backbone: 'components/backbone/backbone-min',
+        humane: 'components/Humane-Dates/humane'
     }
 });
  
