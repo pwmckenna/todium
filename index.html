@@ -13,10 +13,10 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         
-        <link href='http://fonts.googleapis.com/css?family=Abril+Fatface' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="styles/9ca8c101.bootstrap.css">
         <link rel="stylesheet" href="styles/576c6595.font-awesome.css">
-        <link rel="stylesheet" href="styles/2f531a14.main.css">
+        <link rel="stylesheet" href="styles/b40e3a5e.main.css">
         <script src="scripts/vendor/cf69c6f2.modernizr.min.js"></script>
         <script src="scripts/vendor/b7cdd774.ZeroClipboard.js"></script>
 
@@ -39,7 +39,7 @@
         </script>
         
         <script type="text/template" id="stats_template">
-            <canvas class="chart" width="1170" height="600"></canvas>
+            <canvas class="chart" width="1170" height="400"></canvas>
         </script>
 
         <script type="text/template" id="user_template">
@@ -47,7 +47,7 @@
             <br>
             <br>
             <div class="well">
-                <div class="input-append">
+                <div class="input-prepend">
                     <span class="add-on">Torrent link:</span>
                     <input class="span10 createTorrentLink" type="text" placeholder="http://XXXXXX.com/XXXXXX.torrent    /    magnet:?xt=urn:btih:XXXXXX"></input>
                 </div>
@@ -71,10 +71,11 @@
                     <button class="btn copy" type="button"><i class="icon-copy"></i></button>
                     <input class="span11 shorty" type="text" url="<%= url %>" placeholder="<%= url %>" disabled></input>
                 </div>
-                <span class="label label-inverse">Downloads: <span class="badge"><%= completed %></span></span>
-                <span class="label label-inverse">Transferred: <span class="badge"><%= transferred %></span></span>
+                <span class="label label-inverse">Downloads: <%= completed %></span>
+                <span class="label label-inverse">Transferred: <%= transferred %></span>
+                <span class="label label-inverse">Added: <%= time %></span>
                 <% if(typeof labels !== 'undefined') { _.each(labels, function(label) { %> 
-                    <span class="label label-success">label</span>
+                    <span class="label label-success"><%= label %></span>
                 <% }); } %>
             </div>
         </script>
@@ -98,11 +99,9 @@
         </script>
 
 
-        <script src="scripts/8ab52a5b.plugins.js"></script>
-
         <script type="text/javascript" src="https://cdn.firebase.com/v0/firebase.js"></script>
         <script src='https://cdn.firebase.com/v0/firebase-auth-client.js' type='text/javascript'></script>
 
-        <script src="scripts/fbb9ee4e.amd-app.js"></script>
+        <script src="scripts/3411d9f7.amd-app.js"></script>
     </body>
 </html>

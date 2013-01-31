@@ -1,7 +1,7 @@
 # onLogin null null (undefined, #undefined)
 CACHE MANIFEST
 
-# Time: Tue Jan 29 2013 02:44:54 GMT+0000 (UTC)
+# Time: Thu Jan 31 2013 21:52:01 GMT+0000 (UTC)
 # This manifest was created by confess.js, http://github.com/jamesgpearce/confess
 #
 # Retrieved URL: http://localhost:3501/
@@ -23,17 +23,17 @@ CACHE MANIFEST
 
 CACHE:
 http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js
-http://fonts.googleapis.com/css?family=Abril+Fatface
+http://fonts.googleapis.com/css?family=Oswald
+http://localhost:3501/images/ebd462df.grey.png
 http://www.google-analytics.com/ga.js
 https://cdn.firebase.com/v0/firebase-auth-client.js
 https://cdn.firebase.com/v0/firebase.js
-scripts/8ab52a5b.plugins.js
-scripts/fbb9ee4e.amd-app.js
+scripts/3411d9f7.amd-app.js
 scripts/vendor/b7cdd774.ZeroClipboard.js
 scripts/vendor/cf69c6f2.modernizr.min.js
-styles/2f531a14.main.css
 styles/576c6595.font-awesome.css
 styles/9ca8c101.bootstrap.css
+styles/b40e3a5e.main.css
 
 NETWORK:
 *
