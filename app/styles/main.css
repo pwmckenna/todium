@@ -1,5 +1,5 @@
 .jumbotron {
-    background-color: #333;
+    background-color: #EA5B54;
     color: #f8f8f8;
 }
 .jumbotron h1 {
@@ -8,4 +8,7 @@
 }
 .jumbotron > .container > * {
     margin-left: 30px;
+}
+body {
+	background: url(/images/grey.png);
 }

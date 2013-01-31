@@ -34,31 +34,6 @@ define([
             view.remove();
             delete this.views[trackerName];
         },
-        addTracker: function(info_hash, src) {
-            var user = this.model.get('user');
-            var globalTracker = this.model.firebase.child('users').child(user.provider).child(user.id).child('trackers').push();
-            var userTracker = this.model.firebase.child('trackers').push();
-            userTracker.set({
-                owner: this.model.get('user').id,
-                info_hash: info_hash,
-                completed: 0,
-                transferred: 0,
-                src: src,
-                labels: [],
-                time: new Date().getTime()
-            });
-            globalTracker.set(userTracker.name());
-        },
-        addMagnetLink: function(magnetLink) {
-            var info_hash = magnetLink.substr(MAGNET_LINK_IDENTIFIER.length, 40);
-            this.addTracker(info_hash, magnetLink);
-        },
-        addTorrentLink: function(torrentLink) {
-            var hashRequest = $.getJSON('http://hasher.todium.com?torrent=' + torrentLink);
-            hashRequest.then(_.bind(function(info_hash) {
-                this.addTracker(info_hash, torrentLink);
-            }, this));
-        },
         onAddTracker: function(ev) {
             var button = this.$('.btn');
             if(button.hasClass('disabled')) {
@@ -75,11 +50,12 @@ define([
             }
             this.$('.createTorrentLink').val('');            
 
-            if(torrentLink.indexOf(MAGNET_LINK_IDENTIFIER) === 0) {
-                this.addMagnetLink(torrentLink);
-            } else {
-                this.addTorrentLink(torrentLink);
-            } 
+            $.getJSON('http://api.todium.com', {
+                token: this.model.get('user').firebaseAuthToken,
+                src: torrentLink
+            }).then(function(url) {
+                console.log(url);
+            });
         },
         onUser: function() {
             console.log('onUser', this.model.get('user'));
