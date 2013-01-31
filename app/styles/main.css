@@ -1,9 +1,13 @@
+@font-face {
+  font-family: 'TradeGothic';
+  src: url('../font/Trade_Gothic_LT_Bold_Condensed_20.ttf');
+}
 .jumbotron {
     background-color: #EA5B54;
     color: #f8f8f8;
 }
 .jumbotron h1 {
-    font-family: 'Abril Fatface', cursive;
+    font-family: 'TradeGothic';
     margin-top: 25px;
 }
 .jumbotron > .container > * {
@@ -11,8 +15,12 @@
 }
 body {
 	background: url(/images/grey.png);
+	font-family: Sans-Serif;
 }
 
 canvas {
 	border: 2px solid #EEE;
+}
+.well {
+	background-color: rgba(255, 255, 255, 0.7);
 }

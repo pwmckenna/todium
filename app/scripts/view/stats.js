@@ -49,7 +49,7 @@ define([
                 millisPerPixel: 100, 
                 grid: { 
                     strokeStyle: '#F8F8F8',
-                    fillStyle:'#FFF',
+                    fillStyle:'rgba(255, 255, 255, 0.5)',
                     lineWidth: 1, 
                     millisPerLine: 10000, 
                     verticalSections: 4 
@@ -59,7 +59,7 @@ define([
             goal.append(new Date().getTime(), 100000000000000000)
             var zero = new Smoothie.TimeSeries();
             zero.append(new Date().getTime(), 0);
-            chart.addTimeSeries(this.series, { strokeStyle:'rgba(134, 202, 250, 0.5)', fillStyle: 'rgba(134, 202, 250, 0.2)', lineWidth: 1 });
+            chart.addTimeSeries(this.series, { strokeStyle:'rgb(255, 255, 255)', fillStyle: 'rgba(255, 255, 255, 0.5)', lineWidth: 1 });
             //chart.addTimeSeries(goal, { lineWidth: 0 });
             //chart.addTimeSeries(zero, { lineWidth: 0 });
             chart.streamTo(this.$('.chart')[0], 1000);
