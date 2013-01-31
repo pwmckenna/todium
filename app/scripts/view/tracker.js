@@ -4,6 +4,9 @@ define([
     './view'
 ], function($, _, View) {
     'use strict';
+
+    var MAGNET_LINK_IDENTIFIER = 'magnet:?xt=urn:btih:';
+
     var clip = new ZeroClipboard.Client();
     clip.setHandCursor(true);
     clip.addEventListener('complete', function(client, text) {
@@ -38,9 +41,19 @@ define([
         onValue: function(valueSnapshot) {
             console.log('onValue', valueSnapshot.val());
             var val = valueSnapshot.val();
-            this.url = val.url;
+            var url;
+
+            var tracker = 'http://tracker.todium.com/' + this.model.name() + '/announce';
+
+            if(val.src.indexOf(MAGNET_LINK_IDENTIFIER) === 0) {
+                url = val.src + '&tr=' + tracker;
+            } else {
+                url = 'http://editor.todium.com/?tracker=' + tracker + '&torrent=' + val.src;
+            }
+
             val.transferred = bytesToSize(val.transferred);
             this.$el.html(this.template(val));
+            this.url = url;
         },
         onCopy: function(ev) {
             console.log('onCopy', this.url);

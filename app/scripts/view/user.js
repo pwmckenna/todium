@@ -39,16 +39,36 @@ define([
             var user = this.model.get('user');
             var globalTracker = this.model.firebase.child('users').child(user.provider).child(user.id).child('trackers').push();
             var userTracker = this.model.firebase.child('trackers').push();
-            magnetLink += '&tr=http://tracker.todium.com/' + userTracker.name() + '/announce';
             userTracker.set({
                 owner: this.model.get('user').id,
                 info_hash: info_hash,
                 completed: 0,
                 transferred: 0,
-                url: magnetLink,
+                src: magnetLink,
                 labels: []
             });
             globalTracker.set(userTracker.name());
+        },
+        addTorrentLink: function(torrentLink) {
+            var hashRequest = $.getJSON('http://hasher.todium.com?torrent=' + torrentLink);
+            hashRequest.then(_.bind(function(info_hash) {
+                var user = this.model.get('user');
+                var globalTracker = this.model.firebase.child('users').child(user.provider).child(user.id).child('trackers').push();
+                var userTracker = this.model.firebase.child('trackers').push();
+
+                userTracker.set({
+                    owner: this.model.get('user').id,
+                    info_hash: info_hash,
+                    completed: 0,
+                    transferred: 0,
+                    src: torrentLink,
+                    labels: []
+                });
+                globalTracker.set(userTracker.name());
+
+                this.addTorrentLink(info_hash, torrentLink)
+                this.addMagnetLink(MAGNET_LINK_IDENTIFIER + info_hash);
+            }, this));
         },
         onAddTracker: function(ev) {
             var button = this.$('.btn');
@@ -69,10 +89,7 @@ define([
             if(torrentLink.indexOf(MAGNET_LINK_IDENTIFIER) === 0) {
                 this.addMagnetLink(torrentLink);
             } else {
-                var hashRequest = $.getJSON('http://hasher.todium.com?torrent=' + torrentLink);
-                hashRequest.then(_.bind(function(info_hash) {
-                    this.addMagnetLink(MAGNET_LINK_IDENTIFIER + info_hash);
-                }, this));
+                this.addTorrentLink(torrentLink);
             } 
         },
         onUser: function() {
