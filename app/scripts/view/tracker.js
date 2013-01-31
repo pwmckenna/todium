@@ -52,6 +52,7 @@ define([
             }
 
             val.transferred = bytesToSize(val.transferred);
+            val.url = url;
             this.$el.html(this.template(val));
             this.url = url;
         },

@@ -65,9 +65,6 @@ define([
                     labels: []
                 });
                 globalTracker.set(userTracker.name());
-
-                this.addTorrentLink(info_hash, torrentLink)
-                this.addMagnetLink(MAGNET_LINK_IDENTIFIER + info_hash);
             }, this));
         },
         onAddTracker: function(ev) {
