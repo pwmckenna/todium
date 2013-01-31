@@ -49,7 +49,7 @@ define([
             if(val.src.indexOf(MAGNET_LINK_IDENTIFIER) === 0) {
                 url = val.src + '&tr=' + tracker;
             } else {
-                url = 'http://editor.todium.com/?tracker=' + tracker + '&torrent=' + val.src;
+                url = 'http://torrent.todium.com/?tracker=' + tracker + '&torrent=' + val.src;
             }
 
             val.transferred = val.transferred === 0 ? 0 : bytesToSize(val.transferred);
