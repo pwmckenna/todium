@@ -2,6 +2,7 @@
   "name": "todium",
   "dependencies": {
     "backbone": "0.9.9",
-    "underscore": "~1.4.3"
+    "underscore": "~1.4.3",
+    "Humane-Dates": "git://github.com/zachleat/Humane-Dates.git"
   }
 }
