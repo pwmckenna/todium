@@ -1,8 +1,9 @@
 define([
     'jquery',
     'underscore',
+    'humane',
     './view'
-], function($, _, View) {
+], function($, _, humane, View) {
     'use strict';
 
     var MAGNET_LINK_IDENTIFIER = 'magnet:?xt=urn:btih:';
@@ -51,7 +52,8 @@ define([
                 url = 'http://editor.todium.com/?tracker=' + tracker + '&torrent=' + val.src;
             }
 
-            val.transferred = bytesToSize(val.transferred);
+            val.transferred = val.transferred === 0 ? 0 : bytesToSize(val.transferred);
+            val.time = humane(new Date(val.time));
             val.url = url;
             this.$el.html(this.template(val));
             this.url = url;
