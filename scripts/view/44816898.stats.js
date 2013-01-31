@@ -17,6 +17,7 @@ define([
         initialize: function() {
             this.template = _.template($('#stats_template').html());
             this.series = new Smoothie.TimeSeries();
+            this.series.append(new Date().getTime() - 100000, 0);
 
             this.model.on('change:user', this.onUser, this);
             this.model.firebase.child('transferred').on('value', this.onValue, this);
@@ -59,9 +60,9 @@ define([
             goal.append(new Date().getTime(), 100000000000000000)
             var zero = new Smoothie.TimeSeries();
             zero.append(new Date().getTime(), 0);
-            chart.addTimeSeries(this.series, { strokeStyle:'rgb(255, 255, 255)', fillStyle: 'rgba(255, 255, 255, 0.5)', lineWidth: 1 });
+            chart.addTimeSeries(this.series, { strokeStyle:'#111', fillStyle: 'rgba(255, 255, 255, 0.5)', lineWidth: 1 });
             //chart.addTimeSeries(goal, { lineWidth: 0 });
-            //chart.addTimeSeries(zero, { lineWidth: 0 });
+            chart.addTimeSeries(zero, { lineWidth: 0 });
             chart.streamTo(this.$('.chart')[0], 1000);
 
             return this;
