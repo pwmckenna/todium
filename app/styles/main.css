@@ -1,14 +1,10 @@
-@font-face {
-  font-family: 'TradeGothic';
-  src: url('../font/Trade_Gothic_LT_Bold_Condensed_20.ttf');
-}
 .jumbotron {
     background-color: #EA5B54;
     color: #f8f8f8;
     border-bottom: 1px solid #838383;
 }
 .jumbotron h1 {
-    font-family: 'TradeGothic';
+    font-family: 'Oswald', sans-serif;
     margin-top: 25px;
 }
 .jumbotron > .container > * {
@@ -16,7 +12,7 @@
 }
 body {
 	background: url(/images/grey.png);
-	font-family: Sans-Serif;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;
 }
 
 canvas {
