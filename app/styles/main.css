@@ -5,6 +5,7 @@
 .jumbotron {
     background-color: #EA5B54;
     color: #f8f8f8;
+    border-bottom: 1px solid #838383;
 }
 .jumbotron h1 {
     font-family: 'TradeGothic';
