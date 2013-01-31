@@ -34,8 +34,7 @@ define([
             view.remove();
             delete this.views[trackerName];
         },
-        addMagnetLink: function(magnetLink) {
-            var info_hash = magnetLink.substr(MAGNET_LINK_IDENTIFIER.length, 40);
+        addTracker: function(info_hash, src) {
             var user = this.model.get('user');
             var globalTracker = this.model.firebase.child('users').child(user.provider).child(user.id).child('trackers').push();
             var userTracker = this.model.firebase.child('trackers').push();
@@ -44,27 +43,20 @@ define([
                 info_hash: info_hash,
                 completed: 0,
                 transferred: 0,
-                src: magnetLink,
-                labels: []
+                src: src,
+                labels: [],
+                time: new Date().getTime()
             });
             globalTracker.set(userTracker.name());
+        },
+        addMagnetLink: function(magnetLink) {
+            var info_hash = magnetLink.substr(MAGNET_LINK_IDENTIFIER.length, 40);
+            this.addTracker(info_hash, magnetLink);
         },
         addTorrentLink: function(torrentLink) {
             var hashRequest = $.getJSON('http://hasher.todium.com?torrent=' + torrentLink);
             hashRequest.then(_.bind(function(info_hash) {
-                var user = this.model.get('user');
-                var globalTracker = this.model.firebase.child('users').child(user.provider).child(user.id).child('trackers').push();
-                var userTracker = this.model.firebase.child('trackers').push();
-
-                userTracker.set({
-                    owner: this.model.get('user').id,
-                    info_hash: info_hash,
-                    completed: 0,
-                    transferred: 0,
-                    src: torrentLink,
-                    labels: []
-                });
-                globalTracker.set(userTracker.name());
+                this.addTracker(info_hash, torrentLink);
             }, this));
         },
         onAddTracker: function(ev) {
