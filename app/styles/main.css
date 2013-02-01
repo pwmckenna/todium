@@ -35,10 +35,15 @@
 }
 .login .well {
   background-color: #eee;
-  padding-bottom: 40px;
+  padding-bottom: 30px;
 }
 .login .lead {
   margin-bottom: 40px;
+  font-size: 30px;
+}
+.login .instructions {
+  font-size: 16px;
+  margin-bottom: 0px;
 }
 input.input-label {
   margin: 1px 0 0 0;
