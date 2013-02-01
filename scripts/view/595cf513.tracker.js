@@ -29,7 +29,8 @@ define([
 
     var TrackerView = View.extend({
         events: {
-            'mouseover .copy': 'onCopy'
+            'mouseover .copy': 'onCopy',
+            'click .button-label': 'onAddLabel'
         },
         initialize: function() {
             this.url = '...';
@@ -57,6 +58,11 @@ define([
             val.url = url;
             this.$el.html(this.template(val));
             this.url = url;
+        },
+        onAddLabel: function(ev) {
+            var label = this.$('.input-label').val();
+
+            this.model.child('labels').push(label);
         },
         onCopy: function(ev) {
             console.log('onCopy', this.url);
