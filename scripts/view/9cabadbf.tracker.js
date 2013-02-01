@@ -11,7 +11,7 @@ define([
     var clip = new ZeroClipboard.Client();
     clip.setHandCursor(true);
     clip.addEventListener('complete', function(client, text) {
-        var linkElem = $(clip.domElement).next();
+        var linkElem = $(clip.domElement).prev();
         var link = linkElem.attr('placeholder');
         linkElem.attr('placeholder',' Copied to clipboard!');
         setTimeout(function() {
