@@ -71,15 +71,15 @@
 
         <script type="text/template" id="tracker_template">
             <div class="well">
-                <div class="input-append input-prepend">
-                    <button class="btn copy" type="button"><i class="icon-copy"></i></button>
+                <div class="input-append">
                     <input class="span11 shorty" type="text" url="<%= url %>" placeholder="<%= url %>" disabled></input>
+                    <button class="btn copy" type="button"><i class="icon-copy"></i></button>
                 </div>
-                <span class="label label-inverse">Downloads: <%= completed %></span>
-                <span class="label label-inverse">Transferred: <%= transferred %></span>
-                <span class="label label-inverse">Added: <%= time %></span>
+                <span class="label">Downloads: <%= completed %></span>
+                <span class="label">Transferred: <%= transferred %></span>
+                <span class="label">Added: <%= time %></span>
                 <% if(typeof labels !== 'undefined') { _.each(labels, function(label) { %> 
-                    <span class="label label-success"><%= label %></span>
+                    <span class="label label-info"><%= label %></span>
                 <% }); } %>
             </div>
         </script>
