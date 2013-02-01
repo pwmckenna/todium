@@ -10,10 +10,6 @@
     line-height: 70px;
     float: left;
 }
-.jumbotron .lead {
-  float: left;
-  margin: 30px;
-}
 .bigbtn {
   margin-top: 20px;
   width: 80px;
@@ -40,6 +36,9 @@
 .login .well {
   background-color: #eee;
   padding-bottom: 40px;
+}
+.login .lead {
+  margin-bottom: 40px;
 }
 body {
 	background: url(/images/grey.png);
