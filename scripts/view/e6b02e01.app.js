@@ -3,9 +3,10 @@ define([
     'underscore',
     './view',
     './login',
+    './logout',
     './user',
     './stats'
-], function($, _, View, LoginView, UserView, StatsView) {
+], function($, _, View, LoginView, LogoutView, UserView, StatsView) {
     'use strict';
 
     var AppView = View.extend({
@@ -13,6 +14,9 @@ define([
             this.template = _.template($('#app_template').html());
 
             this.loginView = new LoginView({
+                model: this.model
+            });
+            this.logoutView = new LogoutView({
                 model: this.model
             });
             this.userView = new UserView({
@@ -27,7 +31,8 @@ define([
 
             this.assign(this.userView, '.user');                
             this.assign(this.loginView, '.login');
-            this.assign(this.statsView, '.stats');
+            this.assign(this.logoutView, '.logout');
+            //this.assign(this.statsView, '.stats');
 
             return this;
         }

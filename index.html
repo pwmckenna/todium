@@ -16,7 +16,7 @@
         <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="styles/9ca8c101.bootstrap.css">
         <link rel="stylesheet" href="styles/576c6595.font-awesome.css">
-        <link rel="stylesheet" href="styles/c810be5d.main.css">
+        <link rel="stylesheet" href="styles/4ab3bc31.main.css">
         <script src="scripts/vendor/cf69c6f2.modernizr.min.js"></script>
         <script src="scripts/vendor/b7cdd774.ZeroClipboard.js"></script>
 
@@ -28,12 +28,12 @@
                     <h1>
                         <span>Todium</span>
                     </h1>
-                    <p class="lead">bit.ly for torrent/magnet links,<br>with stats about your content.</p>
-                        <span class="login" style="float:right"></span>
+                    <span class="logout" style="float:right"></span>
                 </div>
             </header>
             <div class="container" style="margin-top:50px">
                 <div class="user"></div>
+                <div class="login"></div>
                 <div class="stats"></div>
             </div>
         </script>
@@ -57,12 +57,16 @@
         </script>
 
         <script type="text/template" id="login_template">
-            <button class="btn facebook" type="button"><i class="icon-facebook"></i></button>
-            <button class="btn github" type="button"><i class="icon-github"></i></button>
-            <button class="btn twitter" type="button"><i class="icon-twitter"></i></button>
+            <p class="lead">bit.ly for torrent/magnet links,<br>with content download stats.</p>
+            <div class="well">
+                <h3>Login to create links.</h3>
+                <button class="btn bigbtn facebook" type="button"><i class="icon-facebook"></i></button>
+                <button class="btn bigbtn github" type="button"><i class="icon-github"></i></button>
+                <button class="btn bigbtn twitter" type="button"><i class="icon-twitter"></i></button>
+            </div>
         </script>
         <script type="text/template" id="logout_template">
-            <button class="btn logout" type="button"><i class="icon-off"></i></button>
+            <button class="btn bigbtn logout" type="button"><i class="icon-off"></i></button>
         </script>
 
         <script type="text/template" id="tracker_template">
@@ -102,6 +106,6 @@
         <script type="text/javascript" src="https://cdn.firebase.com/v0/firebase.js"></script>
         <script src='https://cdn.firebase.com/v0/firebase-auth-client.js' type='text/javascript'></script>
 
-        <script src="scripts/2862fb66.amd-app.js"></script>
+        <script src="scripts/1827f282.amd-app.js"></script>
     </body>
 </html>
