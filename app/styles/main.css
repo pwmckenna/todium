@@ -40,6 +40,18 @@
 .login .lead {
   margin-bottom: 40px;
 }
+input.input-label {
+  margin: 1px 0 0 0;
+  padding: 0px;
+  height: 18px;
+  width: 100px;
+}
+.button-label {
+  margin: 1px 0px 0px -1px;
+  padding: 0px 5px;
+  height: 20px;
+}
+
 body {
 	background: url(/images/grey.png);
 }
