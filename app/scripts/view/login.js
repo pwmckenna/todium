@@ -9,11 +9,9 @@ define([
             'click .facebook.btn': 'login',
             'click .github.btn': 'login',
             'click .twitter.btn': 'login',
-            'click .logout.btn': 'logout'
         },
         initialize: function() {
-            this.login_template = _.template($('#login_template').html());
-            this.logout_template = _.template($('#logout_template').html());
+            this.template = _.template($('#login_template').html());
             this.model.on('change:user', this.render, this);
         },
         login: function(ev) {
@@ -34,19 +32,12 @@ define([
             }
             this.model.login(provider);
         },
-        logout: function(ev) {
-            var button = $(ev.currentTarget);
-            if(button.hasClass('disabled')) {
-                return;
-            }
-            button.addClass('disabled');
-            this.model.logout();
-        },
         render: function() {
             if(this.model.get('user')) {
-                this.$el.html(this.logout_template());
+                this.$el.hide();
             } else {
-                this.$el.html(this.login_template());
+                this.$el.html(this.template());
+                this.$el.show();
             }            
             return this;
         }

@@ -5,7 +5,7 @@
 }
 .jumbotron h1 {
     font-family: 'Oswald', sans-serif;
-    margin-top: 25px;
+    margin: 25px 0px;
     font-size: 80px;
     line-height: 70px;
     float: left;
@@ -14,7 +14,7 @@
   float: left;
   margin: 30px;
 }
-.jumbotron .login .btn {
+.bigbtn {
   margin-top: 20px;
   width: 80px;
   height: 80px;
@@ -22,13 +22,24 @@
 .jumbotron > .container > * {
     margin-left: 30px;
 }
-.jumbotron .btn i {
+.bigbtn i {
   margin: 10px;
   line-height: 40px;
 }
-.jumbotron .btn i::before {
+.bigbtn i::before {
   font-size: 40px;
   margin-top: 20px;
+}
+
+.login {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.login .well {
+  background-color: #eee;
+  padding-bottom: 40px;
 }
 body {
 	background: url(/images/grey.png);
