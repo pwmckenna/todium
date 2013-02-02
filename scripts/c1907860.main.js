@@ -1,23 +1,4 @@
 require.config({
-    shim: {
-        "underscore": {
-            exports: "_"
-        },
-        // Backbone
-        "backbone": {
-
-           // Depends on underscore/lodash and jQuery
-           "deps": ["underscore", "jquery"],
-
-          // Exports the global window.Backbone object
-          "exports": "Backbone"
-
-        },
-        "humane": {
-          "exports": "humaneDate"
-        }
-    },
-
     paths: {
         hm: 'vendor/hm',
         esprima: 'vendor/esprima',

@@ -1,8 +1,6 @@
 define([
-    'jquery',
-    'underscore',
     './view'
-], function($, _, View) {
+], function(View) {
     'use strict';
     var LogoutView = View.extend({
         events: {

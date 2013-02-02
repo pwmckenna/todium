@@ -1,7 +1,23 @@
 # onLogin null null (undefined, #undefined)
+TypeError: 'undefined' is not a function (evaluating 'g.$(a)')
+
+  http://localhost:3501/scripts/components/backbone/a4f6f23f.backbone-min.js:37
+  http://localhost:3501/scripts/components/backbone/a4f6f23f.backbone-min.js:39
+  http://localhost:3501/scripts/components/backbone/a4f6f23f.backbone-min.js:36
+  http://localhost:3501/scripts/components/backbone/a4f6f23f.backbone-min.js:41
+  http://localhost:3501/scripts/components/backbone/a4f6f23f.backbone-min.js:41
+  http://localhost:3501/scripts/666b4a75.amd-app.js:1
+  http://localhost:3501/scripts/666b4a75.amd-app.js:1
+  http://localhost:3501/scripts/666b4a75.amd-app.js:1
+  http://localhost:3501/scripts/666b4a75.amd-app.js:1
+  http://localhost:3501/scripts/666b4a75.amd-app.js:1
+  http://localhost:3501/scripts/666b4a75.amd-app.js:1
+  http://localhost:3501/scripts/666b4a75.amd-app.js:1
+  http://localhost:3501/scripts/666b4a75.amd-app.js:1
+  http://localhost:3501/scripts/666b4a75.amd-app.js:1
 CACHE MANIFEST
 
-# Time: Fri Feb 01 2013 22:27:09 GMT+0000 (UTC)
+# Time: Sat Feb 02 2013 23:24:56 GMT+0000 (UTC)
 # This manifest was created by confess.js, http://github.com/jamesgpearce/confess
 #
 # Retrieved URL: http://localhost:3501/
@@ -28,12 +44,16 @@ http://localhost:3501/images/ebd462df.grey.png
 http://www.google-analytics.com/ga.js
 https://cdn.firebase.com/v0/firebase-auth-client.js
 https://cdn.firebase.com/v0/firebase.js
-scripts/1b5bb57e.amd-app.js
+scripts/666b4a75.amd-app.js
+scripts/components/Humane-Dates/e82d1a47.humane.js
+scripts/components/backbone/a4f6f23f.backbone-min.js
+scripts/components/jquery/jquery.min.js
+scripts/components/underscore/6dc59d3a.underscore-min.js
 scripts/vendor/b7cdd774.ZeroClipboard.js
 scripts/vendor/cf69c6f2.modernizr.min.js
+styles/126a58f1.main.css
 styles/576c6595.font-awesome.css
 styles/9ca8c101.bootstrap.css
-styles/cc578c3d.main.css
 
 NETWORK:
 *

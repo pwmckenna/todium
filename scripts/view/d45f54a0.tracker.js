@@ -1,9 +1,6 @@
 define([
-    'jquery',
-    'underscore',
-    'humane',
     './view'
-], function($, _, humane, View) {
+], function(View) {
     'use strict';
 
     var MAGNET_LINK_IDENTIFIER = 'magnet:?xt=urn:btih:';
@@ -54,7 +51,7 @@ define([
             }
 
             val.transferred = val.transferred === 0 ? 0 : bytesToSize(val.transferred);
-            val.time = humane(new Date(val.time));
+            val.time = humaneDate(new Date(val.time));
             val.url = url;
             this.$el.html(this.template(val));
             this.url = url;

@@ -1,12 +1,10 @@
 define([
-    'jquery',
-    'underscore',
     './view',
     './login',
     './logout',
     './user',
     './stats'
-], function($, _, View, LoginView, LogoutView, UserView, StatsView) {
+], function(View, LoginView, LogoutView, UserView, StatsView) {
     'use strict';
 
     var AppView = View.extend({
