@@ -1,9 +1,7 @@
 define([
-    'jquery',
-    'underscore',
     'smoothie',
     './view'
-], function($, _, Smoothie, View) {
+], function(Smoothie, View) {
     'use strict';
 
     var bytesToSize = function(bytes) {

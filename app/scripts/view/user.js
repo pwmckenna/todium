@@ -1,9 +1,7 @@
 define([
-    'jquery',
-    'underscore',
     './view',
     './tracker'
-], function($, _, View, TrackerView) {
+], function(View, TrackerView) {
     'use strict';
 
     var MAGNET_LINK_IDENTIFIER = 'magnet:?xt=urn:btih:';

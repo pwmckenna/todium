@@ -1,8 +1,4 @@
-define([
-    'jquery',
-    'underscore',
-    'backbone'
-], function($, _, Backbone) {
+define([], function() {
     'use strict';
     var AuthenticationModel = Backbone.Model.extend({
         initialize: function() {
