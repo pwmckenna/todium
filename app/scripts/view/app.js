@@ -20,9 +20,9 @@ define([
             this.userView = new UserView({
                 model: this.model
             });
-            // this.statsView = new StatsView({
-            //     model: this.model
-            // });
+            this.statsView = new StatsView({
+                model: this.model
+            });
         },
         render: function() {
             this.$el.html(this.template());
@@ -30,7 +30,7 @@ define([
             this.assign(this.userView, '.user');                
             this.assign(this.loginView, '.login');
             this.assign(this.logoutView, '.logout');
-            // this.assign(this.statsView, '.stats');
+            this.assign(this.statsView, '.stats>div');
 
             return this;
         }

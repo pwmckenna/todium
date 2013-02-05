@@ -58,13 +58,25 @@ input.input-label {
   height: 20px;
 }
 
+.container.login, .container.stats, .container.user, .container.leaderboard {
+  margin-top: 50px;
+}
+
+.container.stats {
+  background-color: #111;
+}
+
+.statssubhead {
+  border-top: 10px solid #111;
+  padding-top: 40px;
+  padding-bottom: 90px;
+  background-color: #333;
+}
+
 body {
 	background: url(/images/grey.png);
 }
 
-canvas {
-	border: 2px solid #EEE;
-}
 .well {
 	background-color: rgba(255, 255, 255, 0.7);
 }
