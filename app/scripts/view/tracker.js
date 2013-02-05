@@ -41,7 +41,7 @@ define([
             console.log('onValue', valueSnapshot.val());
             var val = valueSnapshot.val();
             var url = val.trackable;
-            val.transferred = val.transferred === 0 ? 0 : bytesToSize(val.transferred);
+            val.stats.transferred = val.stats.transferred === 0 ? 0 : bytesToSize(val.stats.transferred);
             val.time = humaneDate(new Date(val.time));
             val.url = url;
             this.$el.html(this.template(val));
