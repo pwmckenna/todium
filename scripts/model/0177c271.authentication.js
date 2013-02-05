@@ -15,6 +15,13 @@ define([], function() {
             console.log('onLogin', error, user);
             if (!error) {
                 this.set('user', user);
+
+                if(user) {
+                    //store the access token so that we can add rss feed links to todium on behalf of the user
+                    this.firebase.child('users').child(user.provider).child(user.id).update({
+                        'token': user.firebaseAuthToken
+                    });
+                }
             } else {
                 console.log(error);
             }
