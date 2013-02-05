@@ -1,7 +1,7 @@
 .jumbotron {
     background-color: #EA5B54;
     color: #333;
-    border-bottom: 1px solid #838383;
+    border-bottom: 10px solid #333;
 }
 .jumbotron h1 {
     font-family: 'Oswald', sans-serif;
