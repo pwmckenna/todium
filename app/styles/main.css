@@ -34,7 +34,8 @@
   text-align: center;
 }
 .login .well {
-  background-color: #eee;
+  color: #eee;
+  background-color: #333;
   padding-bottom: 30px;
 }
 .login .lead {
