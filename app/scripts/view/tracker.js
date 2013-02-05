@@ -40,16 +40,7 @@ define([
         onValue: function(valueSnapshot) {
             console.log('onValue', valueSnapshot.val());
             var val = valueSnapshot.val();
-            var url;
-
-            var tracker = 'http://tracker.todium.com/' + this.model.name() + '/announce';
-
-            if(val.src.indexOf(MAGNET_LINK_IDENTIFIER) === 0) {
-                url = val.src + '&tr=' + tracker;
-            } else {
-                url = 'http://torrent.todium.com/?tracker=' + tracker + '&torrent=' + val.src;
-            }
-
+            var url = val.trackable;
             val.transferred = val.transferred === 0 ? 0 : bytesToSize(val.transferred);
             val.time = humaneDate(new Date(val.time));
             val.url = url;
