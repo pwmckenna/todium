@@ -68,7 +68,13 @@ input.input-label {
 
 .transferred {
   text-align: center;
-  color: #fefefe;
+  font-size: 200px;
+  margin-bottom: -100px;
+  padding-top: 200px;
+}
+
+.transferredChart {
+  margin-top: -120px;
 }
 
 .statssubhead {
