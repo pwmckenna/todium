@@ -30,7 +30,7 @@ define([
             this.assign(this.userView, '.user');                
             this.assign(this.loginView, '.login');
             this.assign(this.logoutView, '.logout');
-            this.assign(this.statsView, '.stats>div');
+            this.assign(this.statsView, '.stats');
 
             return this;
         }

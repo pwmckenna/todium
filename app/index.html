@@ -36,7 +36,6 @@
             <header class="statssubhead subhead row" id="overview">
                 <div class="container">
                     <div class="container stats">
-                        <div></div>
                     </div>
                 </div>
             </header>
@@ -44,7 +43,8 @@
         
         <script type="text/template" id="stats_template">
             <h3 class="transferred"><%= transferred %></h3>
-            <canvas class="chart" width="1170" height="400"></canvas>
+            <canvas class="transferredChart" width="1170" height="400"></canvas>
+            <canvas class="trackerEventChart" width="1170" height="400"></canvas>
         </script>
 
         <script type="text/template" id="user_template">
