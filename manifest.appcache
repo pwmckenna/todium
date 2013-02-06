@@ -2,7 +2,7 @@
 # render (undefined, #undefined)
 CACHE MANIFEST
 
-# Time: Wed Feb 06 2013 01:08:15 GMT+0000 (UTC)
+# Time: Wed Feb 06 2013 01:11:18 GMT+0000 (UTC)
 # This manifest was created by confess.js, http://github.com/jamesgpearce/confess
 #
 # Retrieved URL: http://localhost:3501/
@@ -37,7 +37,7 @@ scripts/vendor/b7cdd774.ZeroClipboard.js
 scripts/vendor/cf69c6f2.modernizr.min.js
 styles/576c6595.font-awesome.css
 styles/9ca8c101.bootstrap.css
-styles/be3b9368.main.css
+styles/f703bc0b.main.css
 
 NETWORK:
 *
