@@ -8,7 +8,7 @@ define([
         var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB'];
         if (bytes == 0) return 'n/a';
         var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-        return (bytes / Math.pow(1024, i)).toFixed(8) + ' ' + sizes[i];
+        return (bytes / Math.pow(1024, i)).toFixed(2) + ' ' + sizes[i];
     }
 
     var StatsView = View.extend({
@@ -32,6 +32,12 @@ define([
             var completed = value.completed;
             var started = value.started;
             var stopped = value.stopped;
+            var transferred = value.transferred;
+            var totalTransferred = 0;
+            _.each(transferred, function(val) {
+                totalTransferred += val;
+            });
+            this.$('.transferred').text(bytesToSize(totalTransferred));
             console.log(completed, started, stopped);
             this.completedSeries.append(new Date().getTime(), completed);
             this.startedSeries.append(new Date().getTime(), started);
@@ -46,7 +52,9 @@ define([
         },
         render: function() {
             console.log('render');
-            this.$el.html(this.template());
+            this.$el.html(this.template({
+                transferred: 0
+            }));
 
             var chart = new Smoothie.SmoothieChart({ 
                 millisPerPixel: 100, 

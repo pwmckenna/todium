@@ -66,6 +66,11 @@ input.input-label {
   background-color: #111;
 }
 
+.transferred {
+  text-align: center;
+  color: #fefefe;
+}
+
 .statssubhead {
   border-top: 10px solid #111;
   padding-top: 40px;
