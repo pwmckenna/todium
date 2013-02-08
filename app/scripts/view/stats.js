@@ -13,46 +13,61 @@ define([
 
     var StatsView = View.extend({
         initialize: function() {
+            _.bindAll(this, 'resizeCanvas');
             this.template = _.template($('#stats_template').html());
             this.completedSeries = new Smoothie.TimeSeries();
             this.startedSeries = new Smoothie.TimeSeries();
             this.stoppedSeries = new Smoothie.TimeSeries();
             this.transferredSeries = new Smoothie.TimeSeries();
             
-            this.model.on('change:user', this.onUser, this);
-            this.model.firebase.child('stats').on('value', this.onValue, this);
-            window.addEventListener('resize', _.bind(this.resizeCanvas, this), false);
+            this.startedEvents = 0;
+            this.completedEvents = 0;
+            this.stoppedEvents = 0;
+            this.transferred = 0;
+
+            this.model.child('stats').child('completed').on('child_added', this.onTransferredEvent, this);
+            this.model.child('stats').child('completed').on('child_added', this.onCompletedEvent, this);
+            this.model.child('stats').child('started').on('child_added', this.onStartedEvent, this);
+            this.model.child('stats').child('stopped').on('child_added', this.onStoppedEvent, this);
+            window.addEventListener('resize', this.resizeCanvas, false);
             setTimeout(_.bind(this.resizeCanvas, this));
+        },
+        destroy: function() {
+            this.model.child('stats').off('value', this.onValue, this);
+            window.removeEventListener('resize', this.resizeCanvas, false);
         },
         resizeCanvas: function() {
             this.$('.transferredChart')[0].width = this.$el.parent().innerWidth();
             this.$('.trackerEventChart')[0].width = this.$el.parent().innerWidth();
         },
-        onValue: function(valueSnapshot) {
-            console.log('onValue');
-            var value = valueSnapshot.val();
-            var completed = value.completed;
-            var started = value.started;
-            var stopped = value.stopped;
-            var transferred = value.transferred;
-            var totalTransferred = 0;
-            _.each(transferred, function(val) {
-                totalTransferred += val;
-            });
-            this.$('.transferred').text(bytesToSize(totalTransferred));
-            this.transferredSeries.append(new Date().getTime(), totalTransferred);
-            this.completedSeries.append(new Date().getTime(), completed);
-            this.startedSeries.append(new Date().getTime(), started);
-            this.stoppedSeries.append(new Date().getTime(), stopped);
+        onCompletedEvent: function(childSnapshot) {
+            var child = childSnapshot.val();
+            var time = new Date(child.time).getTime();
+            console.log('completed', child.time);
+            this.completedSeries.append(time, ++this.completedEvents);
         },
-        onUser: function() {
-            if(this.model.get('user')) {
-                this.$el.hide();
-            } else {
-                this.$el.show();
-            }
+        onStartedEvent: function(childSnapshot) {
+            var child = childSnapshot.val();
+            var time = new Date(child.time).getTime();
+            console.log('started', child.time);
+            this.startedSeries.append(time, ++this.startedEvents);
+        },
+        onStoppedEvent: function(childSnapshot) {
+            var child = childSnapshot.val();
+            var time = new Date(child.time).getTime();
+            console.log('stopped', child.time);
+            this.stoppedSeries.append(time, ++this.stoppedEvents);
+            console.log(this.stoppedSeries.data.length, 'stopped data points');
+        },
+        onTransferredEvent: function(childSnapshot) {
+            var child = childSnapshot.val();
+            this.transferred += child.downloaded;
+            this.$('.transferred').text(bytesToSize(this.transferred));
+            this.transferredSeries.append(new Date().getTime(), this.transferred);
+            console.log(this.transferredSeries.data.length, 'transferred data points');
         },
         renderTrackerEventGraph : function() {
+            console.log('renderTrackerEventGraph');
             var chart = new Smoothie.SmoothieChart({ 
                 millisPerPixel: 100, 
                 grid: { 
@@ -69,25 +84,26 @@ define([
             zero.append(new Date().getTime(), 0);
 
             chart.addTimeSeries(this.completedSeries, { 
-                strokeStyle:'#3A87AD', 
-                fillStyle:'rgba(255, 255, 255, 0.0)', 
-                lineWidth: 3 
+                strokeStyle:'#3A87AD',
+                fillStyle:'rgba(255, 255, 255, 0.0)',
+                lineWidth: 3
             });
             chart.addTimeSeries(this.startedSeries, { 
-                strokeStyle:'green', 
-                fillStyle:'rgba(150, 255, 150, 0.0)', 
-                lineWidth: 3 
+                strokeStyle:'green',
+                fillStyle:'rgba(150, 255, 150, 0.0)',
+                lineWidth: 3
             });
             chart.addTimeSeries(this.stoppedSeries, {
-                strokeStyle:'red', 
-                fillStyle:'rgba(255, 255, 255, 0.0)', 
-                lineWidth: 3 
+                strokeStyle:'red',
+                fillStyle:'rgba(255, 255, 255, 0.0)',
+                lineWidth: 3
             });
             chart.addTimeSeries(zero, { lineWidth: 0 });
 
             chart.streamTo(this.$('.trackerEventChart')[0], 1000);
         },
         renderTransferredGraph: function() {
+            console.log('renderTransferredGraph');
             var chart = new Smoothie.SmoothieChart({ 
                 millisPerPixel: 100, 
                 grid: { 

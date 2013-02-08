@@ -80,9 +80,7 @@
                     <input class="span11 shorty" type="text" url="<%= url %>" readonly="readonly" value="<%= url %>"></input>
                     <button class="btn copy" type="button"><i class="icon-copy"></i></button>
                 </div>
-                <span class="label">Downloads: <%= stats.completed %></span>
-                <span class="label">Transferred: <%= stats.transferred %></span>
-                <span class="label">Added: <%= time %></span>
+                    <span class="label">Added: <%= time %></span>
                 <% if(typeof labels !== 'undefined') { _.each(labels, function(label) { %> 
                     <span class="label label-info"><%= label %></span>
                 <% }); } %>
