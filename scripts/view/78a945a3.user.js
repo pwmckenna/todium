@@ -12,7 +12,21 @@ define([
         },
         initialize: function() {
             this.template = _.template($('#user_template').html());
-            this.model.on('change:user', this.onUser, this);
+            this.views = {};
+            var user = this.model.get('user');
+            this.trackers = this.model.firebase.child('users').child(user.provider).child(user.id).child('trackers');
+            setTimeout(_.bind(function() {
+                this.trackers.on('child_added', this.onTrackerAdded, this);
+                this.trackers.on('child_removed', this.onTrackerRemoved, this);
+            }, this));
+        },
+        destroy: function() {
+            this.trackers.off('child_added', this.onTrackerAdded, this);
+            this.trackers.off('child_removed', this.onTrackerRemoved, this);
+            _.each(this.views, function(view) {
+                view.destroy();
+                view.remove();
+            });
             this.views = {};
         },
         onTrackerAdded: function(dataSnapshot) {
@@ -55,42 +69,10 @@ define([
                 console.log(url);
             });
         },
-        onUser: function() {
-            console.log('onUser', this.model.get('user'));
-            var user = this.model.get('user');
-            if(user) {
-                var trackers = this.model.firebase.child('users').child(user.provider).child(user.id).child('trackers');
-                trackers.on('child_added', this.onTrackerAdded, this);
-                trackers.on('child_removed', this.onTrackerRemoved, this);
-                if(this.removeCallbacks) {
-                    throw 'leaking callbacks';
-                }
-                this.removeCallbacks = _.bind(function() {
-                    trackers.off('child_added', this.onTrackerAdded, this);
-                    trackers.off('child_removed', this.onTrackerRemoved, this);                    
-                }, this);
-            } else if(this.removeCallbacks) {
-                _.each(this.views, function(view) {
-                    view.destroy();
-                    view.remove();
-                });
-                this.views = {};
-                this.removeCallbacks();
-                this.removeCallbacks = undefined;
-            }
-            this.render();
-        },
         render: function() {
             var trackers = this.$('.trackers').children().detach();
             this.$el.html(this.template());
             this.$('.trackers').append(trackers);
-
-            if(this.model.get('user')) {
-                this.$el.show();
-            } else {
-                this.$el.hide();
-            }
-            return this;
         }
     });
     return UserView;
