@@ -35,16 +35,21 @@
             <div class="container user"></div>
             <header class="statssubhead subhead row" id="overview">
                 <div class="container">
-                    <div class="container stats">
+                    <div class="container transferGraphView">
+                    </div>
+                    <div class="container eventGraphView">
                     </div>
                 </div>
             </header>
         </script>
         
-        <script type="text/template" id="stats_template">
+        <script type="text/template" id="event_graph_template">
+            <canvas class="chart"></canvas>
+        </script>
+
+        <script type="text/template" id="transfer_graph_template">
             <div class="transferred"><%= transferred %></div>
-            <canvas class="transferredChart" width="1170" height="400"></canvas>
-            <canvas class="trackerEventChart" width="1170" height="400"></canvas>
+            <canvas class="chart" width="1170" height="400"></canvas>
         </script>
 
         <script type="text/template" id="user_template">
