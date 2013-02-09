@@ -14,18 +14,16 @@ define([
     var StatsView = View.extend({
         initialize: function() {
             _.bindAll(this, 'resizeCanvas');
-            this.template = _.template($('#stats_template').html());
+            this.template = _.template($('#event_graph_template').html());
             this.completedSeries = new Smoothie.TimeSeries();
             this.startedSeries = new Smoothie.TimeSeries();
             this.stoppedSeries = new Smoothie.TimeSeries();
-            this.transferredSeries = new Smoothie.TimeSeries();
             
             this.startedEvents = 0;
             this.completedEvents = 0;
             this.stoppedEvents = 0;
-            this.transferred = 0;
+            this.render();
 
-            this.model.child('stats').child('completed').on('child_added', this.onTransferredEvent, this);
             this.model.child('stats').child('completed').on('child_added', this.onCompletedEvent, this);
             this.model.child('stats').child('started').on('child_added', this.onStartedEvent, this);
             this.model.child('stats').child('stopped').on('child_added', this.onStoppedEvent, this);
@@ -33,12 +31,15 @@ define([
             setTimeout(_.bind(this.resizeCanvas, this));
         },
         destroy: function() {
-            this.model.child('stats').off('value', this.onValue, this);
+            this.model.child('stats').child('completed').off('child_added', this.onCompletedEvent, this);
+            this.model.child('stats').child('started').off('child_added', this.onStartedEvent, this);
+            this.model.child('stats').child('stopped').off('child_added', this.onStoppedEvent, this);
             window.removeEventListener('resize', this.resizeCanvas, false);
         },
         resizeCanvas: function() {
-            this.$('.transferredChart')[0].width = this.$el.parent().innerWidth();
-            this.$('.trackerEventChart')[0].width = this.$el.parent().innerWidth();
+            var width = this.$el.parent().innerWidth();
+            this.$('.chart')[0].width = width;
+            this.$('.chart')[0].height = width / 3;
         },
         onCompletedEvent: function(childSnapshot) {
             var child = childSnapshot.val();
@@ -59,14 +60,7 @@ define([
             this.stoppedSeries.append(time, ++this.stoppedEvents);
             console.log(this.stoppedSeries.data.length, 'stopped data points');
         },
-        onTransferredEvent: function(childSnapshot) {
-            var child = childSnapshot.val();
-            this.transferred += child.downloaded;
-            this.$('.transferred').text(bytesToSize(this.transferred));
-            this.transferredSeries.append(new Date().getTime(), this.transferred);
-            console.log(this.transferredSeries.data.length, 'transferred data points');
-        },
-        renderTrackerEventGraph : function() {
+        renderGraph : function() {
             console.log('renderTrackerEventGraph');
             var chart = new Smoothie.SmoothieChart({ 
                 millisPerPixel: 100, 
@@ -100,39 +94,13 @@ define([
             });
             chart.addTimeSeries(zero, { lineWidth: 0 });
 
-            chart.streamTo(this.$('.trackerEventChart')[0], 1000);
-        },
-        renderTransferredGraph: function() {
-            console.log('renderTransferredGraph');
-            var chart = new Smoothie.SmoothieChart({ 
-                millisPerPixel: 100, 
-                grid: { 
-                    strokeStyle: 'rgba(245, 245, 245, 0.2)',
-                    fillStyle:'rgba(255, 255, 255, 0.0)',
-                    lineWidth: 1,
-                    millisPerLine: 10000, 
-                    verticalSections: 4 
-                }
-            });
-            var zero = new Smoothie.TimeSeries();
-            zero.append(new Date().getTime(), 0);
-
-            chart.addTimeSeries(this.transferredSeries, {
-                strokeStyle:'#3A87AD',
-                fillStyle:'rgba(255, 255, 255, 0.0)',
-                lineWidth: 3
-            });
-            chart.addTimeSeries(zero, { lineWidth: 0 });
-
-            chart.streamTo(this.$('.transferredChart')[0], 1000);
+            chart.streamTo(this.$('.chart')[0], 1000);
         },
         render: function() {
             console.log('render');
             this.$el.html(this.template({
-                transferred: 0
             }));
-            this.renderTrackerEventGraph();
-            this.renderTransferredGraph();
+            this.renderGraph();
             return this;
         }
     });

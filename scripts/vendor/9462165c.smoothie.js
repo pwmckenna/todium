@@ -67,6 +67,9 @@ TimeSeries.prototype.resetBounds = function() {
 };
 
 TimeSeries.prototype.append = function(timestamp, value) {
+  if(this.data.length > 0 && this.data[this.data.length - 1][0] > timestamp) {
+    debugger;
+  }
   this.data.push([timestamp, value]);
   this.maxValue = !isNaN(this.maxValue) ? Math.max(this.maxValue, value) : value;
   this.minValue = !isNaN(this.minValue) ? Math.min(this.minValue, value) : value;

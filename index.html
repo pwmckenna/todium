@@ -16,7 +16,7 @@
         <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="styles/9ca8c101.bootstrap.css">
         <link rel="stylesheet" href="styles/576c6595.font-awesome.css">
-        <link rel="stylesheet" href="styles/f93fb2ac.main.css">
+        <link rel="stylesheet" href="styles/65fa27a6.main.css">
         <script src="scripts/vendor/cf69c6f2.modernizr.min.js"></script>
         <script src="scripts/vendor/b7cdd774.ZeroClipboard.js"></script>
     </head>
@@ -35,16 +35,21 @@
             <div class="container user"></div>
             <header class="statssubhead subhead row" id="overview">
                 <div class="container">
-                    <div class="container stats">
+                    <div class="container transferGraphView">
+                    </div>
+                    <div class="container eventGraphView">
                     </div>
                 </div>
             </header>
         </script>
         
-        <script type="text/template" id="stats_template">
+        <script type="text/template" id="event_graph_template">
+            <canvas class="chart"></canvas>
+        </script>
+
+        <script type="text/template" id="transfer_graph_template">
             <div class="transferred"><%= transferred %></div>
-            <canvas class="transferredChart" width="1170" height="400"></canvas>
-            <canvas class="trackerEventChart" width="1170" height="400"></canvas>
+            <canvas class="chart" width="1170" height="400"></canvas>
         </script>
 
         <script type="text/template" id="user_template">
@@ -116,6 +121,6 @@
         <script type="text/javascript" src="https://cdn.firebase.com/v0/firebase.js"></script>
         <script src='https://cdn.firebase.com/v0/firebase-auth-client.js' type='text/javascript'></script>
 
-        <script src="scripts/7056ae3e.amd-app.js"></script>
+        <script src="scripts/f529c564.amd-app.js"></script>
     </body>
 </html>
