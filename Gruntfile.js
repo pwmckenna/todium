@@ -224,7 +224,21 @@ module.exports = function (grunt) {
                     src: [
                         '*.{ico,txt}',
                         '.htaccess',
-                        'CNAME'
+                        'CNAME',
+                        'styles/bootstrap.css',
+                        'scripts/vendor/jquery.sparkline.min.js',
+                        'scripts/vendor/ZeroCLipboard.js',
+                        'scripts/vendor/modernizr.min.js',
+                        'styles/font-awesome.css',
+                        'styles/bootstrap.css',
+                        'scripts/components/underscore/underscore-min.js',
+                        'scripts/components/Humane-Dates/humane.js',
+                        'scripts/components/backbone/backbone-min.js',
+                        'font/fontawesome-webfont.eot',
+                        'font/fontawesome-webfont.svg',
+                        'font/fontawesome-webfont.ttf',
+                        'font/fontawesome-webfont.woff',
+                        'ZeroCLipboard.swf'
                     ]
                 }]
             }
