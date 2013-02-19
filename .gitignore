@@ -1,5 +1,6 @@
+node_modules
 temp
 dist
-components
+.sass-cache
 app/scripts/components
 .DS_Store
