@@ -227,7 +227,7 @@ module.exports = function (grunt) {
                         'CNAME',
                         'styles/bootstrap.css',
                         'scripts/vendor/jquery.sparkline.min.js',
-                        'scripts/vendor/ZeroCLipboard.js',
+                        'scripts/vendor/ZeroClipboard.js',
                         'scripts/vendor/modernizr.min.js',
                         'styles/font-awesome.css',
                         'styles/bootstrap.css',
