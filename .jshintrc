@@ -1,4 +1,14 @@
 {
+    "globals": {
+        "jQuery": true,
+        "Backbone": true,
+        "_": true,
+        "Firebase": true,
+        "FirebaseAuthClient": true,
+        "define": true,
+        "ZeroClipboard": true,
+        "humaneDate": true
+    },
     "node": true,
     "browser": true,
     "es5": true,

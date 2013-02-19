@@ -3,11 +3,11 @@ define([
     './login',
     './logout',
     './user'
-], function(View, LoginView, LogoutView, UserView) {
+], function (View, LoginView, LogoutView, UserView) {
     'use strict';
 
     var AppView = View.extend({
-        initialize: function() {
+        initialize: function () {
             this.template = _.template($('#app_template').html());
 
             this.loginView = new LoginView({
@@ -19,25 +19,25 @@ define([
             this.onUser();
             this.model.on('change:user', this.onUser, this);
         },
-        onUser: function() {
-            if(this.model.get('user')) {
-                if(!this.userView) {
+        onUser: function () {
+            if (this.model.get('user')) {
+                if (!this.userView) {
                     this.userView = new UserView({
                         model: this.model
                     });
                 }
             } else {
-                if(this.userView) {
+                if (this.userView) {
                     this.userView.destroy();
-                    this.userView = null;   
+                    this.userView = null;
                 }
             }
             this.render();
         },
-        render: function() {
+        render: function () {
             this.$el.html(this.template());
 
-            if(this.userView) {
+            if (this.userView) {
                 this.assign(this.userView, '.user');
             }
             this.assign(this.loginView, '.login');
