@@ -10,10 +10,11 @@ require.config({
     }
 });
  
-require(['model/authentication', 'view/app'], function(AuthenticationModel, AppView) {
-  window.authentication = new AuthenticationModel();
-  var view = new AppView({
-    model: authentication
-  });
-  $('body').append(view.render().el);
+require(['model/authentication', 'view/app'], function (AuthenticationModel, AppView) {
+    'use strict';
+    window.authentication = new AuthenticationModel();
+    var view = new AppView({
+        model: window.authentication
+    });
+    $('body').append(view.render().el);
 });
