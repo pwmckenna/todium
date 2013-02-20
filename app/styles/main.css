@@ -34,8 +34,6 @@
   text-align: center;
 }
 .login .well {
-  color: #eee;
-  background-color: #333;
   padding-bottom: 30px;
 }
 .login .lead {
@@ -73,5 +71,6 @@ body {
 }
 
 .well {
-	background-color: rgba(255, 255, 255, 0.7);
+  color: #eee;
+  background-color: #333;
 }

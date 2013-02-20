@@ -40,9 +40,56 @@ define([
             console.log('onValue', valueSnapshot.val());
             var val = valueSnapshot.val();
             var url = val.trackable;
-            val.time = humaneDate(new Date(val.time));
             val.url = url;
+
+            var startedcount = 0;
+            var started = _.map(val.hasOwnProperty('stats') && val.stats.hasOwnProperty('started') ? val.stats.started : [], function(stat) {
+                var date = new Date(stat.time).getTime();
+                return [date, ++startedcount];
+            });
+            started.unshift([new Date(val.time).getTime(), 0]);
+            started.push([new Date().getTime(), _.last(started)[1]]);
+
+            var stoppedcount = 0;
+            var stopped = _.map(val.hasOwnProperty('stats') && val.stats.hasOwnProperty('stopped') ? val.stats.stopped : [], function(stat) {
+                var date = new Date(stat.time).getTime();
+                return [date, ++stoppedcount];
+            });
+            stopped.unshift([new Date(val.time).getTime(), 0]);
+            stopped.push([new Date().getTime(), _.last(stopped)[1]]);
+
+            var completedcount = 0;
+            var completed = _.map(val.hasOwnProperty('stats') && val.stats.hasOwnProperty('completed') ? val.stats.completed : [], function(stat) {
+                var date = new Date(stat.time).getTime();
+                return [date, ++completedcount];
+            });
+            completed.unshift([new Date(val.time).getTime(), 0]);
+            completed.push([new Date().getTime(), _.last(completed)[1]]);
+
+
+            val.time = humaneDate(new Date(val.time));
             this.$el.html(this.template(val));
+
+            var max = Math.max(startedcount, stoppedcount, completedcount);
+            var height = 20 * Math.floor(max ? Math.log(max) : 0);
+            console.log(height);
+
+            this.$('.sparkline').sparkline(started, {
+                width: '100%',
+                height: height + 'px',
+                fillColor: false,
+                lineColor: 'green'
+            });
+            this.$('.sparkline').sparkline(stopped, {
+                composite: true,
+                fillColor: false,
+                lineColor: 'red'
+            });
+            this.$('.sparkline').sparkline(completed, {
+                composite: true,
+                fillColor: false,
+                lineColor: 'blue'
+            });
             this.url = url;
         },
         onAddLabel: function () {
