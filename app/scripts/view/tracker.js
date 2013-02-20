@@ -71,24 +71,31 @@ define([
             this.$el.html(this.template(val));
 
             var max = Math.max(startedcount, stoppedcount, completedcount);
-            var height = 20 * Math.floor(max ? Math.log(max) : 0);
-            console.log(height);
+            var height = 20 * Math.floor(max ? Math.log(max) : 1);
+
+            var chartMax = Math.floor(max * 1.2);
 
             this.$('.sparkline').sparkline(started, {
                 width: '100%',
                 height: height + 'px',
                 fillColor: false,
-                lineColor: 'green'
+                lineColor: 'green',
+                chartRangeMin: 0,
+                chartRangeMax: chartMax
             });
             this.$('.sparkline').sparkline(stopped, {
                 composite: true,
                 fillColor: false,
-                lineColor: 'red'
+                lineColor: 'red',
+                chartRangeMin: 0,
+                chartRangeMax: chartMax
             });
             this.$('.sparkline').sparkline(completed, {
                 composite: true,
                 fillColor: false,
-                lineColor: 'blue'
+                lineColor: 'blue',
+                chartRangeMin: 0,
+                chartRangeMax: chartMax
             });
             this.url = url;
         },

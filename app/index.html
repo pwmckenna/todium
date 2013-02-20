@@ -68,8 +68,8 @@
                     <input class="span11 shorty" type="text" url="<%= url %>" readonly="readonly" value="<%= url %>"></input>
                     <button class="btn copy" type="button"><i class="icon-copy"></i></button>
                 </div>
-                    <div class="src">Original Link: <a href="<%= src %>"><%= src %></a></div>
-                    <span class="label">Added: <%= time %></span>
+                <div class="src">Original Link: <a href="<%= src %>"><%= src %></a></div>
+                <span class="label">Added: <%= time %></span>
                 <% if(typeof labels !== 'undefined') { _.each(labels, function(label) { %> 
                     <span class="label label-info"><%= label %></span>
                 <% }); } %>

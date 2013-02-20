@@ -60,6 +60,10 @@ input.input-label {
   margin-top: 50px;
 }
 
+.sparkline canvas {
+  background-color: #eee;
+}
+
 .src {
   color: #888;
   font-size: 10px;
