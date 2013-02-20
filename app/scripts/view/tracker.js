@@ -43,7 +43,7 @@ define([
             val.url = url;
 
             var startedcount = 0;
-            var started = _.map(val.hasOwnProperty('stats') && val.stats.hasOwnProperty('started') ? val.stats.started : [], function(stat) {
+            var started = _.map(val.hasOwnProperty('stats') && val.stats.hasOwnProperty('started') ? val.stats.started : [], function (stat) {
                 var date = new Date(stat.time).getTime();
                 return [date, ++startedcount];
             });
@@ -51,7 +51,7 @@ define([
             started.push([new Date().getTime(), _.last(started)[1]]);
 
             var stoppedcount = 0;
-            var stopped = _.map(val.hasOwnProperty('stats') && val.stats.hasOwnProperty('stopped') ? val.stats.stopped : [], function(stat) {
+            var stopped = _.map(val.hasOwnProperty('stats') && val.stats.hasOwnProperty('stopped') ? val.stats.stopped : [], function (stat) {
                 var date = new Date(stat.time).getTime();
                 return [date, ++stoppedcount];
             });
@@ -59,7 +59,7 @@ define([
             stopped.push([new Date().getTime(), _.last(stopped)[1]]);
 
             var completedcount = 0;
-            var completed = _.map(val.hasOwnProperty('stats') && val.stats.hasOwnProperty('completed') ? val.stats.completed : [], function(stat) {
+            var completed = _.map(val.hasOwnProperty('stats') && val.stats.hasOwnProperty('completed') ? val.stats.completed : [], function (stat) {
                 var date = new Date(stat.time).getTime();
                 return [date, ++completedcount];
             });
