@@ -2,8 +2,9 @@ define([
     './view',
     './login',
     './logout',
-    './user'
-], function (View, LoginView, LogoutView, UserView) {
+    './user',
+    './stats'
+], function (View, LoginView, LogoutView, UserView, StatsView) {
     'use strict';
 
     var AppView = View.extend({
@@ -26,10 +27,19 @@ define([
                         model: this.model
                     });
                 }
+                if(this.statsView) {
+                    this.statsView.destroy();
+                    this.statsView = null;
+                }
             } else {
                 if (this.userView) {
                     this.userView.destroy();
                     this.userView = null;
+                }
+                if(!this.statsView) {
+                    this.statsView = new StatsView({
+                        model: this.model.firebase.child('stats')
+                    });
                 }
             }
             this.render();
@@ -39,6 +49,10 @@ define([
 
             if (this.userView) {
                 this.assign(this.userView, '.user');
+            }
+            if(this.statsView) {
+                console.log('rendering stats');
+                this.assign(this.statsView, '.stats');
             }
             this.assign(this.loginView, '.login');
             this.assign(this.logoutView, '.logout');

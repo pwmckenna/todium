@@ -74,7 +74,18 @@ body {
 	background: #eee;
 }
 
+.stats {
+  background-color: white;
+}
+
+.container.stats {
+  margin-bottom: 50px;
+}
+
 .well {
   color: #eee;
   background-color: #333;
+}
+.well .add-on {
+  color: #333;
 }

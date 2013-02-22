@@ -1,6 +1,7 @@
 define([
-    './view'
-], function (View) {
+    './view',
+    './stats'
+], function (View, StatsView) {
     'use strict';
 
     var clip = new ZeroClipboard.Client();
@@ -31,6 +32,9 @@ define([
         initialize: function () {
             this.url = '...';
             this.template = _.template($('#tracker_template').html());
+            this.statsView = new StatsView({
+                model: this.model.child('stats')
+            });
             this.model.on('value', this.onValue, this);
         },
         destroy: function () {
@@ -38,66 +42,8 @@ define([
         },
         onValue: function (valueSnapshot) {
             console.log('onValue', valueSnapshot.val());
-            var val = valueSnapshot.val();
-            var url = val.trackable;
-            val.url = url;
-
-            var startedcount = 0;
-            var started = _.map(val.hasOwnProperty('stats') && val.stats.hasOwnProperty('started') ? val.stats.started : [], function (stat) {
-                var date = new Date(stat.time).getTime();
-                return [date, ++startedcount];
-            });
-            started.unshift([new Date(val.time).getTime(), 0]);
-            started.push([new Date().getTime(), _.last(started)[1]]);
-
-            var stoppedcount = 0;
-            var stopped = _.map(val.hasOwnProperty('stats') && val.stats.hasOwnProperty('stopped') ? val.stats.stopped : [], function (stat) {
-                var date = new Date(stat.time).getTime();
-                return [date, ++stoppedcount];
-            });
-            stopped.unshift([new Date(val.time).getTime(), 0]);
-            stopped.push([new Date().getTime(), _.last(stopped)[1]]);
-
-            var completedcount = 0;
-            var completed = _.map(val.hasOwnProperty('stats') && val.stats.hasOwnProperty('completed') ? val.stats.completed : [], function (stat) {
-                var date = new Date(stat.time).getTime();
-                return [date, ++completedcount];
-            });
-            completed.unshift([new Date(val.time).getTime(), 0]);
-            completed.push([new Date().getTime(), _.last(completed)[1]]);
-
-
-            val.time = humaneDate(new Date(val.time));
-            this.$el.html(this.template(val));
-
-            var max = Math.max(startedcount, stoppedcount, completedcount);
-            var height = 20 * Math.floor(max ? Math.log(max) : 1);
-
-            var chartMax = Math.floor(max * 1.2);
-
-            this.$('.sparkline').sparkline(started, {
-                width: '100%',
-                height: height + 'px',
-                fillColor: false,
-                lineColor: 'green',
-                chartRangeMin: 0,
-                chartRangeMax: chartMax
-            });
-            this.$('.sparkline').sparkline(stopped, {
-                composite: true,
-                fillColor: false,
-                lineColor: 'red',
-                chartRangeMin: 0,
-                chartRangeMax: chartMax
-            });
-            this.$('.sparkline').sparkline(completed, {
-                composite: true,
-                fillColor: false,
-                lineColor: 'blue',
-                chartRangeMin: 0,
-                chartRangeMax: chartMax
-            });
-            this.url = url;
+            this.val = valueSnapshot.val();
+            this.render();
         },
         onAddLabel: function () {
             var label = this.$('.input-label').val();
@@ -118,6 +64,16 @@ define([
             clip.receiveEvent('mouseover', null);
         },
         render: function () {
+            this.$el.html(this.template({
+                src: this.val.src,
+                time: humaneDate(new Date(this.val.time)),
+                labels: this.val.labels,
+                url: this.val.trackable
+            }));
+            this.url = this.val.url;
+
+            this.assign(this.statsView, '.stats');
+
             return this;
         }
     });
