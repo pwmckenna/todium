@@ -27,7 +27,7 @@ define([
                         model: this.model
                     });
                 }
-                if(this.statsView) {
+                if (this.statsView) {
                     this.statsView.destroy();
                     this.statsView = null;
                 }
@@ -36,7 +36,7 @@ define([
                     this.userView.destroy();
                     this.userView = null;
                 }
-                if(!this.statsView) {
+                if (!this.statsView) {
                     this.statsView = new StatsView({
                         model: this.model.firebase.child('stats')
                     });
@@ -50,7 +50,7 @@ define([
             if (this.userView) {
                 this.assign(this.userView, '.user');
             }
-            if(this.statsView) {
+            if (this.statsView) {
                 console.log('rendering stats');
                 this.assign(this.statsView, '.stats');
             }
