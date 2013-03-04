@@ -19,12 +19,11 @@ env:
         # It must be encrypted using the travis gem
         # http://about.travis-ci.org/docs/user/build-configuration/#Secure-environment-variables
         #
-        # travis encrypt GH_OAUTH_TOKEN=b2797fff05e7461c4c8174fae08fb006cbadba9f
+        # travis encrypt GH_OAUTH_TOKEN=ed2f64a411e6de015754415941f40ff29f620824
         #
         # User specific env variables
-        - secure: "aPk8jCow6lmL9lMJdo8cWM6Rkid91pPSS0uhkuDox6oaA+unVE4yPWbr7ByQ\nB7Cdi3WtrBU29sRn4cl2LYieM5VDpANBRuJvhEjhGCOyLNUtu1cNDK8STxzf\ninFJp2vyRxJOcqDFUCto31Nr33f4wIetZB76WWkXIepNIMUroRc="
-
-        - GH_USER_NAME: pwmckenna
+        - secure: "arnJJ/JmLEs0XkN6meY5ppLEIZvb+usLGrU1OCuNUVO6j/5bhcIG11O2MQooCX9+XQ3ol1CQieTicnR4Ns/tQOwHXLIIJ07F/+UuNxp3eyRk4yGHGXJ1YaPfPtozTNvqghbLmAbKfRtcCr10DFo0/jEZDfXGjmc1dTkK5Xuxv5k="
+        - GH_OWNER: pwmckenna
         - GH_PROJECT_NAME: todium
         # This .travis.yml file instructs travis-ci.org to build your master branch using `yeoman build`
         # and deploy the output to your project's gh-pages branch.
@@ -36,12 +35,13 @@ before_script:
     - gem install optipng
     - npm install -g yo grunt-cli bower
 script:
+    - echo ${GH_OAUTH_TOKEN}
     # We want to gate on passing tests and a successful build
     - bower install
     - grunt
 after_success:
     # Any command that using GH_OAUTH_TOKEN must pipe the output to /dev/null to not expose your oauth token
-    - git submodule add -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_USER_NAME}/${GH_PROJECT_NAME} site 2>&1
+    - git submodule add -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} site 2>&1
     - cd site
     - git checkout gh-pages
     - git rm -r .
@@ -52,4 +52,4 @@ after_success:
     - git config user.name "Patrick Williams"
     - git commit -am "adding the yeoman build files to gh-pages"
     # Any command that using GH_OAUTH_TOKEN must pipe the output to /dev/null to not expose your oauth token
-    - git push https://${GH_OAUTH_TOKEN}@github.com/${GH_USER_NAME}/${GH_PROJECT_NAME} gh-pages > /dev/null 2>&1
+    - git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} gh-pages > /dev/null 2>&1
