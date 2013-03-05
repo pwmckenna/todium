@@ -9,12 +9,11 @@ require.config({
         humane: 'components/Humane-Dates/humane'
     }
 });
- 
+
 require(['model/authentication', 'view/app'], function (AuthenticationModel, AppView) {
     'use strict';
     window.authentication = new AuthenticationModel();
-    var view = new AppView({
+    $('body').append(AppView({
         model: window.authentication
-    });
-    $('body').append(view.render().el);
+    }).render().el);
 });
