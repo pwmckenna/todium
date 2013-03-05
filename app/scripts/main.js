@@ -13,7 +13,7 @@ require.config({
 require(['model/authentication', 'view/app'], function (AuthenticationModel, AppView) {
     'use strict';
     window.authentication = new AuthenticationModel();
-    $('body').append(AppView({
+    $('body').append(new AppView({
         model: window.authentication
     }).render().el);
 });
