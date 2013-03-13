@@ -22,7 +22,7 @@ env:
         # travis encrypt GH_OAUTH_TOKEN=XXXXXXXXXXXXXXX
         #
         # User specific env variables
-        - secure: "TxYawTx1eukQZszYaZPaz+qGycvEgXPslVEHH8+OZEL2lhkbvFGa6cVltlSy\ns25B710zLN3EU8HWGKLflb6bIPbaneqTRhiFlfP5KZyWGwFuEHAZ8o7wdDr1\n5a/3z08WBM/LCVmBWOaCm7cXidEMm+ZR/cfLNTpyWpMMz7shlp0="
+        - secure: "YMY384CYLh5D9Wg55znCJxoXau0oYfWT85v9u4o+1/+Qb3LD0IX5OXwJb/fp\ntG5IlTC1yFkE+vMV+CNrqMiCtkXhV/Iuk5mr23HzHZwZOkddzIQwBmjqp2Ex\nd4APw/KE5cX3c+0MWukpyuJax1ff4NXgxV6BRNtCnujK+DSN18k="
         - GH_OWNER: pwmckenna
         - GH_PROJECT_NAME: todium
         # This .travis.yml file instructs travis-ci.org to build your master branch using `yeoman build`
