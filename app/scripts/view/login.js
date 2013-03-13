@@ -4,31 +4,46 @@ define([
     'use strict';
     var LoginView = View.extend({
         events: {
-            'click .facebook.btn': 'login',
-            'click .github.btn': 'login',
-            'click .twitter.btn': 'login',
+            'click .signup_form .btn': 'signUp',
+            'click .login_form .btn': 'login'
         },
         initialize: function () {
             this.template = _.template($('#login_template').html());
             this.model.on('change:user', this.render, this);
         },
-        login: function (ev) {
-            var button = $(ev.currentTarget);
-            if (button.hasClass('disabled')) {
+        signUp: function () {
+            var email = this.$('.signup_well .email').val();
+            var password = this.$('.signup_well .password1').val();
+            if (password !== this.$('.signup_well .password2').val()) {
+                console.error('mismatch passwords!');
                 return;
             }
-            button.addClass('disabled');
-            var provider = '';
-            if (button.hasClass('facebook')) {
-                provider = 'facebook';
-            } else if (button.hasClass('github')) {
-                provider = 'github';
-            } else if (button.hasClass('twitter')) {
-                provider = 'twitter';
-            } else {
-                throw 'invalid login provider';
-            }
-            this.model.login(provider);
+            var auth = this.model.auth;
+            console.log('create user', email, password);
+            auth.createUser(email, password, function (error, user) {
+                if (error) {
+                    console.error(error);
+                    return;
+                } else {
+                    console.log('User Id: ' + user.id + ', Email: ' + user.email);
+                    auth.login('password', {
+                        email: user.email,
+                        password: password,
+                        rememberMe: true
+                    });
+                }
+
+            });
+        },
+        login: function () {
+            var email = this.$('.login_well .email').val();
+            var password = this.$('.login_well .password').val();
+            console.log('login', email, password);
+            this.model.auth.login('password', {
+                email: email,
+                password: password,
+                rememberMe: true
+            });
         },
         render: function () {
             if (this.model.get('user')) {

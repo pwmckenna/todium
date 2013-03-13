@@ -1,7 +1,6 @@
 define([
-    './view',
-    './stats'
-], function (View, StatsView) {
+    './view'
+], function (View) {
     'use strict';
 
     var clip = new ZeroClipboard.Client();
@@ -32,9 +31,6 @@ define([
         initialize: function () {
             this.url = '...';
             this.template = _.template($('#tracker_template').html());
-            this.statsView = new StatsView({
-                model: this.model.child('stats')
-            });
             this.model.on('value', this.onValue, this);
         },
         destroy: function () {
@@ -70,9 +66,7 @@ define([
                 labels: this.val.labels,
                 url: this.val.trackable
             }));
-            this.url = this.val.url;
-
-            this.assign(this.statsView, '.stats');
+            this.url = this.val.trackable;
 
             return this;
         }

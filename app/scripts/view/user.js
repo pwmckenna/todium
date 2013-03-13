@@ -1,50 +1,48 @@
 define([
     './view',
-    './tracker'
-], function (View, TrackerView) {
+    './campaign'
+], function (View, CampaignView) {
     'use strict';
 
     var UserView = View.extend({
         events: {
-            'click .addTracker': 'onAddTracker'
+            'click .addCampaign': 'onAddCampaign'
         },
         initialize: function () {
             this.template = _.template($('#user_template').html());
             this.views = {};
-            var user = this.model.get('user');
-            this.trackers = this.model.firebase.child('users').child(user.provider).child(user.id).child('trackers');
             setTimeout(_.bind(function () {
-                this.trackers.on('child_added', this.onTrackerAdded, this);
-                this.trackers.on('child_removed', this.onTrackerRemoved, this);
+                this.model.child('campaigns').on('child_added', this.onCampaignAdded, this);
+                this.model.child('campaigns').on('child_removed', this.onCampaignRemoved, this);
             }, this));
         },
         destroy: function () {
-            this.trackers.off('child_added', this.onTrackerAdded, this);
-            this.trackers.off('child_removed', this.onTrackerRemoved, this);
+            this.model.child('campaigns').off('child_added', this.onCampaignAdded, this);
+            this.model.child('campaigns').off('child_removed', this.onCampaignRemoved, this);
             _.each(this.views, function (view) {
                 view.destroy();
                 view.remove();
             });
             this.views = {};
         },
-        onTrackerAdded: function (dataSnapshot) {
-            console.log('onTrackerAdded', dataSnapshot.val());
-            var trackerName = dataSnapshot.val();
-            var tracker = this.model.firebase.child('trackers').child(trackerName);
-            var view = new TrackerView({
-                model: tracker
+        onCampaignAdded: function (dataSnapshot) {
+            console.log('onCampaignAdded', dataSnapshot.val());
+            var id = dataSnapshot.val();
+            var campaign = this.model.root().child('campaigns').child(id);
+            var view = new CampaignView({
+                model: campaign
             });
-            this.views[trackerName] = view;
-            this.$('.trackers').append(view.$el);
+            this.views[id] = view;
+            this.$('.campaigns').append(view.render().el);
         },
-        onTrackerRemoved: function (dataSnapshot) {
-            console.log('onTrackerRemoved', dataSnapshot.val());
-            var trackerName = dataSnapshot.val();
-            var view = this.views[trackerName];
+        onCampaignRemoved: function (dataSnapshot) {
+            console.log('onCampaignRemoved', dataSnapshot.val());
+            var id = dataSnapshot.val();
+            var view = this.views[id];
             view.remove();
-            delete this.views[trackerName];
+            delete this.views[id];
         },
-        onAddTracker: function () {
+        onAddCampaign: function () {
             var button = this.$('.btn');
             if (button.hasClass('disabled')) {
                 return;
@@ -54,23 +52,23 @@ define([
                 button.removeClass('disabled');
             }, 3000);
 
-            var torrentLink = this.$('.createTorrentLink').val();
-            if (!torrentLink) {
+            var name = this.$('.campaignName').val();
+            if (!name) {
                 return;
             }
-            this.$('.createTorrentLink').val('');
-
-            $.getJSON('http://api.todium.com', {
-                token: this.model.get('user').firebaseAuthToken,
-                src: torrentLink
-            }).then(function (url) {
-                console.log(url);
+            this.$('.campaignName').val('');
+            //this is actually not that random...replace with a hash of random data
+            var random = this.model.root().child('campaigns').push().name();
+            var campaign = this.model.root().child('campaigns').push({
+                name: name,
+                secret: random
             });
+            this.model.child('campaigns').push().set(campaign.name());
         },
         render: function () {
-            var trackers = this.$('.trackers').children().detach();
+            var trackers = this.$('.campaigns').children().detach();
             this.$el.html(this.template());
-            this.$('.trackers').append(trackers);
+            this.$('.campaigns').append(trackers);
         }
     });
     return UserView;

@@ -2,9 +2,8 @@ define([
     './view',
     './login',
     './logout',
-    './user',
-    './stats'
-], function (View, LoginView, LogoutView, UserView, StatsView) {
+    './user'
+], function (View, LoginView, LogoutView, UserView) {
     'use strict';
 
     var AppView = View.extend({
@@ -21,26 +20,14 @@ define([
             this.model.on('change:user', this.onUser, this);
         },
         onUser: function () {
-            if (this.model.get('user')) {
-                if (!this.userView) {
-                    this.userView = new UserView({
-                        model: this.model
-                    });
-                }
-                if (this.statsView) {
-                    this.statsView.destroy();
-                    this.statsView = null;
-                }
-            } else {
-                if (this.userView) {
-                    this.userView.destroy();
-                    this.userView = null;
-                }
-                if (!this.statsView) {
-                    this.statsView = new StatsView({
-                        model: this.model.firebase.child('stats')
-                    });
-                }
+            if (this.model.get('user') && !this.userView) {
+                var userId = this.model.get('user').id;
+                this.userView = new UserView({
+                    model: this.model.firebase.child('users').child(userId)
+                });
+            } else if (!this.model.get('user') && this.userView) {
+                this.userView.destroy();
+                this.userView = null;
             }
             this.render();
         },
@@ -49,10 +36,6 @@ define([
 
             if (this.userView) {
                 this.assign(this.userView, '.user');
-            }
-            if (this.statsView) {
-                console.log('rendering stats');
-                this.assign(this.statsView, '.stats');
             }
             this.assign(this.loginView, '.login');
             this.assign(this.logoutView, '.logout');
