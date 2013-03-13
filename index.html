@@ -12,7 +12,7 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        
+
         <link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="styles/bootstrap.css">
         <link rel="stylesheet" href="styles/font-awesome.css">
@@ -32,30 +32,76 @@
             </header>
             <div class="container login" style="margin-top:50px; min-height:500px"></div>
             <div class="container user"></div>
-            <div class="container stats"></div>
         </script>
-        
+
         <script type="text/template" id="user_template">
-            <div class="trackers"></div>
+            <div class="campaigns"></div>
             <br>
             <br>
             <div class="well">
                 <div class="input-prepend">
-                    <span class="add-on">Torrent link:</span>
-                    <input class="span10 createTorrentLink" type="text" placeholder="http://XXXXXX.com/XXXXXX.torrent    /    magnet:?xt=urn:btih:XXXXXX"></input>
+                    <span class="add-on">Campaign Name:</span>
+                    <input class="span9 campaignName" type="text" placeholder="Twitter FeaturedContent"></input>
                 </div>
-                <button class="btn btn-large btn-block btn-inverse addTracker" type="button">Create Link</button>
+                <button class="btn btn-large btn-block btn-inverse addCampaign" type="button">Create Campaign</button>
+            </div>
+            <br>
+        </script>
+
+        <script type="text/template" id="campaign_template">
+            <div class="well">
+                <h1><%= name %></h1>
+                <div class="trackers"></div>
+                <br>
+                <br>
+                <div class="well">
+                    <div class="input-prepend">
+                        <span class="add-on">Torrent link:</span>
+                        <input class="span10 createTorrentLink" type="text" placeholder="http://XXXXXX.com/XXXXXX.torrent    /    magnet:?xt=urn:btih:XXXXXX"></input>
+                    </div>
+                    <button class="btn btn-large btn-block btn-inverse addTracker" type="button">Create Link</button>
+                </div>
             </div>
             <br>
         </script>
 
         <script type="text/template" id="login_template">
             <p class="lead">bit.ly for torrent/magnet links,<br>with content download stats.</p>
-            <div class="well">
-                <p class="instructions">Login to create links:</p>
-                <button class="btn bigbtn facebook" type="button"><i class="icon-facebook"></i></button>
-                <button class="btn bigbtn github" type="button"><i class="icon-github"></i></button>
-                <button class="btn bigbtn twitter" type="button"><i class="icon-twitter"></i></button>
+            <div class="well signup_well">
+                <p class="instructions">Sign up to create links:</p><br>
+                <div class="form-inline signup_form">
+                    <div>
+                        <input type="text" class="input email" placeholder="Email">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="password" class="input password1" placeholder="Password">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="password" class="input password2" placeholder="Password again">
+                    </div>
+                    <br>
+                    <div>
+                        <button class="btn">Sign up</button>
+                    </div>
+                </div>
+            </div>
+            <div class="well login_well">
+                <p class="instructions">Login to create links:</p><br>
+                <div class="form-inline login_form">
+                    <div>
+                        <input type="text" class="input email" placeholder="Email">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="password" class="input password" placeholder="Password">
+                    </div>
+                    <br>
+                    <div>
+                        <button class="btn">Log in</button>
+                    </div>
+                </div>
             </div>
         </script>
         <script type="text/template" id="logout_template">
@@ -65,20 +111,18 @@
         <script type="text/template" id="tracker_template">
             <div class="well">
                 <div class="input-append">
-                    <input class="span11 shorty" type="text" url="<%= url %>" readonly="readonly" value="<%= url %>"></input>
+                    <input class="span10 shorty" type="text" url="<%= url %>" readonly="readonly" value="<%= url %>"></input>
                     <button class="btn copy" type="button"><i class="icon-copy"></i></button>
                 </div>
                 <div class="src">Original Link: <a href="<%= src %>"><%= src %></a></div>
                 <span class="label">Added: <%= time %></span>
-                <% if(typeof labels !== 'undefined') { _.each(labels, function(label) { %> 
+                <% if(typeof labels !== 'undefined') { _.each(labels, function(label) { %>
                     <span class="label label-info"><%= label %></span>
                 <% }); } %>
                 <span class="input-append">
                     <input class="input-label" type="text" placeholder="new label"></input>
                     <button class="btn button-label" type="button"><i class="icon-plus"></i></button>
                 </span>
-                <div class="stats">
-                </div>
             </div>
         </script>
         <!--[if lt IE 7]>
@@ -92,7 +136,7 @@
         <script src="scripts/vendor/jquery.sparkline.min.js"></script>
         <script src="scripts/components/underscore/underscore-min.js"></script>
         <script src="scripts/components/backbone/backbone-min.js"></script>
-        <script src="scripts/components/Humane-Dates/humane.js"></script>        
+        <script src="scripts/components/Humane-Dates/humane.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
