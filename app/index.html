@@ -30,7 +30,7 @@
             <span>Examples:</span>
             <pre class="curl">curl -X POST 'http://api.todium.com'  \<br>    -d 'id=<%= id %>'  \<br>    -d 'secret=<%= secret %>'  \<br>    -d 'src=http://www.clearbits.net/get/547-home-2009.torrent'<br><br><span>> http://torrent.todium.com/-Ipf63TQ8PIhXXRNM5md.torrent</span></pre>
             <pre class="curl">curl -X POST 'http://api.todium.com'  \<br>    -d 'id=<%= id %>'  \<br>    -d 'secret=<%= secret %>'  \<br>    -d 'src=magnet:?xt=urn:btih:54DEC3E7B1169FAD5587D5A9E30FAFA92097EAB7&dn=Big+Buck+Bunny'<br><br><span>> magnet:?xt=urn:btih:54DEC3E7B1169FAD5587D5A9E30FAFA92097EAB7&tr=http://tracker.todium.com/-Ipf7-4f0v_ThSId5rdg/announce</span></pre>
-            <pre class="curl">curl -X POST 'http://api.todium.com'  \<br>    -d 'id=<%= id %>'  \<br>    -d 'secret=<%= secret %>'  \<br>    -d 'src=54DEC3E7B1169FAD5587D5A9E30FAFA92097EAB7'<br><br><span>> http://tracker.todium.com/-Ipf7-4f0v_ThSId5rdg/announce</span></pre>
+            <pre class="curl">curl -X POST 'http://api.todium.com/tracker'  \<br>    -d 'id=<%= id %>'  \<br>    -d 'secret=<%= secret %>'  \<br>    -d 'src=54DEC3E7B1169FAD5587D5A9E30FAFA92097EAB7'<br><br><span>> http://tracker.todium.com/-Ipf7-4f0v_ThSId5rdg/announce</span></pre>
 
 
 
@@ -62,9 +62,7 @@
                 </h1>
                 <br>
                 <div class="owners well"></div>
-                <br>
                 <div class="api well"></div>
-                <br>
                 <div class="trackers well"></div>
             </div>
             <br>
