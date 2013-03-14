@@ -18,7 +18,6 @@
         <link rel="stylesheet" href="styles/font-awesome.css">
         <link rel="stylesheet" href="styles/main.css">
         <script src="scripts/vendor/modernizr.min.js"></script>
-        <script src="scripts/vendor/ZeroClipboard.js"></script>
     </head>
     <body>
 
@@ -52,11 +51,11 @@
             <div class="well">
                 <h1>
                     <span><%= name %></span>
-                    <div class="btn-group pull-right" data-toggle="buttons-checkbox">
+                    <div class="btn-group pull-right" data-toggle="buttons-radio">
                         <!--button type="button" class="btn medbtn" title="analytics"><i class="icon-signal"></i></button-->
-                        <button type="button" class="btn medbtn" title="campaign followers"><i class="icon-user"></i></button>
-                        <button type="button" class="btn medbtn" title="api info"><i class="icon-qrcode"></i></button>
-                        <button type="button" class="btn medbtn" title="torrents"><i class="icon-magnet"></i></button>
+                        <button type="button" class="btn medbtn owners" title="campaign followers"><i class="icon-user"></i></button>
+                        <button type="button" class="btn medbtn api" title="api info"><i class="icon-qrcode"></i></button>
+                        <button type="button" class="btn medbtn trackers active" title="torrents"><i class="icon-magnet"></i></button>
                     </div>
                 </h1>
                 <br>
@@ -114,17 +113,14 @@
         </script>
 
         <script type="text/template" id="owners_template">
-            <div>Campaign Members: </div>
+            <div>Campaign Owners: </div>
             <% _.each(owners, function (owner) { %>
                 <img title="<%= owner.email %>" src="<%= owner.image %>" />
             <% }) %>
         </script>
 
         <script type="text/template" id="tracker_template">
-            <div class="input-append">
-                <input class="span10 shorty" type="text" url="<%= url %>" readonly="readonly" value="<%= url %>"></input>
-                <button class="btn copy" type="button"><i class="icon-copy"></i></button>
-            </div>
+            <input class="input-block-level shorty" type="text" url="<%= url %>" readonly="readonly" value="<%= url %>"></input>
             <span class="label">Added: <%= time %></span>
             <span class="src">Original Link: <a href="<%= src %>"><%= src %></a></span>
         </script>
