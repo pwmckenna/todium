@@ -27,17 +27,17 @@ define([
         toggleViews: function () {
             var _this = this;
             setTimeout(function () {
-                if(_this.$('.btn.trackers').hasClass('active')) {
+                if (_this.$('.btn.trackers').hasClass('active')) {
                     _this.trackersView.$el.show();
                 } else {
                     _this.trackersView.$el.hide();
                 }
-                if(_this.$('.btn.api').hasClass('active')) {
+                if (_this.$('.btn.api').hasClass('active')) {
                     _this.apiView.$el.show();
                 } else {
                     _this.apiView.$el.hide();
                 }
-                if(_this.$('.btn.owners').hasClass('active')) {
+                if (_this.$('.btn.owners').hasClass('active')) {
                     _this.ownersView.$el.show();
                 } else {
                     _this.ownersView.$el.hide();
