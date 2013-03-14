@@ -19,7 +19,7 @@ define([
                 owners = ownersSnapshot.val();
             });
 
-            var images = _.map(owners, function(email, id) {
+            var images = _.map(owners, function (email) {
                 var hash = md5(email.trim());
                 return '//www.gravatar.com/avatar/' + hash + '?s=32&d=mm';
             });

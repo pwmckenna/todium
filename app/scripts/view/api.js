@@ -15,7 +15,7 @@ define([
             var secret = '';
             this.model.child('secret').once('value', function (secretSnapshot) {
                 secret = secretSnapshot.val();
-            })
+            });
             this.$el.html(this.template({
                 id: this.model.name(),
                 secret: secret

@@ -70,8 +70,7 @@ define([
                 secret: secret,
                 owners: owners
             };
-            var campaign = this.model.root().child('campaigns').update(update);
-
+            this.model.root().child('campaigns').update(update);
             this.model.child('campaigns').push().set(id);
         },
         render: function () {
