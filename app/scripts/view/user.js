@@ -1,7 +1,8 @@
 define([
     './view',
-    './campaign'
-], function (View, CampaignView) {
+    './campaign',
+    'md5'
+], function (View, CampaignView, md5) {
     'use strict';
 
     var UserView = View.extend({
@@ -58,16 +59,26 @@ define([
             }
             this.$('.campaignName').val('');
             //this is actually not that random...replace with a hash of random data
-            var random = this.model.root().child('campaigns').push().name();
-            var campaign = this.model.root().child('campaigns').push({
+            var id = md5(this.model.root().child('campaigns').push().name());
+            var secret = md5(this.model.root().child('campaigns').push().name());
+
+            var update = {};
+            var owners = {};
+            owners[this.options.id] = this.options.email;
+            update[id] = {
                 name: name,
-                secret: random
-            });
-            this.model.child('campaigns').push().set(campaign.name());
+                secret: secret,
+                owners: owners
+            };
+            var campaign = this.model.root().child('campaigns').update(update);
+
+            this.model.child('campaigns').push().set(id);
         },
         render: function () {
             var trackers = this.$('.campaigns').children().detach();
-            this.$el.html(this.template());
+            this.$el.html(this.template({
+                email: this.options.email
+            }));
             this.$('.campaigns').append(trackers);
         }
     });

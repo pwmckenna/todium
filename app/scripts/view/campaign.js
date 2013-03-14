@@ -1,7 +1,9 @@
 define([
     './view',
-    './tracker'
-], function (View, TrackerView) {
+    './tracker',
+    './api',
+    './owners'
+], function (View, TrackerView, ApiView, OwnersView) {
     'use strict';
 
     var CampaignView = View.extend({
@@ -11,14 +13,24 @@ define([
         initialize: function () {
             this.template = _.template($('#campaign_template').html());
             this.views = {};
+            this.apiView = new ApiView({
+                model: this.model
+            });
+            this.ownersView = new OwnersView({
+                model: this.model
+            });
             setTimeout(_.bind(function () {
                 this.model.child('trackers').on('child_added', this.onTrackerAdded, this);
                 this.model.child('trackers').on('child_removed', this.onTrackerRemoved, this);
+                this.model.on('value', this.render, this);
             }, this));
         },
         destroy: function () {
             this.model.child('trackers').off('child_added', this.onTrackerAdded, this);
             this.model.child('trackers').off('child_removed', this.onTrackerRemoved, this);
+            this.model.off('value', this.render, this);
+            this.apiView.destroy();
+            this.apiView.remove();
             _.each(this.views, function (view) {
                 view.destroy();
                 view.remove();
@@ -70,13 +82,25 @@ define([
             }, this);
         },
         render: function () {
-            this.model.child('name').once('value', function (nameSnapshot) {
-                var trackers = this.$('.trackers').children().detach();
-                this.$el.html(this.template({
-                    name: nameSnapshot.val()
-                }));
-                this.$('.trackers').append(trackers);
-            }, this);
+            var trackers = this.$('.trackers').children().detach();
+
+            var name = '';
+            var id = this.model.name();
+            var secret = '';
+            this.model.once('value', function (valueSnapshot) {
+                var val = valueSnapshot.val();
+                name = val.name;
+                secret = val.secret;
+            });
+
+            this.$el.html(this.template({
+                name: name,
+                id: id,
+                secret: secret
+            }));
+            this.$('.trackers').append(trackers);
+            this.assign(this.apiView, '.api');
+            this.assign(this.ownersView, '.owners');
             return this;
         }
     });

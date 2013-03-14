@@ -39,47 +39,63 @@
             <br>
             <br>
             <div class="well">
-                <div class="input-prepend">
-                    <span class="add-on">Campaign Name:</span>
-                    <input class="span9 campaignName" type="text" placeholder="Twitter FeaturedContent"></input>
-                </div>
+                <input class="input-block-level campaignName" type="text" placeholder="Campaign Name"></input>
                 <button class="btn btn-large btn-block btn-inverse addCampaign" type="button">Create Campaign</button>
             </div>
             <br>
         </script>
+        <script type="text/template" id="owners_template">
+            <div>Campaign Members: </div>
+            <% _.each(images, function (image) { %>
+                <img src="<%= image %>" />
+            <% }) %>
+        </script>
+        <script type="text/template" id="api_template">
+            <span>Api Id:</span>
+            <input class="input-block-level" type="text" readonly="readonly" value="<%= id %>"></input>
+            <span>Api Secret: </span>
+            <input class="input-block-level" type="text" readonly="readonly" value="<%= secret %>"></input>
+        </script>
 
         <script type="text/template" id="campaign_template">
             <div class="well">
-                <h1><%= name %></h1>
+                <h1>
+                    <span><%= name %></span>
+                    <div class="btn-group pull-right" data-toggle="buttons-checkbox">
+                        <!--button type="button" class="btn" title="analytics"><i class="icon-signal"></i></button-->
+                        <button type="button" class="btn" title="campaign followers"><i class="icon-user"></i></button>
+                        <button type="button" class="btn" title="api info"><i class="icon-qrcode"></i></button>
+                        <button type="button" class="btn" title="torrents"><i class="icon-magnet"></i></button>
+                    </div>
+                </h1>
+                <br>
+                <div class="owners"></div>
+                <br>
+                <div class="api"></div>
+                <br>
                 <div class="trackers"></div>
                 <br>
-                <br>
-                <div class="well">
-                    <div class="input-prepend">
-                        <span class="add-on">Torrent link:</span>
-                        <input class="span10 createTorrentLink" type="text" placeholder="http://XXXXXX.com/XXXXXX.torrent    /    magnet:?xt=urn:btih:XXXXXX"></input>
-                    </div>
-                    <button class="btn btn-large btn-block btn-inverse addTracker" type="button">Create Link</button>
-                </div>
+                <input class="input-block-level createTorrentLink" type="text" placeholder="http://XXXXXX.com/XXXXXX.torrent    /    magnet:?xt=urn:btih:XXXXXX"></input>
+                <button class="btn btn-large btn-block btn-inverse addTracker" type="button">Create Link</button>
             </div>
             <br>
         </script>
 
         <script type="text/template" id="login_template">
-            <p class="lead">bit.ly for torrent/magnet links,<br>with content download stats.</p>
+            <p class="lead">Simple analytics for torrents.</p>
             <div class="well signup_well">
                 <p class="instructions">Sign up to create links:</p><br>
                 <div class="form-inline signup_form">
                     <div>
-                        <input type="text" class="input email" placeholder="Email">
+                        <input type="text" class="input-block-level email" placeholder="Email">
                     </div>
                     <br>
                     <div>
-                        <input type="password" class="input password1" placeholder="Password">
+                        <input type="password" class="input-block-level password1" placeholder="Password">
                     </div>
                     <br>
                     <div>
-                        <input type="password" class="input password2" placeholder="Password again">
+                        <input type="password" class="input-block-level password2" placeholder="Password again">
                     </div>
                     <br>
                     <div>
@@ -91,11 +107,11 @@
                 <p class="instructions">Login to create links:</p><br>
                 <div class="form-inline login_form">
                     <div>
-                        <input type="text" class="input email" placeholder="Email">
+                        <input type="text" class="input-block-level email" placeholder="Email">
                     </div>
                     <br>
                     <div>
-                        <input type="password" class="input password" placeholder="Password">
+                        <input type="password" class="input-block-level password" placeholder="Password">
                     </div>
                     <br>
                     <div>
@@ -114,15 +130,8 @@
                     <input class="span10 shorty" type="text" url="<%= url %>" readonly="readonly" value="<%= url %>"></input>
                     <button class="btn copy" type="button"><i class="icon-copy"></i></button>
                 </div>
-                <div class="src">Original Link: <a href="<%= src %>"><%= src %></a></div>
                 <span class="label">Added: <%= time %></span>
-                <% if(typeof labels !== 'undefined') { _.each(labels, function(label) { %>
-                    <span class="label label-info"><%= label %></span>
-                <% }); } %>
-                <span class="input-append">
-                    <input class="input-label" type="text" placeholder="new label"></input>
-                    <button class="btn button-label" type="button"><i class="icon-plus"></i></button>
-                </span>
+                <span class="src">Original Link: <a href="<%= src %>"><%= src %></a></span>
             </div>
         </script>
         <!--[if lt IE 7]>

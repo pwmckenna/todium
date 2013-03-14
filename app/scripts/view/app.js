@@ -23,7 +23,9 @@ define([
             if (this.model.get('user') && !this.userView) {
                 var userId = this.model.get('user').id;
                 this.userView = new UserView({
-                    model: this.model.firebase.child('users').child(userId)
+                    model: this.model.firebase.child('users').child(userId),
+                    email: this.model.get('user').email,
+                    id: this.model.get('user').id
                 });
             } else if (!this.model.get('user') && this.userView) {
                 this.userView.destroy();
