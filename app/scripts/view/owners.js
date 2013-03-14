@@ -19,13 +19,14 @@ define([
                 owners = ownersSnapshot.val();
             });
 
-            var images = _.map(owners, function (email) {
-                var hash = md5(email.trim());
-                return '//www.gravatar.com/avatar/' + hash + '?s=32&d=mm';
-            });
-
             this.$el.html(this.template({
-                images: images
+                owners: _.map(owners, function (email) {
+                    var hash = md5(email.trim());
+                    return {
+                        image: '//www.gravatar.com/avatar/' + hash + '?s=32&d=mm',
+                        email: email
+                    }
+                })
             }));
             return this;
         }
