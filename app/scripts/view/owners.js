@@ -25,7 +25,7 @@ define([
                     return {
                         image: '//www.gravatar.com/avatar/' + hash + '?s=32&d=mm',
                         email: email
-                    }
+                    };
                 })
             }));
             return this;
