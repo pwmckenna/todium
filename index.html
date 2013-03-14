@@ -22,6 +22,126 @@
     </head>
     <body>
 
+
+        <script type="text/template" id="api_template">
+            <span>Api Id:</span>
+            <input class="input-block-level" type="text" readonly="readonly" value="<%= id %>"></input>
+            <span>Api Secret: </span>
+            <input class="input-block-level" type="text" readonly="readonly" value="<%= secret %>"></input>
+        </script>
+
+        <script type="text/template" id="app_template">
+            <header class="jumbotron subhead row" id="overview">
+                <div class="container">
+                    <h1>
+                        <span>Todium</span>
+                    </h1>
+                    <span class="logout" style="float:right"></span>
+                </div>
+            </header>
+            <div class="container login" style="margin-top:50px; min-height:500px"></div>
+            <div class="container user"></div>
+        </script>
+
+        <script type="text/template" id="campaign_template">
+            <div class="well">
+                <h1>
+                    <span><%= name %></span>
+                    <div class="btn-group pull-right" data-toggle="buttons-checkbox">
+                        <!--button type="button" class="btn medbtn" title="analytics"><i class="icon-signal"></i></button-->
+                        <button type="button" class="btn medbtn" title="campaign followers"><i class="icon-user"></i></button>
+                        <button type="button" class="btn medbtn" title="api info"><i class="icon-qrcode"></i></button>
+                        <button type="button" class="btn medbtn" title="torrents"><i class="icon-magnet"></i></button>
+                    </div>
+                </h1>
+                <br>
+                <div class="owners well"></div>
+                <br>
+                <div class="api well"></div>
+                <br>
+                <div class="trackers well"></div>
+            </div>
+            <br>
+        </script>
+
+        <script type="text/template" id="login_template">
+            <p class="lead">Simple analytics for torrents.</p>
+            <div class="well signup_well">
+                <p class="instructions">Sign up to create links:</p><br>
+                <div class="form-inline signup_form">
+                    <div>
+                        <input type="text" class="input-block-level email" placeholder="Email">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="password" class="input-block-level password1" placeholder="Password">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="password" class="input-block-level password2" placeholder="Password again">
+                    </div>
+                    <br>
+                    <div>
+                        <button class="btn">Sign up</button>
+                    </div>
+                </div>
+            </div>
+            <div class="well login_well">
+                <p class="instructions">Login to create links:</p><br>
+                <div class="form-inline login_form">
+                    <div>
+                        <input type="text" class="input-block-level email" placeholder="Email">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="password" class="input-block-level password" placeholder="Password">
+                    </div>
+                    <br>
+                    <div>
+                        <button class="btn">Log in</button>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/template" id="logout_template">
+            <button class="btn bigbtn logout" type="button"><i class="icon-off"></i></button>
+        </script>
+
+        <script type="text/template" id="owners_template">
+            <div>Campaign Members: </div>
+            <% _.each(images, function (image) { %>
+                <img src="<%= image %>" />
+            <% }) %>
+        </script>
+
+        <script type="text/template" id="tracker_template">
+            <div class="input-append">
+                <input class="span10 shorty" type="text" url="<%= url %>" readonly="readonly" value="<%= url %>"></input>
+                <button class="btn copy" type="button"><i class="icon-copy"></i></button>
+            </div>
+            <span class="label">Added: <%= time %></span>
+            <span class="src">Original Link: <a href="<%= src %>"><%= src %></a></span>
+        </script>
+
+        <script type="text/template" id="trackers_template">
+            <div class="trackers"></div>
+            <br>
+            <input class="input-block-level createTorrentLink" type="text" placeholder="http://XXXXXX.com/XXXXXX.torrent    /    magnet:?xt=urn:btih:XXXXXX"></input>
+            <button class="btn btn-large btn-block btn-inverse addTracker" type="button">Create Link</button>
+        </script>
+
+        <script type="text/template" id="user_template">
+            <div class="campaigns"></div>
+            <br>
+            <br>
+            <div class="well">
+                <input class="input-block-level campaignName" type="text" placeholder="Campaign Name"></input>
+                <button class="btn btn-large btn-block btn-inverse addCampaign" type="button">Create Campaign</button>
+            </div>
+            <br>
+        </script>
+
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
