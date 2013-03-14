@@ -28,6 +28,11 @@
             <input class="input-block-level" type="text" readonly="readonly" value="<%= id %>"></input>
             <span>Api Secret: </span>
             <input class="input-block-level" type="text" readonly="readonly" value="<%= secret %>"></input>
+            <pre class="curl">curl -X POST 'http://api.todium.com'  \<br>    -d 'id=<%= id %>'  \<br>    -d 'secret=<%= secret %>'  \<br>    -d 'src=http://www.clearbits.net/get/547-home-2009.torrent'</pre>
+            <pre class="curl">curl -X POST 'http://api.todium.com'  \<br>    -d 'id=<%= id %>'  \<br>    -d 'secret=<%= secret %>'  \<br>    -d 'src=magnet:?xt=urn:btih:54DEC3E7B1169FAD5587D5A9E30FAFA92097EAB7&dn=Big+Buck+Bunny'</pre>
+
+
+
         </script>
 
         <script type="text/template" id="app_template">
@@ -110,8 +115,8 @@
 
         <script type="text/template" id="owners_template">
             <div>Campaign Members: </div>
-            <% _.each(images, function (image) { %>
-                <img src="<%= image %>" />
+            <% _.each(owners, function (owner) { %>
+                <img title="<%= owner.email %>" src="<%= owner.image %>" />
             <% }) %>
         </script>
 
@@ -162,10 +167,6 @@
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
-
-
-        <script type="text/javascript" src="https://cdn.firebase.com/v0/firebase.js"></script>
-        <script src="https://cdn.firebase.com/v0/firebase-auth-client.js" type="text/javascript"></script>
 
         <script data-main="scripts/amd-app" src="scripts/vendor/require.js"></script>
     </body>

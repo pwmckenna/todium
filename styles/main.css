@@ -106,3 +106,7 @@ body {
 .owners img {
     border: 1px solid #ccc;
 }
+
+.curl {
+    font-size: 12px;
+}
