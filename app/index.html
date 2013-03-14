@@ -18,7 +18,6 @@
         <link rel="stylesheet" href="styles/font-awesome.css">
         <link rel="stylesheet" href="styles/main.css">
         <script src="scripts/vendor/modernizr.min.js"></script>
-        <script src="scripts/vendor/ZeroClipboard.js"></script>
     </head>
     <body>
 
@@ -121,10 +120,7 @@
         </script>
 
         <script type="text/template" id="tracker_template">
-            <div class="input-append">
-                <input class="span10 shorty" type="text" url="<%= url %>" readonly="readonly" value="<%= url %>"></input>
-                <button class="btn copy" type="button"><i class="icon-copy"></i></button>
-            </div>
+            <input class="input-block-level shorty" type="text" url="<%= url %>" readonly="readonly" value="<%= url %>"></input>
             <span class="label">Added: <%= time %></span>
             <span class="src">Original Link: <a href="<%= src %>"><%= src %></a></span>
         </script>
