@@ -57,6 +57,13 @@
             <input class="input-block-level" type="text" readonly="readonly" value="<%= secret %>"></input>
         </script>
 
+        <script type="text/template" id="trackers_template">
+            <div class="trackers"></div>
+            <br>
+            <input class="input-block-level createTorrentLink" type="text" placeholder="http://XXXXXX.com/XXXXXX.torrent    /    magnet:?xt=urn:btih:XXXXXX"></input>
+            <button class="btn btn-large btn-block btn-inverse addTracker" type="button">Create Link</button>
+        </script>
+
         <script type="text/template" id="campaign_template">
             <div class="well">
                 <h1>
@@ -74,9 +81,6 @@
                 <div class="api"></div>
                 <br>
                 <div class="trackers"></div>
-                <br>
-                <input class="input-block-level createTorrentLink" type="text" placeholder="http://XXXXXX.com/XXXXXX.torrent    /    magnet:?xt=urn:btih:XXXXXX"></input>
-                <button class="btn btn-large btn-block btn-inverse addTracker" type="button">Create Link</button>
             </div>
             <br>
         </script>
