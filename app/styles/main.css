@@ -15,9 +15,6 @@
   width: 80px;
   height: 80px;
 }
-.jumbotron > .container > * {
-    margin-left: 30px;
-}
 .bigbtn i {
   margin: 10px;
   line-height: 40px;
@@ -25,6 +22,22 @@
 .bigbtn i::before {
   font-size: 40px;
   margin-top: 20px;
+}
+.medbtn {
+    margin-top: 0px;
+    width: 40px;
+    height: 40px;
+}
+.medbtn i {
+  margin: 0px;
+  line-height: 20px;
+}
+.medbtn i::before {
+  font-size: 20px;
+  margin-top: 10px;
+}
+.jumbotron > .container > * {
+    margin-left: 30px;
 }
 
 .login {
