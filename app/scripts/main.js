@@ -21,10 +21,31 @@ require.config({
     }
 });
 
-require(['model/authentication', 'view/app', 'buttons'], function (AuthenticationModel, AppView) {
+require(['jquery', 'model/authentication', 'view/app', 'buttons'], function ($, AuthenticationModel, AppView) {
     'use strict';
-    window.authentication = new AuthenticationModel();
-    $('body').append(new AppView({
-        model: window.authentication
-    }).render().el);
+    $(document).ready(function () {
+        var lt = function (name) {
+            var d = $.Deferred();
+            $.get('/templates/_' + name + '.html', function (res) {
+                d.resolve(res);
+            });
+            return d.promise();
+        };
+        var loadTemplates = function () {
+            var templates = ['api', 'app', 'campaign', 'login', 'logout', 'owners', 'tracker', 'trackers', 'user'];
+            var reqs = $.map(templates, lt);
+            return $.when.apply($, reqs).then(function () {
+                for (var i = 0; i < arguments.length; i++) {
+                    $('body').append(arguments[i]);
+                }
+            });
+        };
+
+        loadTemplates().then(function () {
+            var authentication = new AuthenticationModel();
+            $('body').append(new AppView({
+                model: authentication
+            }).render().el);
+        });
+    });
 });

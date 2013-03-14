@@ -34,7 +34,7 @@ define([
                 });
                 _this.views[trackerName] = view;
                 _this.$('.trackers').append(view.$el);
-            })
+            });
         },
         onTrackerRemoved: function (dataSnapshot) {
             console.log('onTrackerRemoved', dataSnapshot.val());

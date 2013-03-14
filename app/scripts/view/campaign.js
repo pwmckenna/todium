@@ -31,8 +31,6 @@ define([
             this.trackersView.remove();
         },
         render: function () {
-            var trackers = this.$('.trackers').children().detach();
-
             var name = '';
             this.model.child('name').once('value', function (valueSnapshot) {
                 name = valueSnapshot.val();
