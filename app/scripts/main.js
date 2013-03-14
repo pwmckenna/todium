@@ -8,12 +8,21 @@ require.config({
         backbone: 'components/backbone/backbone-min',
         humane: 'components/Humane-Dates/humane',
         md5: 'vendor/md5',
-        buttons: 'components/bootstrap/js/bootstrap-button'
+        buttons: 'components/bootstrap/js/bootstrap-button',
+        firebase: 'vendor/firebase',
+        auth: 'vendor/firebase-auth-client'
     },
     shim: {
         buttons: {
             deps: ['jquery'],
             exports: '$.fn.button'
+        },
+        firebase: {
+            exports: 'Firebase'
+        },
+        auth: {
+            exports: 'FirebaseAuthClient',
+            deps: ['firebase']
         },
         underscore: {
             exports: '_'
