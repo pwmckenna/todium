@@ -18,11 +18,10 @@ require.config({
         underscore: {
             exports: '_'
         }
-    },
-    enforceDefine: true
+    }
 });
 
-define(['model/authentication', 'view/app', 'buttons'], function (AuthenticationModel, AppView) {
+require(['model/authentication', 'view/app', 'buttons'], function (AuthenticationModel, AppView) {
     'use strict';
     window.authentication = new AuthenticationModel();
     $('body').append(new AppView({
