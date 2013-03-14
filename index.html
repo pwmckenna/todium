@@ -27,8 +27,10 @@
             <input class="input-block-level" type="text" readonly="readonly" value="<%= id %>"></input>
             <span>Api Secret: </span>
             <input class="input-block-level" type="text" readonly="readonly" value="<%= secret %>"></input>
-            <pre class="curl">curl -X POST 'http://api.todium.com'  \<br>    -d 'id=<%= id %>'  \<br>    -d 'secret=<%= secret %>'  \<br>    -d 'src=http://www.clearbits.net/get/547-home-2009.torrent'</pre>
-            <pre class="curl">curl -X POST 'http://api.todium.com'  \<br>    -d 'id=<%= id %>'  \<br>    -d 'secret=<%= secret %>'  \<br>    -d 'src=magnet:?xt=urn:btih:54DEC3E7B1169FAD5587D5A9E30FAFA92097EAB7&dn=Big+Buck+Bunny'</pre>
+            <span>Examples:</span>
+            <pre class="curl">curl -X POST 'http://api.todium.com'  \<br>    -d 'id=<%= id %>'  \<br>    -d 'secret=<%= secret %>'  \<br>    -d 'src=http://www.clearbits.net/get/547-home-2009.torrent'<br><br><span>> http://torrent.todium.com/-Ipf63TQ8PIhXXRNM5md.torrent</span></pre>
+            <pre class="curl">curl -X POST 'http://api.todium.com'  \<br>    -d 'id=<%= id %>'  \<br>    -d 'secret=<%= secret %>'  \<br>    -d 'src=magnet:?xt=urn:btih:54DEC3E7B1169FAD5587D5A9E30FAFA92097EAB7&dn=Big+Buck+Bunny'<br><br><span>> magnet:?xt=urn:btih:54DEC3E7B1169FAD5587D5A9E30FAFA92097EAB7&tr=http://tracker.todium.com/-Ipf7-4f0v_ThSId5rdg/announce</span></pre>
+            <pre class="curl">curl -X POST 'http://api.todium.com'  \<br>    -d 'id=<%= id %>'  \<br>    -d 'secret=<%= secret %>'  \<br>    -d 'src=54DEC3E7B1169FAD5587D5A9E30FAFA92097EAB7'<br><br><span>> http://tracker.todium.com/-Ipf7-4f0v_ThSId5rdg/announce</span></pre>
 
 
 
@@ -120,15 +122,15 @@
         </script>
 
         <script type="text/template" id="tracker_template">
-            <input class="input-block-level shorty" type="text" url="<%= url %>" readonly="readonly" value="<%= url %>"></input>
             <span class="label">Added: <%= time %></span>
             <span class="src">Original Link: <a href="<%= src %>"><%= src %></a></span>
+            <input class="input-block-level shorty" type="text" url="<%= url %>" readonly="readonly" value="<%= url %>"></input>
         </script>
 
         <script type="text/template" id="trackers_template">
             <div class="trackers"></div>
             <br>
-            <input class="input-block-level createTorrentLink" type="text" placeholder="http://XXXXXX.com/XXXXXX.torrent    /    magnet:?xt=urn:btih:XXXXXX"></input>
+            <input class="input-block-level createTorrentLink" type="text" placeholder="http://XXXXXX.com/XXXXXX.torrent    /    magnet:?xt=urn:btih:XXXXXX    /    XXXXXXXXXXXX"></input>
             <button class="btn btn-large btn-block btn-inverse addTracker" type="button">Create Link</button>
         </script>
 
