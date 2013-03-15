@@ -61,7 +61,7 @@ define([
 
             this.model.child('secret').once('value', function (secretSnapshot) {
                 var secret = secretSnapshot.val();
-                $.getJSON('http://api.todium.com', {
+                $.post('http://api.todium.com', {
                     id: this.model.name(),
                     secret: secret,
                     src: torrentLink
