@@ -29,7 +29,7 @@ define([
         },
         render: function () {
             this.$el.html(this.template({
-                src: this.val.src,
+                info_hash: this.val.info_hash,
                 time: humaneDate(new Date(this.val.time)),
                 url: this.val.trackable
             }));
