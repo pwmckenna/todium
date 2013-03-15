@@ -2,8 +2,9 @@ define([
     './view',
     './login',
     './logout',
-    './user'
-], function (View, LoginView, LogoutView, UserView) {
+    './user',
+    'md5'
+], function (View, LoginView, LogoutView, UserView, md5) {
     'use strict';
 
     var AppView = View.extend({
@@ -21,11 +22,12 @@ define([
         },
         onUser: function () {
             if (this.model.get('user') && !this.userView) {
-                var userId = this.model.get('user').id;
+                var email = this.model.get('user').email;
+                var id = md5(email);
                 this.userView = new UserView({
-                    model: this.model.firebase.child('users').child(userId),
-                    email: this.model.get('user').email,
-                    id: this.model.get('user').id
+                    model: this.model.firebase.child('users').child(id),
+                    email: email,
+                    id: id
                 });
             } else if (!this.model.get('user') && this.userView) {
                 this.userView.destroy();

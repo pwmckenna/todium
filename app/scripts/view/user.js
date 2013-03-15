@@ -11,6 +11,7 @@ define([
         },
         initialize: function () {
             this.template = _.template($('#user_template').html());
+            this.model.child('email').set(this.options.email);
             this.views = {};
             setTimeout(_.bind(function () {
                 this.model.child('campaigns').on('child_added', this.onCampaignAdded, this);
