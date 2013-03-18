@@ -4,6 +4,7 @@
     "backbone": "0.9.9",
     "underscore": "~1.4.3",
     "Humane-Dates": "git://github.com/zachleat/Humane-Dates.git",
-    "bootstrap": "~2.3.1"
+    "bootstrap": "~2.3.1",
+    "Chart.js": "git://github.com/nnnick/Chart.js.git"
   }
 }

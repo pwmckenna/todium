@@ -1,16 +1,13 @@
 define([
     './view',
-    './tracker',
+    './stat',
     'underscore'
-], function (View, TrackerView, _) {
+], function (View, StatView, _) {
     'use strict';
 
-    var TrackersView = View.extend({
-        events: {
-            'click .addTracker': 'onAddTracker'
-        },
+    var StatsView = View.extend({
         initialize: function () {
-            this.template = _.template($('#trackers_template').html());
+            this.template = _.template($('#stats_template').html());
             this.views = {};
             setTimeout(_.bind(function () {
                 this.model.child('trackers').on('child_added', this.onTrackerAdded, this);
@@ -26,13 +23,18 @@ define([
             });
             this.views = {};
         },
+        resize: function () {
+            _.each(this.views, function (view) {
+                view.resize();
+            });
+        },
         onTrackerAdded: function (dataSnapshot) {
             var _this = this;
             setTimeout(function () {
                 console.log('onTrackerAdded', dataSnapshot.val());
                 var trackerName = dataSnapshot.val();
-                var tracker = _this.model.parent().parent().child('trackers').child(trackerName);
-                var view = new TrackerView({
+                var tracker = _this.model.root().child('trackers').child(trackerName);
+                var view = new StatView({
                     model: tracker
                 });
                 _this.views[trackerName] = view;
@@ -45,33 +47,6 @@ define([
             var view = this.views[trackerName];
             view.remove();
             delete this.views[trackerName];
-        },
-        onAddTracker: function () {
-            var button = this.$('.btn');
-            if (button.hasClass('disabled')) {
-                return;
-            }
-            button.addClass('disabled');
-            setTimeout(function () {
-                button.removeClass('disabled');
-            }, 3000);
-
-            var torrentLink = this.$('.createTorrentLink').val();
-            if (!torrentLink) {
-                return;
-            }
-            this.$('.createTorrentLink').val('');
-
-            this.model.child('secret').once('value', function (secretSnapshot) {
-                var secret = secretSnapshot.val();
-                $.post('http://api.todium.com', {
-                    id: this.model.name(),
-                    secret: secret,
-                    src: torrentLink
-                }).then(function (url) {
-                    console.log(url);
-                });
-            }, this);
         },
         render: function () {
             var trackers = this.$('.trackers').children().detach();
@@ -87,5 +62,5 @@ define([
             return this;
         }
     });
-    return TrackersView;
+    return StatsView;
 });

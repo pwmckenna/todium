@@ -9,13 +9,22 @@ require.config({
         humane: 'components/Humane-Dates/humane',
         md5: 'vendor/md5',
         buttons: 'components/bootstrap/js/bootstrap-button',
+        typeahead: 'components/bootstrap/js/bootstrap-typeahead',
         firebase: 'vendor/firebase',
-        auth: 'vendor/firebase-auth-client'
+        auth: 'vendor/firebase-auth-client',
+        chart: 'components/Chart.js/Chart.min'
     },
     shim: {
+        jquery: {
+            exports: 'jQuery'
+        },
         buttons: {
             deps: ['jquery'],
             exports: '$.fn.button'
+        },
+        typeahead: {
+            deps: ['jquery'],
+            exports: '$.fn.typeahead'
         },
         firebase: {
             exports: 'Firebase'
@@ -26,11 +35,14 @@ require.config({
         },
         underscore: {
             exports: '_'
+        },
+        chart: {
+            exports: 'Chart'
         }
     }
 });
 
-require(['jquery', 'model/authentication', 'view/app', 'buttons'], function ($, AuthenticationModel, AppView) {
+require(['jquery', 'model/authentication', 'view/app'], function ($, AuthenticationModel, AppView) {
     'use strict';
     $(document).ready(function () {
         var authentication = new AuthenticationModel();

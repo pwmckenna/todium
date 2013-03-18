@@ -210,6 +210,7 @@ module.exports = function (grunt) {
                         'scripts/vendor/modernizr.min.js',
                         'styles/*',
                         'scripts/components/bootstrap/js/bootstrap-button.js',
+                        'scripts/components/bootstrap/js/bootstrap-typeahead.js',
                         'scripts/components/underscore/underscore-min.js',
                         'scripts/components/Humane-Dates/humane.js',
                         'scripts/components/backbone/backbone-min.js',

@@ -2,13 +2,15 @@ define([
     './view',
     './api',
     './owners',
-    './trackers'
-], function (View, ApiView, OwnersView, TrackersView) {
+    './trackers',
+    './stats',
+    'buttons'
+], function (View, ApiView, OwnersView, TrackersView, StatsView) {
     'use strict';
 
     var CampaignView = View.extend({
         events: {
-            'click .btn.owners, .btn.api, .btn.trackers': 'toggleViews'
+            'click .btn.owners, .btn.api, .btn.trackers, .btn.stats': 'toggleViews'
         },
         initialize: function () {
             this.template = _.template($('#campaign_template').html());
@@ -20,6 +22,9 @@ define([
                 model: this.model
             });
             this.trackersView = new TrackersView({
+                model: this.model
+            });
+            this.statsView = new StatsView({
                 model: this.model
             });
             this.model.child('name').on('value', this.render, this);
@@ -42,6 +47,12 @@ define([
                 } else {
                     _this.ownersView.$el.hide();
                 }
+                if (_this.$('.btn.stats').hasClass('active')) {
+                    _this.statsView.$el.show();
+                    _this.statsView.resize();
+                } else {
+                    _this.statsView.$el.hide();
+                }
             });
         },
         destroy: function () {
@@ -52,6 +63,8 @@ define([
             this.ownersView.remove();
             this.trackersView.destroy();
             this.trackersView.remove();
+            this.statsView.destroy();
+            this.statsView.remove();
         },
         render: function () {
             var name = '';
@@ -64,6 +77,7 @@ define([
             this.assign(this.apiView, '.well.api');
             this.assign(this.ownersView, '.well.owners');
             this.assign(this.trackersView, '.well.trackers');
+            this.assign(this.statsView, '.well.stats');
             this.toggleViews();
             return this;
         }

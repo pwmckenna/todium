@@ -1,8 +1,9 @@
 define([
     './view',
     './campaign',
-    'md5'
-], function (View, CampaignView, md5) {
+    'md5',
+    'underscore'
+], function (View, CampaignView, md5, _) {
     'use strict';
 
     var UserView = View.extend({
