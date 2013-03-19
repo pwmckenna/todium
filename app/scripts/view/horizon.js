@@ -7,7 +7,7 @@ define([
     var HorizonView = View.extend({
         initialize: function () {
             this.url = '...';
-            this.template = _.template($('#stat_template').html());
+            this.template = _.template($('#horizon_template').html());
             this.model.child('stats').on('value', this.onValue, this);
         },
         destroy: function () {

@@ -1,14 +1,18 @@
 define([
     './view',
     './horizon',
+    './donut',
     'underscore'
-], function (View, HorizonView, _) {
+], function (View, HorizonView, DonutView, _) {
     'use strict';
 
     var StatsView = View.extend({
         initialize: function () {
             this.template = _.template($('#stats_template').html());
             this.views = {};
+            this.donutView = new DonutView({
+                model: this.model
+            });
             this.model.child('trackers').on('child_added', this.onTrackerAdded, this);
             this.model.child('trackers').on('child_removed', this.onTrackerRemoved, this);
         },
@@ -52,6 +56,7 @@ define([
             this.$el.html(this.template({
                 name: name,
             }));
+            this.assign(this.donutView, '.donuts');
             _.each(this.views, function (view) {
                 this.$('.horizons').append(view.render().el);
             }, this);
