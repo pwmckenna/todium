@@ -1,8 +1,8 @@
 define([
     './view',
-    './stat',
+    './horizon',
     'underscore'
-], function (View, StatView, _) {
+], function (View, HorizonView, _) {
     'use strict';
 
     var StatsView = View.extend({
@@ -30,11 +30,11 @@ define([
             console.log('onTrackerAdded', dataSnapshot.val());
             var trackerName = dataSnapshot.val();
             var tracker = this.model.root().child('trackers').child(trackerName);
-            var view = new StatView({
+            var view = new HorizonView({
                 model: tracker
             });
             this.views[trackerName] = view;
-            this.$('.trackers').append(view.render.el);
+            this.$('.horizons').append(view.render.el);
         },
         onTrackerRemoved: function (dataSnapshot) {
             console.log('onTrackerRemoved', dataSnapshot.val());
@@ -53,7 +53,7 @@ define([
                 name: name,
             }));
             _.each(this.views, function (view) {
-                this.$('.trackers').append(view.render().el);
+                this.$('.horizons').append(view.render().el);
             }, this);
             return this;
         }

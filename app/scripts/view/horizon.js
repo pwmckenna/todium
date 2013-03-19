@@ -4,7 +4,7 @@ define([
     'horizon'
 ], function (View, _, d3) {
     'use strict';
-    var StatView = View.extend({
+    var HorizonView = View.extend({
         initialize: function () {
             this.url = '...';
             this.template = _.template($('#stat_template').html());
@@ -61,5 +61,5 @@ define([
             return this;
         }
     });
-    return StatView;
+    return HorizonView;
 });
