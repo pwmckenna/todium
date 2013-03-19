@@ -213,8 +213,8 @@ module.exports = function (grunt) {
                         'scripts/components/underscore/underscore-min.js',
                         'scripts/components/Humane-Dates/humane.js',
                         'scripts/components/backbone/backbone-min.js',
-                        'scripts/components/d3/d3.min',
-                        'scripts/components/Chart.js/Chart.min',
+                        'scripts/components/d3/d3.js',
+                        'scripts/components/Chart.js/Chart.js',
                         'font/*',
                         'templates/*'
                     ]

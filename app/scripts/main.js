@@ -12,7 +12,7 @@ require.config({
         typeahead: 'components/bootstrap/js/bootstrap-typeahead',
         firebase: 'vendor/firebase',
         auth: 'vendor/firebase-auth-client',
-        chart: 'components/Chart.js/Chart.min',
+        chart: 'components/Chart.js/Chart',
         d3: 'components/d3/d3',
         horizon: 'vendor/horizon'
     },
