@@ -206,7 +206,6 @@ module.exports = function (grunt) {
                         'CNAME',
                         'styles/bootstrap.css',
                         'scripts/vendor/jquery.sparkline.min.js',
-                        'scripts/vendor/ZeroClipboard.js',
                         'scripts/vendor/modernizr.min.js',
                         'styles/*',
                         'scripts/components/bootstrap/js/bootstrap-button.js',
@@ -215,8 +214,7 @@ module.exports = function (grunt) {
                         'scripts/components/Humane-Dates/humane.js',
                         'scripts/components/backbone/backbone-min.js',
                         'font/*',
-                        'templates/*',
-                        'ZeroCLipboard.swf'
+                        'templates/*'
                     ]
                 }]
             }
