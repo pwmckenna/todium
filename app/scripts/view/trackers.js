@@ -12,10 +12,8 @@ define([
         initialize: function () {
             this.template = _.template($('#trackers_template').html());
             this.views = {};
-            setTimeout(_.bind(function () {
-                this.model.child('trackers').on('child_added', this.onTrackerAdded, this);
-                this.model.child('trackers').on('child_removed', this.onTrackerRemoved, this);
-            }, this));
+            this.model.child('trackers').on('child_added', this.onTrackerAdded, this);
+            this.model.child('trackers').on('child_removed', this.onTrackerRemoved, this);
         },
         destroy: function () {
             this.model.child('trackers').off('child_added', this.onTrackerAdded, this);
@@ -27,17 +25,14 @@ define([
             this.views = {};
         },
         onTrackerAdded: function (dataSnapshot) {
-            var _this = this;
-            setTimeout(function () {
-                console.log('onTrackerAdded', dataSnapshot.val());
-                var trackerName = dataSnapshot.val();
-                var tracker = _this.model.parent().parent().child('trackers').child(trackerName);
-                var view = new TrackerView({
-                    model: tracker
-                });
-                _this.views[trackerName] = view;
-                _this.$('.trackers').append(view.$el);
+            console.log('onTrackerAdded', dataSnapshot.val());
+            var trackerName = dataSnapshot.val();
+            var tracker = this.model.parent().parent().child('trackers').child(trackerName);
+            var view = new TrackerView({
+                model: tracker
             });
+            this.views[trackerName] = view;
+            this.$('.trackers').append(view.$el);
         },
         onTrackerRemoved: function (dataSnapshot) {
             console.log('onTrackerRemoved', dataSnapshot.val());
@@ -74,8 +69,7 @@ define([
             }, this);
         },
         render: function () {
-            var trackers = this.$('.trackers').children().detach();
-
+            console.log('render trackers');
             var name = '';
             this.model.child('name').once('value', function (valueSnapshot) {
                 name = valueSnapshot.val();
@@ -83,7 +77,9 @@ define([
             this.$el.html(this.template({
                 name: name,
             }));
-            this.$('.trackers').append(trackers);
+            _.each(this.views, function (view) {
+                this.$('.trackers').append(view.render().el);
+            }, this);
             return this;
         }
     });

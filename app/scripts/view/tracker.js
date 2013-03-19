@@ -1,6 +1,7 @@
 define([
-    './view'
-], function (View) {
+    './view',
+    'underscore'
+], function (View, _) {
     'use strict';
 
     // var bytesToSize = function (bytes) {
@@ -15,7 +16,6 @@ define([
 
     var TrackerView = View.extend({
         initialize: function () {
-            this.url = '...';
             this.template = _.template($('#tracker_template').html());
             this.model.on('value', this.onValue, this);
         },
@@ -23,17 +23,25 @@ define([
             this.model.off('value', this.onValue, this);
         },
         onValue: function (valueSnapshot) {
-            console.log('onValue', valueSnapshot.val());
             this.val = valueSnapshot.val();
             this.render();
         },
         render: function () {
+            var info_hash = '';
+            var time = '';
+            var url = '';
+            this.model.once('value', function (valueSnapshot) {
+                var val = valueSnapshot.val();
+                info_hash = val.hasOwnProperty('info_hash') ? val.info_hash : '';
+                time = val.hasOwnProperty('time') ? humaneDate(new Date(val.time)) : '';
+                url = val.hasOwnProperty('trackable') ? val.trackable : '';
+            });
+            console.log('render tracker');
             this.$el.html(this.template({
-                info_hash: this.val.info_hash,
-                time: humaneDate(new Date(this.val.time)),
-                url: this.val.trackable
+                info_hash: info_hash,
+                time: time,
+                url: url
             }));
-            this.url = this.val.trackable;
 
             return this;
         }

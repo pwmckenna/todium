@@ -1,6 +1,7 @@
 define([
-    './view'
-], function (View) {
+    './view',
+    'underscore'
+], function (View, _) {
     'use strict';
 
     var ApiView = View.extend({
@@ -12,6 +13,7 @@ define([
             this.model.child('secret').off('value', this.render, this);
         },
         render: function () {
+            console.log('render api');
             var secret = '';
             this.model.child('secret').once('value', function (secretSnapshot) {
                 secret = secretSnapshot.val();

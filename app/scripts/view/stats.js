@@ -9,10 +9,8 @@ define([
         initialize: function () {
             this.template = _.template($('#stats_template').html());
             this.views = {};
-            setTimeout(_.bind(function () {
-                this.model.child('trackers').on('child_added', this.onTrackerAdded, this);
-                this.model.child('trackers').on('child_removed', this.onTrackerRemoved, this);
-            }, this));
+            this.model.child('trackers').on('child_added', this.onTrackerAdded, this);
+            this.model.child('trackers').on('child_removed', this.onTrackerRemoved, this);
         },
         destroy: function () {
             this.model.child('trackers').off('child_added', this.onTrackerAdded, this);
@@ -49,6 +47,7 @@ define([
             delete this.views[trackerName];
         },
         render: function () {
+            console.log('render stats');
             var trackers = this.$('.trackers').children().detach();
 
             var name = '';

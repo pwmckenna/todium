@@ -67,6 +67,7 @@ define([
             this.statsView.remove();
         },
         render: function () {
+            console.log('render campaign');
             var name = '';
             this.model.child('name').once('value', function (valueSnapshot) {
                 name = valueSnapshot.val();

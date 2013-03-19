@@ -23,7 +23,6 @@ define([
         },
         signUp: function (email, password) {
             var auth = this.model.auth;
-            console.log('create user', email, password);
             auth.createUser(email, password, _.bind(function (error) {
                 if (error) {
                     console.error(error);
@@ -39,7 +38,6 @@ define([
             this.login(email, password);
         },
         login: function (email, password) {
-            console.log('login', email, password);
             this.model.auth.login('password', {
                 email: email,
                 password: password,

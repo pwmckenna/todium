@@ -17,7 +17,6 @@ define([
             this.logoutView = new LogoutView({
                 model: this.model
             });
-            this.onUser();
             this.model.on('change:user', this.onUser, this);
         },
         onUser: function () {
@@ -36,6 +35,7 @@ define([
             this.render();
         },
         render: function () {
+            console.log('render app');
             this.$el.html(this.template());
 
             if (this.userView) {

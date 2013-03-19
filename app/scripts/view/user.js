@@ -12,12 +12,10 @@ define([
         },
         initialize: function () {
             this.template = _.template($('#user_template').html());
-            this.model.child('email').set(this.options.email);
             this.views = {};
-            setTimeout(_.bind(function () {
-                this.model.child('campaigns').on('child_added', this.onCampaignAdded, this);
-                this.model.child('campaigns').on('child_removed', this.onCampaignRemoved, this);
-            }, this));
+            this.model.child('email').set(this.options.email);
+            this.model.child('campaigns').on('child_added', this.onCampaignAdded, this);
+            this.model.child('campaigns').on('child_removed', this.onCampaignRemoved, this);
         },
         destroy: function () {
             this.model.child('campaigns').off('child_added', this.onCampaignAdded, this);
@@ -76,11 +74,13 @@ define([
             this.model.child('campaigns').push().set(id);
         },
         render: function () {
-            var trackers = this.$('.campaigns').children().detach();
+            console.log('render user');
             this.$el.html(this.template({
                 email: this.options.email
             }));
-            this.$('.campaigns').append(trackers);
+            _.each(this.views, function (view) {
+                this.$('.campaigns').append(view.render().el);
+            }, this);
         }
     });
     return UserView;

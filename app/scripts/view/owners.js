@@ -2,7 +2,8 @@ define([
     'underscore',
     './view',
     'md5',
-    'typeahead'
+    'typeahead',
+    'underscore'
 ], function (_, View, md5, typeahead) {
     'use strict';
 
@@ -49,6 +50,7 @@ define([
             }, this);
         },
         render: function () {
+            console.log('render owners');
             var owners = [];
             this.model.child('owners').once('value', function (ownersSnapshot) {
                 owners = ownersSnapshot.val();
