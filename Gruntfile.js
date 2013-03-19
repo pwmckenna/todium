@@ -205,7 +205,7 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'CNAME',
                         'styles/bootstrap.css',
-                        'scripts/vendor/jquery.sparkline.min.js',
+                        'scripts/vendor/horizon.js',
                         'scripts/vendor/modernizr.min.js',
                         'styles/*',
                         'scripts/components/bootstrap/js/bootstrap-button.js',
