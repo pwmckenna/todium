@@ -12,7 +12,9 @@ require.config({
         typeahead: 'components/bootstrap/js/bootstrap-typeahead',
         firebase: 'vendor/firebase',
         auth: 'vendor/firebase-auth-client',
-        chart: 'components/Chart.js/Chart.min'
+        chart: 'components/Chart.js/Chart.min',
+        d3: 'components/d3/d3',
+        horizon: 'vendor/horizon'
     },
     shim: {
         jquery: {
@@ -35,6 +37,13 @@ require.config({
         },
         underscore: {
             exports: '_'
+        },
+        d3: {
+            exports: 'd3'
+        },
+        horizon: {
+            exports: 'd3',
+            deps: ['d3']
         },
         chart: {
             exports: 'Chart'

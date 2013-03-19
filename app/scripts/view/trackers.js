@@ -32,7 +32,7 @@ define([
                 model: tracker
             });
             this.views[trackerName] = view;
-            this.$('.trackers').append(view.$el);
+            this.$('.trackers').append(view.render().el);
         },
         onTrackerRemoved: function (dataSnapshot) {
             console.log('onTrackerRemoved', dataSnapshot.val());
