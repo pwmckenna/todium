@@ -130,11 +130,12 @@
         </script>
 
         <script type="text/template" id="horizon_template">
-            <svg height="25"></svg>
+            <!--svg class="started" height="25"><g><title><%= info_hash %></title></g></svg>
+            <svg title="<%= info_hash %>" class="stopped" height="25"><g><title><%= info_hash %></title></g></svg-->
+            <svg title="<%= info_hash %>" class="completed" height="25"><g><title><%= info_hash %></title></g></svg>
         </script>
 
         <script type="text/template" id="stats_template">
-            <h4>Real time stats coming soon...</h4>
             <div class="donuts"></div>
             <div class="horizons"></div>
         </script>
