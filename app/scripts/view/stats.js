@@ -17,6 +17,7 @@ define([
             this.firstDateObserver = new Backbone.Model();
             this.model.child('trackers').on('child_added', this.onTrackerAdded, this);
             this.model.child('trackers').on('child_removed', this.onTrackerRemoved, this);
+            $(window).resize(_.bind(this.resize, this));
         },
         destroy: function () {
             this.model.child('trackers').off('child_added', this.onTrackerAdded, this);
@@ -29,9 +30,11 @@ define([
             this.firstDateObserver.off();
         },
         resize: function () {
+            console.log('resize');
             _.each(this.views, function (view) {
                 view.resize();
             });
+            this.donutView.resize();
         },
         onTrackerAdded: function (dataSnapshot) {
             console.log('onTrackerAdded', dataSnapshot.val());

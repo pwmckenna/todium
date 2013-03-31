@@ -72,7 +72,7 @@ define([
             ];
             var ctx = this.$('canvas').get(0).getContext('2d');
             new Chart(ctx).Doughnut(data, {
-                animateScale: true
+                animation: false
             });
             return this;
         }
