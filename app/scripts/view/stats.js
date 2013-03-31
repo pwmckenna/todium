@@ -2,8 +2,9 @@ define([
     './view',
     './horizon',
     './donut',
+    'backbone',
     'underscore'
-], function (View, HorizonView, DonutView, _) {
+], function (View, HorizonView, DonutView, Backbone, _) {
     'use strict';
 
     var StatsView = View.extend({
@@ -13,6 +14,7 @@ define([
             this.donutView = new DonutView({
                 model: this.model
             });
+            this.firstDateObserver = new Backbone.Model();
             this.model.child('trackers').on('child_added', this.onTrackerAdded, this);
             this.model.child('trackers').on('child_removed', this.onTrackerRemoved, this);
         },
@@ -24,6 +26,7 @@ define([
                 view.remove();
             });
             this.views = {};
+            this.firstDateObserver.off();
         },
         resize: function () {
             _.each(this.views, function (view) {
@@ -35,7 +38,8 @@ define([
             var trackerName = dataSnapshot.val();
             var tracker = this.model.root().child('trackers').child(trackerName);
             var view = new HorizonView({
-                model: tracker
+                model: tracker,
+                firstDateObserver: this.firstDateObserver
             });
             this.views[trackerName] = view;
             this.$('.horizons').append(view.render.el);

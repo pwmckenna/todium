@@ -38,6 +38,10 @@ require.config({
         underscore: {
             exports: '_'
         },
+        backbone: {
+            exports: 'Backbone',
+            deps: ['underscore']
+        },
         d3: {
             exports: 'd3'
         },

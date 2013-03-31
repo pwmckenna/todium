@@ -32,9 +32,9 @@ define([
             var url = '';
             this.model.once('value', function (valueSnapshot) {
                 var val = valueSnapshot.val();
-                info_hash = val.hasOwnProperty('info_hash') ? val.info_hash : '';
-                time = val.hasOwnProperty('time') ? humaneDate(new Date(val.time)) : '';
-                url = val.hasOwnProperty('trackable') ? val.trackable : '';
+                info_hash = val && val.hasOwnProperty('info_hash') ? val.info_hash : '';
+                time = val && val.hasOwnProperty('time') ? humaneDate(new Date(val.time)) : '';
+                url = val && val.hasOwnProperty('trackable') ? val.trackable : '';
             });
             console.log('render tracker');
             this.$el.html(this.template({

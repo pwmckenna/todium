@@ -4,12 +4,14 @@ define([
     'chart'
 ], function (View, _, Chart) {
     'use strict';
-    var HorizonView = View.extend({
+    var DonutView = View.extend({
         initialize: function () {
             this.template = _.template($('#donut_template').html());
 
             this.model.child('trackers').on('child_added', this.onTrackerAdded, this);
             this.model.child('trackers').on('child_removed', this.onTrackerRemoved, this);
+
+            this.started = this.stopped = this.completed = 0;
         },
         destroy: function () {
             this.model.child('trackers').off('child_added', this.onTrackerAdded, this);
@@ -20,6 +22,21 @@ define([
             var trackerName = dataSnapshot.val();
             var tracker = this.model.root().child('trackers').child(trackerName);
             console.log(trackerName, tracker);
+            tracker.child('stats').once('value', _.bind(function (valueSnapshot) {
+                var val = valueSnapshot.val();
+                if (val) {
+                    if (val.hasOwnProperty('started')) {
+                        this.started += _.keys(val.started).length;
+                    }
+                    if (val.hasOwnProperty('stopped')) {
+                        this.stopped += _.keys(val.stopped).length;
+                    }
+                    if (val.hasOwnProperty('completed')) {
+                        this.completed += _.keys(val.completed).length;
+                    }
+                    this.render();
+                }
+            }, this));
         },
         onTrackerRemoved: function (dataSnapshot) {
             console.log('onTrackerRemoved', dataSnapshot.val());
@@ -32,7 +49,6 @@ define([
         render: function () {
             console.log('render stat');
             this.$el.html(this.template());
-
             var width = this.$el.get(0).offsetWidth;
             var height = this.$el.get(0).offsetHeight;
             var size = {
@@ -40,33 +56,26 @@ define([
                 height: height
             };
             this.$('canvas').css(size).attr(size);
-
             var data = [
                 {
-                    value: 30,
-                    color: '#F7464A'
-                },
-                {
-                    value : 50,
+                    value : this.started,
                     color : '#E2EAE9'
                 },
                 {
-                    value : 100,
-                    color : '#D4CCC5'
+                    value: this.stopped,
+                    color: '#F7464A'
                 },
                 {
-                    value : 40,
-                    color : '#949FB1'
-                },
-                {
-                    value : 120,
+                    value : this.completed,
                     color : '#4D5360'
                 }
             ];
             var ctx = this.$('canvas').get(0).getContext('2d');
-            new Chart(ctx).Doughnut(data);
+            new Chart(ctx).Doughnut(data, {
+                animateScale: true
+            });
             return this;
         }
     });
-    return HorizonView;
+    return DonutView;
 });
