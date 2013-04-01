@@ -15,6 +15,7 @@ define([
                 model: this.model
             });
             this.firstDateObserver = new Backbone.Model();
+            this.meanCompletedObserver = new Backbone.Model();
             this.model.child('trackers').on('child_added', this.onTrackerAdded, this);
             this.model.child('trackers').on('child_removed', this.onTrackerRemoved, this);
             $(window).resize(_.bind(this.resize, this));
@@ -42,7 +43,8 @@ define([
             var tracker = this.model.root().child('trackers').child(trackerName);
             var view = new HorizonView({
                 model: tracker,
-                firstDateObserver: this.firstDateObserver
+                firstDateObserver: this.firstDateObserver,
+                meanCompletedObserver: this.meanCompletedObserver
             });
             this.views[trackerName] = view;
             this.$('.horizons').append(view.render.el);
