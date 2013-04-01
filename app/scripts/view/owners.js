@@ -3,10 +3,8 @@ define([
     './view',
     './owner',
     'md5',
-    'typeahead',
-    'tooltip',
-    'humane'
-], function (_, View, OwnerView, md5, typeahead, tooltip, humane) {
+    'typeahead'
+], function (_, View, OwnerView, md5, typeahead) {
     'use strict';
 
     var OwnersView = View.extend({
@@ -29,14 +27,6 @@ define([
             });
             this.views = {};
         },
-        onTrackerRemoved: function (dataSnapshot) {
-            console.log('onTrackerRemoved', dataSnapshot.val());
-            var trackerName = dataSnapshot.val();
-            var view = this.views[trackerName];
-            view.remove();
-            delete this.views[trackerName];
-        },
-
         submit: function (e) {
             e.preventDefault();
             var email = this.$('input[type=text]').val();
@@ -68,7 +58,7 @@ define([
             }, this);
         },
         onOwnerAdded: function (dataSnapshot) {
-            console.log('onTrackerAdded', dataSnapshot.val());
+            console.log('onOwnerAdded', dataSnapshot.val());
             var email = dataSnapshot.val();
             var owner = this.model.root().child('users').child(md5(email));
             var view = new OwnerView({
@@ -78,6 +68,11 @@ define([
             this.$('.owners').append(view.render().el);
         },
         onOwnerRemoved: function (dataSnapshot) {
+            console.log('onOwnerRemoved', dataSnapshot.val());
+            var email = dataSnapshot.val();
+            var view = this.views[email];
+            view.remove();
+            delete this.views[email];
         },
         render: function () {
             this.$el.html(this.template({}));
