@@ -14,9 +14,12 @@ require.config({
         auth: 'vendor/firebase-auth-client',
         chart: 'components/Chart.js/Chart',
         d3: 'components/d3/d3',
-        horizon: 'vendor/horizon'
+        horizon: 'vendor/horizon',
     },
     shim: {
+        humane: {
+            exports: 'humaneDate'
+        },
         jquery: {
             exports: 'jQuery'
         },

@@ -2,9 +2,10 @@ define([
     './view',
     './horizon',
     './donut',
+    './tally',
     'backbone',
     'underscore'
-], function (View, HorizonView, DonutView, Backbone, _) {
+], function (View, HorizonView, DonutView, TallyView, Backbone, _) {
     'use strict';
 
     var StatsView = View.extend({
@@ -12,6 +13,9 @@ define([
             this.template = _.template($('#stats_template').html());
             this.views = {};
             this.donutView = new DonutView({
+                model: this.model
+            });
+            this.tallyView = new TallyView({
                 model: this.model
             });
             this.firstDateObserver = new Backbone.Model();
@@ -64,6 +68,7 @@ define([
             this.$el.html(this.template({
                 name: name,
             }));
+            this.assign(this.tallyView, '.tally');
             this.assign(this.donutView, '.donuts');
             _.each(this.views, function (view) {
                 this.$('.horizons').append(view.render().el);

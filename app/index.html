@@ -134,10 +134,19 @@
         </script>
 
         <script type="text/template" id="stats_template">
-            <h5><span style="color:#E2EAE9;">Started</span> vs <span style="color:#F7464A;">Stopped</span> vs <span style="color:#4D5360;">Completed</span></h5>
+            <h3>Campaign Overview</h3>
+            <div class="tally"></div>
+            <h3>Campaign Events</h3>
+            <div><span style="color:#E2EAE9;">Started</span> vs <span style="color:#F7464A;">Stopped</span> vs <span style="color:#4D5360;">Completed</span></div>
             <div class="donuts"></div>
-            <h5>Popularity comparisons</h5>
+            <h3>Popularity comparisons</h3>
             <div class="horizons"></div>
+        </script>
+
+        <script type="text/template" id="tally_template">
+            <div class="torrents">Torrents: <%= torrents %></div>
+            <div class="downloads">Downloads: <%= downloads %></div>
+            <div class="transferred">Transferred: <%= transferred %></div>
         </script>
 
         <script type="text/template" id="tracker_template">
