@@ -43,7 +43,9 @@ define([
             view.remove();
             delete this.views[id];
         },
-        onAddCampaign: function () {
+        onAddCampaign: function (ev) {
+            ev.preventDefault();
+
             var button = this.$('.btn');
             if (button.hasClass('disabled')) {
                 return;

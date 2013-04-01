@@ -5,14 +5,17 @@ define([
     'use strict';
     var LoginView = View.extend({
         events: {
-            'click .signup_form .btn': 'onClickSignUp',
-            'click .login_form .btn': 'onClickLogin'
+            'click .signup_form > .btn': 'onClickSignUp',
+            'click .login_form > .btn': 'onClickLogin'
         },
         initialize: function () {
             this.template = _.template($('#login_template').html());
             this.model.on('change:user', this.render, this);
         },
-        onClickSignUp: function () {
+        onClickSignUp: function (ev) {
+            ev.preventDefault();
+            this.$('.signup_form > .btn').addClass('disabled');
+
             var email = this.$('.signup_well .email').val();
             var password = this.$('.signup_well .password1').val();
             if (password !== this.$('.signup_well .password2').val()) {
@@ -32,7 +35,10 @@ define([
                 }
             }, this));
         },
-        onClickLogin: function () {
+        onClickLogin: function (ev) {
+            ev.preventDefault();
+            this.$('.login_form > .btn').addClass('disabled');
+
             var email = this.$('.login_well .email').val();
             var password = this.$('.login_well .password').val();
             this.login(email, password);

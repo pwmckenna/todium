@@ -41,7 +41,9 @@ define([
             view.remove();
             delete this.views[trackerName];
         },
-        onAddTracker: function () {
+        onAddTracker: function (ev) {
+            ev.preventDefault();
+
             var button = this.$('.btn');
             if (button.hasClass('disabled')) {
                 return;
