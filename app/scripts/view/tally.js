@@ -37,13 +37,13 @@ define([
             this.stats.set('torrents', (this.stats.get('torrents') || 0) + 1);
             tracker.child('stats').once('value', function (valueSnapshot) {
                 var val = valueSnapshot.val();
-                if(val && val.hasOwnProperty('completed') && _.keys(val.completed).length > 0) {
-                    var torrentSize = Math.max.apply(this, _.map(val.completed, function(obj) { 
-                        return obj.downloaded; 
+                if (val && val.hasOwnProperty('completed') && _.keys(val.completed).length > 0) {
+                    var torrentSize = Math.max.apply(this, _.map(val.completed, function (obj) {
+                        return obj.downloaded;
                     }));
                     var numDownloads = val.hasOwnProperty('started') ? _.keys(val.started).length : 0;
                     this.stats.set('downloads', (this.stats.get('downloads') || 0) + numDownloads);
-                    this.stats.set('transferred', (this.stats.get('transferred') || 0) + numDownloads * torrentSize)
+                    this.stats.set('transferred', (this.stats.get('transferred') || 0) + numDownloads * torrentSize);
                 }
             }, this);
         },
