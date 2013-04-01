@@ -57,7 +57,6 @@ define([
             delete this.views[trackerName];
         },
         render: function () {
-            console.log('render stats');
             var name = '';
             this.model.child('name').once('value', function (valueSnapshot) {
                 name = valueSnapshot.val();

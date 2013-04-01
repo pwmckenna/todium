@@ -36,7 +36,6 @@ define([
                 time = val && val.hasOwnProperty('time') ? humaneDate(new Date(val.time)) : '';
                 url = val && val.hasOwnProperty('trackable') ? val.trackable : '';
             });
-            console.log('render tracker');
             this.$el.html(this.template({
                 info_hash: info_hash,
                 time: time,

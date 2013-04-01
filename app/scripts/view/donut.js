@@ -47,7 +47,6 @@ define([
             this.render();
         },
         render: function () {
-            console.log('render stat');
             this.$el.html(this.template());
             var width = this.$el.get(0).offsetWidth;
             var height = this.$el.get(0).offsetHeight;

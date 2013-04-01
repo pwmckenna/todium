@@ -21,8 +21,6 @@ define([
             this.render();
         },
         render: function () {
-            console.log('render stat');
-
             var info_hash;
             this.model.child('info_hash').once('value', function (valueSnapshot) {
                 info_hash = valueSnapshot.val();
@@ -35,10 +33,8 @@ define([
                 info_hash: info_hash
             }));
 
-            var width = this.$el.get(0).offsetWidth;
+            var width = this.$el.get(0).offsetWidth - 50;
             var height = 30;
-            console.log('width', width);
-            console.log('height', height);
 
             var chart = d3.horizon()
                 .width(width)
@@ -48,16 +44,9 @@ define([
                 .colors(['red', 'white', 'white', 'navy']);
 
             this.$('.completed').css('width', width).css('height', height);
-            this.model.child('stats').child('completed').once('value', _.bind(function (valueSnapshot) {
+            this.model.child('stats').child('started').once('value', _.bind(function (valueSnapshot) {
                 var val = valueSnapshot.val();
-                if (!val) {
-                    return;
-                }
-                var len = _.keys(val).length;
-                if (len <= 0) {
-                    return;
-                }
-
+                var len = _.keys(val || {}).length;
 
 
                 if (!this.options.meanCompletedObserver.has(info_hash) ||
@@ -67,6 +56,20 @@ define([
                     console.log('meanCompletedObserver', info_hash, len);
                     return;
                 }
+
+                if (!val || len <= 0) {
+                    this.$('.count').text(len);
+                    return;
+                }
+
+
+
+
+
+
+
+
+
                 var lens = _.values(this.options.meanCompletedObserver.toJSON());
                 var mean = _.reduce(lens, function (memo, num) {
                     return memo + num;
@@ -87,11 +90,9 @@ define([
                 var data = _.map(val, function (announce) {
                     return [new Date(announce.time), ++index - mean];
                 });
-                if (this.options.firstDateObserver.get('time') === firstTime) {
-                    console.log('first!');
-                } else {
-                    console.log('not first');
-                    data.unshift([new Date(this.options.firstDateObserver.get('time')), -mean]);
+                if (this.options.firstDateObserver.get('time') !== firstTime) {
+                    data.unshift([new Date(firstTime - 1), 0]);
+                    data.unshift([new Date(this.options.firstDateObserver.get('time')), 0]);
                 }
 
 
