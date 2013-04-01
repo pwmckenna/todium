@@ -10,6 +10,7 @@ require.config({
         md5: 'vendor/md5',
         buttons: 'components/bootstrap/js/bootstrap-button',
         typeahead: 'components/bootstrap/js/bootstrap-typeahead',
+        tooltip: 'components/bootstrap/js/bootstrap-tooltip',
         firebase: 'vendor/firebase',
         auth: 'vendor/firebase-auth-client',
         chart: 'components/Chart.js/Chart',
@@ -30,6 +31,10 @@ require.config({
         typeahead: {
             deps: ['jquery'],
             exports: '$.fn.typeahead'
+        },
+        tooltip: {
+            deps: ['jquery'],
+            exports: '$.fn.tooltip'
         },
         firebase: {
             exports: 'Firebase'

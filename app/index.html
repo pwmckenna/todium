@@ -94,11 +94,13 @@
             <button class="btn bigbtn logout" type="button"><i class="icon-off"></i></button>
         </script>
 
+        <script type="text/template" id="owner_template">
+            <img data-html="true" data-title="Email: <%= email %><br>Joined: <%= joined %><br>Last Visited: <%= visited %>" src="<%= image %>" data-toggle="tooltip"/>
+        </script>
+
         <script type="text/template" id="owners_template">
             <div>Campaign Owners: </div>
-            <% _.each(owners, function (owner) { %>
-                <img title="<%= owner.email %>" src="<%= owner.image %>" />
-            <% }) %>
+            <div class="owners"></div>
             <br><br>
             <form class="form-inline">
                 <input type="text" class="input-large" placeholder="Add Owner">

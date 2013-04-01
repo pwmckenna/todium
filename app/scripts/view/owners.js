@@ -1,10 +1,12 @@
 define([
     'underscore',
     './view',
+    './owner',
     'md5',
     'typeahead',
-    'underscore'
-], function (_, View, md5, typeahead) {
+    'tooltip',
+    'humane'
+], function (_, View, OwnerView, md5, typeahead, tooltip, humane) {
     'use strict';
 
     var OwnersView = View.extend({
@@ -14,11 +16,27 @@ define([
         initialize: function () {
             _.bindAll(this, 'typeahead');
             this.template = _.template($('#owners_template').html());
-            this.model.child('owners').on('value', this.render, this);
+            this.views = {};
+            this.model.child('owners').on('child_added', this.onOwnerAdded, this);
+            this.model.child('owners').on('child_removed', this.onOwnerRemoved, this);
         },
         destroy: function () {
-            this.model.child('owners').off('value', this.render, this);
+            this.model.child('owners').off('child_added', this.onOwnerAdded, this);
+            this.model.child('owners').off('child_removed', this.onOwnerRemoved, this);
+            _.each(this.views, function (view) {
+                view.destroy();
+                view.remove();
+            });
+            this.views = {};
         },
+        onTrackerRemoved: function (dataSnapshot) {
+            console.log('onTrackerRemoved', dataSnapshot.val());
+            var trackerName = dataSnapshot.val();
+            var view = this.views[trackerName];
+            view.remove();
+            delete this.views[trackerName];
+        },
+
         submit: function (e) {
             e.preventDefault();
             var email = this.$('input[type=text]').val();
@@ -49,22 +67,23 @@ define([
                 process(emails);
             }, this);
         },
-        render: function () {
-            console.log('render owners');
-            var owners = [];
-            this.model.child('owners').once('value', function (ownersSnapshot) {
-                owners = ownersSnapshot.val();
+        onOwnerAdded: function (dataSnapshot) {
+            console.log('onTrackerAdded', dataSnapshot.val());
+            var email = dataSnapshot.val();
+            var owner = this.model.root().child('users').child(md5(email));
+            var view = new OwnerView({
+                model: owner
             });
-
-            this.$el.html(this.template({
-                owners: _.map(owners, function (email) {
-                    var hash = md5(email.trim());
-                    return {
-                        image: '//www.gravatar.com/avatar/' + hash + '?s=32&d=mm',
-                        email: email
-                    };
-                })
-            }));
+            this.views[email] = view;
+            this.$('.owners').append(view.render().el);
+        },
+        onOwnerRemoved: function (dataSnapshot) {
+        },
+        render: function () {
+            this.$el.html(this.template({}));
+            _.each(this.views, function (view) {
+                this.$('.owners').append(view.render().el);
+            }, this);
             typeahead.call(this.$('input'), {
                 source: this.typeahead
             });
