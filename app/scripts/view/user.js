@@ -14,6 +14,12 @@ define([
             this.template = _.template($('#user_template').html());
             this.views = {};
             this.model.child('email').set(this.options.email);
+            this.model.child('joined').transaction(function (currentValue) {
+                if (!currentValue) {
+                    return new Date().getTime();
+                }
+            });
+            this.model.child('visited').set(new Date().getTime());
             this.model.child('campaigns').on('child_added', this.onCampaignAdded, this);
             this.model.child('campaigns').on('child_removed', this.onCampaignRemoved, this);
         },
