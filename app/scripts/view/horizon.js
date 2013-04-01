@@ -36,17 +36,16 @@ define([
             }));
 
             var width = this.$el.get(0).offsetWidth;
-            var height = 25;
+            var height = 30;
             console.log('width', width);
             console.log('height', height);
 
             var chart = d3.horizon()
                 .width(width)
                 .height(height)
-                .bands(4)
+                .bands(5)
                 .mode('mirror')
-                .colors(['red', 'white', 'white', 'navy'])
-                .interpolate('basis');
+                .colors(['red', 'white', 'white', 'navy']);
 
             this.$('.completed').css('width', width).css('height', height);
             this.model.child('stats').child('completed').once('value', _.bind(function (valueSnapshot) {
