@@ -73,39 +73,20 @@
             <p class="lead">Simple analytics for torrents.</p>
             <div class="well signup_well">
                 <p class="instructions">Sign up to create links:</p><br>
-                <div class="form-inline signup_form">
-                    <div>
-                        <input type="text" class="input-block-level email" placeholder="Email">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="password" class="input-block-level password1" placeholder="Password">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="password" class="input-block-level password2" placeholder="Password again">
-                    </div>
-                    <br>
-                    <div>
-                        <button class="btn">Sign up</button>
-                    </div>
-                </div>
+                <form class="signup_form">
+                    <input type="text" class="input-block-level email" placeholder="Email">
+                    <input type="password" class="input-block-level password1" placeholder="Password">
+                    <input type="password" class="input-block-level password2" placeholder="Password again">
+                    <button type="submit" class="btn">Sign up</button>
+                </form>
             </div>
             <div class="well login_well">
                 <p class="instructions">Login to create links:</p><br>
-                <div class="form-inline login_form">
-                    <div>
-                        <input type="text" class="input-block-level email" placeholder="Email">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="password" class="input-block-level password" placeholder="Password">
-                    </div>
-                    <br>
-                    <div>
-                        <button class="btn">Log in</button>
-                    </div>
-                </div>
+                <form class="login_form">
+                    <input type="text" class="input-block-level email" placeholder="Email">
+                    <input type="password" class="input-block-level password" placeholder="Password">
+                    <button type="submit" class="btn">Log in</button>
+                </form>
             </div>
         </script>
 
@@ -158,18 +139,20 @@
         <script type="text/template" id="trackers_template">
             <div class="trackers"></div>
             <br>
-            <input class="input-block-level createTorrentLink" type="text" placeholder="http://XXXXXX.com/XXXXXX.torrent    /    magnet:?xt=urn:btih:XXXXXX    /    XXXXXXXXXXXX"></input>
-            <button class="btn btn-large btn-block btn-inverse addTracker" type="button">Create Link</button>
+            <form>
+                <input class="input-block-level createTorrentLink" type="text" placeholder="http://XXXXXX.com/XXXXXX.torrent    /    magnet:?xt=urn:btih:XXXXXX    /    XXXXXXXXXXXX"></input>
+                <button class="btn btn-large btn-block btn-inverse addTracker" type="submit">Create Link</button>
+            </form>
         </script>
 
         <script type="text/template" id="user_template">
             <div class="campaigns"></div>
             <br>
             <br>
-            <div class="well">
+            <form class="well">
                 <input class="input-block-level campaignName" type="text" placeholder="Campaign Name"></input>
-                <button class="btn btn-large btn-block btn-inverse addCampaign" type="button">Create Campaign</button>
-            </div>
+                <button class="btn btn-large btn-block btn-inverse addCampaign" type="submit">Create Campaign</button>
+            </form>
             <br>
         </script>
 
