@@ -36,13 +36,16 @@ define([
             var tracker = this.model.root().child('trackers').child(trackerName);
             this.stats.set('torrents', (this.stats.get('torrents') || 0) + 1);
             tracker.child('stats').once('value', function (valueSnapshot) {
+                console.log('tracker stats');
                 var val = valueSnapshot.val();
+
+                var numDownloads = val && val.hasOwnProperty('started') ? _.keys(val.started).length : 0;
+                this.stats.set('downloads', (this.stats.get('downloads') || 0) + numDownloads);
+
                 if (val && val.hasOwnProperty('completed') && _.keys(val.completed).length > 0) {
                     var torrentSize = Math.max.apply(this, _.map(val.completed, function (obj) {
                         return obj.downloaded;
                     }));
-                    var numDownloads = val.hasOwnProperty('started') ? _.keys(val.started).length : 0;
-                    this.stats.set('downloads', (this.stats.get('downloads') || 0) + numDownloads);
                     this.stats.set('transferred', (this.stats.get('transferred') || 0) + numDownloads * torrentSize);
                 }
             }, this);
