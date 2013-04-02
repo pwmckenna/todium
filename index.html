@@ -109,6 +109,9 @@
         </script>
 
         <script type="text/template" id="donut_template">
+            <div style="color:#E2EAE9;">Started - <%= started %></div>
+            <div style="color:#F7464A;">Stopped - <%= stopped %></div>
+            <div style="color:#4D5360;">Completed - <%= completed %></div>
             <canvas></canvas>
         </script>
 
@@ -120,7 +123,6 @@
             <h3>Campaign Overview</h3>
             <div class="tally"></div>
             <h3>Campaign Events</h3>
-            <div><span style="color:#E2EAE9;">Started</span> vs <span style="color:#F7464A;">Stopped</span> vs <span style="color:#4D5360;">Completed</span></div>
             <div class="donuts"></div>
             <h3>Popularity comparisons</h3>
             <div class="horizons"></div>
