@@ -11,17 +11,17 @@
     float: left;
 }
 .bigbtn {
-  margin-top: 20px;
-  width: 80px;
-  height: 80px;
+    margin-top: 20px;
+    width: 80px;
+    height: 80px;
 }
 .bigbtn i {
-  margin: 10px;
-  line-height: 40px;
+    margin: 10px;
+    line-height: 40px;
 }
 .bigbtn i::before {
-  font-size: 40px;
-  margin-top: 20px;
+    font-size: 40px;
+    margin-top: 20px;
 }
 .medbtn {
     margin-top: 0px;
@@ -29,78 +29,78 @@
     height: 40px;
 }
 .medbtn i {
-  margin: 0px;
-  line-height: 20px;
+    margin: 0px;
+    line-height: 20px;
 }
 .medbtn i::before {
-  font-size: 20px;
-  margin-top: 10px;
+    font-size: 20px;
+    margin-top: 10px;
 }
 .jumbotron > .container > * {
     margin-left: 30px;
 }
 
 .login {
-  width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 .login .well {
-  padding-bottom: 30px;
+    padding-bottom: 30px;
 }
 .login .lead {
-  margin-bottom: 40px;
-  font-size: 30px;
+    margin-bottom: 40px;
+    font-size: 30px;
 }
 .login .instructions {
-  font-size: 16px;
-  margin-bottom: 0px;
+    font-size: 16px;
+    margin-bottom: 0px;
 }
 input.input-label {
-  margin: 1px 0 0 0;
-  padding: 0px;
-  height: 18px;
-  width: 100px;
+    margin: 1px 0 0 0;
+    padding: 0px;
+    height: 18px;
+    width: 100px;
 }
 .button-label {
-  margin: 1px 0px 0px -1px;
-  padding: 0px 5px;
-  height: 20px;
+    margin: 1px 0px 0px -1px;
+    padding: 0px 5px;
+    height: 20px;
 }
 
 .container.login, .container.user, .container.leaderboard {
-  margin-top: 50px;
+    margin-top: 50px;
 }
 
 .sparkline canvas {
-  background-color: #eee;
+    background-color: #eee;
 }
 
 .src {
-  color: #888;
-  font-size: 10px;
-  line-height: 20px;
+    color: #888;
+    font-size: 10px;
+    line-height: 20px;
 }
 
 body {
-	background: #eee;
+    background: #eee;
 }
 
 .stats {
-  background-color: white;
+    background-color: white;
 }
 
 .container.stats {
-  margin-bottom: 50px;
+    margin-bottom: 50px;
 }
 
 .well {
-  color: #eee;
-  background-color: #333;
+    color: #eee;
+    background-color: #333;
 }
 .well .add-on {
-  color: #333;
+    color: #333;
 }
 
 .well.owners img {

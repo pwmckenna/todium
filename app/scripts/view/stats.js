@@ -8,6 +8,18 @@ define([
 ], function (View, HorizonView, DonutView, TallyView, Backbone, _) {
     'use strict';
 
+    var median = function (values) {
+        values.sort(function (a, b) {
+            return a - b;
+        });
+        var half = Math.floor(values.length / 2);
+        if (values.length % 2) {
+            return values[half];
+        } else {
+            return (values[half - 1] + values[half]) / 2.0;
+        }
+    };
+
     var StatsView = View.extend({
         initialize: function () {
             this.template = _.template($('#stats_template').html());
@@ -18,8 +30,29 @@ define([
             this.tallyView = new TallyView({
                 model: this.model
             });
-            this.firstDateObserver = new Backbone.Model();
-            this.meanCompletedObserver = new Backbone.Model();
+            this.firstDateObserver = new (Backbone.Model.extend({
+
+            }))();
+            this.meanCompletedObserver = new (Backbone.Model.extend({
+                initialize: function () {
+                    this.mean = 0;
+                    this.on('change', this._calculateMean, this);
+                },
+                _calculateMean: function () {
+                    var lens = _.values(this.toJSON());
+                    this.mean = median(lens);
+                },
+                setCompleted: function (info_hash, completed) {
+                    if (!this.has(info_hash) ||
+                        this.get(info_hash) !== completed
+                    ) {
+                        this.set(info_hash, completed);
+                    }
+                },
+                getMean: function () {
+                    return this.mean;
+                }
+            }))();
             this.model.child('trackers').on('child_added', this.onTrackerAdded, this);
             this.model.child('trackers').on('child_removed', this.onTrackerRemoved, this);
             $(window).resize(_.bind(this.resize, this));

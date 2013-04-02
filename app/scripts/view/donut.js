@@ -47,8 +47,12 @@ define([
             this.render();
         },
         render: function () {
-            this.$el.html(this.template());
-            var width = this.$el.get(0).offsetWidth;
+            this.$el.html(this.template({
+                started: this.started,
+                stopped: this.stopped,
+                completed: this.completed
+            }));
+            var width = this.$el.get(0).offsetWidth - 200;
             var height = this.$el.get(0).offsetHeight;
             var size = {
                 width: width,

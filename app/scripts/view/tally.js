@@ -31,12 +31,10 @@ define([
             this.model.child('trackers').off('child_added', this.onTrackerAdded, this);
         },
         onTrackerAdded: function (dataSnapshot) {
-            console.log('onTrackerAdded', dataSnapshot.val());
             var trackerName = dataSnapshot.val();
             var tracker = this.model.root().child('trackers').child(trackerName);
             this.stats.set('torrents', (this.stats.get('torrents') || 0) + 1);
             tracker.child('stats').once('value', function (valueSnapshot) {
-                console.log('tracker stats');
                 var val = valueSnapshot.val();
 
                 var numDownloads = val && val.hasOwnProperty('started') ? _.keys(val.started).length : 0;
@@ -51,7 +49,6 @@ define([
             }, this);
         },
         render: function () {
-
             this.$el.html(this.template({
                 torrents: this.stats.get('torrents') || 0,
                 downloads: this.stats.get('downloads') || 0,

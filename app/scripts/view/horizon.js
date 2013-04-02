@@ -4,17 +4,6 @@ define([
     'horizon'
 ], function (View, _, d3) {
     'use strict';
-    var median = function (values) {
-        values.sort(function (a, b) {
-            return a - b;
-        });
-        var half = Math.floor(values.length / 2);
-        if (values.length % 2) {
-            return values[half];
-        } else {
-            return (values[half - 1] + values[half]) / 2.0;
-        }
-    };
 
     var HorizonView = View.extend({
         initialize: function () {
@@ -22,12 +11,13 @@ define([
             this.model.child('stats').on('value', this.render, this);
             this.model.child('info_hash').on('value', this.render, this);
             this.options.firstDateObserver.on('change:time', this.render, this);
-            this.options.meanCompletedObserver.on('change', this.render, this);
+            this.options.meanCompletedObserver.on('mean', this.render, this);
         },
         destroy: function () {
             this.model.child('stats').off('value', this.render, this);
             this.model.child('info_hash').off('value', this.render, this);
             this.options.firstDateObserver.off('change:time', this.render, this);
+            this.options.meanCompletedObserver.off('mean', this.render, this);
         },
         resize: function () {
             this.render();
@@ -45,7 +35,10 @@ define([
                 info_hash: info_hash
             }));
 
-            var width = this.$el.get(0).offsetWidth - 50;
+            var width = this.$el.get(0).offsetWidth;
+            if (width > 50) {
+                width -= 50;
+            }
             var height = 30;
 
             var chart = d3.horizon()
@@ -60,12 +53,10 @@ define([
                 var val = valueSnapshot.val();
                 var len = _.keys(val || {}).length;
 
-
-                if (!this.options.meanCompletedObserver.has(info_hash) ||
-                    this.options.meanCompletedObserver.get(info_hash) !== len
-                ) {
-                    this.options.meanCompletedObserver.set(info_hash, len);
-                    console.log('meanCompletedObserver', info_hash, len);
+                var mean = this.options.meanCompletedObserver.getMean();
+                this.options.meanCompletedObserver.setCompleted(info_hash, len);
+                //bail if something has changed, as we'll react to the thrown event and re-render anyhow
+                if (mean !== this.options.meanCompletedObserver.getMean()) {
                     return;
                 }
 
@@ -74,16 +65,6 @@ define([
                     return;
                 }
 
-
-
-
-
-
-
-
-
-                var lens = _.values(this.options.meanCompletedObserver.toJSON());
-                var mean = median(lens);
                 var time = _.first(_.values(val)).time;
                 var firstTime = new Date(time).getTime();
                 if (!this.options.firstDateObserver.has('time') ||

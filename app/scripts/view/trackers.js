@@ -28,11 +28,10 @@ define([
             console.log('onTrackerAdded', dataSnapshot.val());
             var trackerName = dataSnapshot.val();
             var tracker = this.model.parent().parent().child('trackers').child(trackerName);
-            var view = new TrackerView({
+            this.views[trackerName] = new TrackerView({
                 model: tracker
             });
-            this.views[trackerName] = view;
-            this.$('.trackers').append(view.render().el);
+            this.render();
         },
         onTrackerRemoved: function (dataSnapshot) {
             console.log('onTrackerRemoved', dataSnapshot.val());
