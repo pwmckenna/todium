@@ -36,11 +36,15 @@ define([
             this.meanCompletedObserver = new (Backbone.Model.extend({
                 initialize: function () {
                     this.mean = 0;
-                    this.on('change', this._calculateMean, this);
-                },
-                _calculateMean: function () {
-                    var lens = _.values(this.toJSON());
-                    this.mean = median(lens);
+                    this.on('change', _.throttle(function () {
+                        console.log('calculating mean');
+                        var prev = this.mean;
+                        var lens = _.values(this.toJSON());
+                        this.mean = median(lens);
+                        if(prev !== this.mean) {
+                            this.trigger('mean');
+                        }
+                    }, 1000), this);
                 },
                 setCompleted: function (info_hash, completed) {
                     if (!this.has(info_hash) ||
