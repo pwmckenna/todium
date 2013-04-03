@@ -81,14 +81,16 @@ define([
         onTrackerAdded: function (dataSnapshot) {
             console.log('onTrackerAdded', dataSnapshot.val());
             var trackerName = dataSnapshot.val();
-            var tracker = this.model.root().child('trackers').child(trackerName);
-            var view = new HorizonView({
-                model: tracker,
-                firstDateObserver: this.firstDateObserver,
-                meanCompletedObserver: this.meanCompletedObserver
-            });
-            this.views[trackerName] = view;
-            this.$('.horizons').append(view.render.el);
+            setTimeout(_.bind(function () {
+                var tracker = this.model.root().child('trackers').child(trackerName);
+                var view = new HorizonView({
+                    model: tracker,
+                    firstDateObserver: this.firstDateObserver,
+                    meanCompletedObserver: this.meanCompletedObserver
+                });
+                this.views[trackerName] = view;
+                this.$('.horizons').append(view.render().el);
+            }, this));
         },
         onTrackerRemoved: function (dataSnapshot) {
             console.log('onTrackerRemoved', dataSnapshot.val());
@@ -98,6 +100,7 @@ define([
             delete this.views[trackerName];
         },
         render: function () {
+            var children = this.$('.horizons').children().detach();
             var name = '';
             this.model.child('name').once('value', function (valueSnapshot) {
                 name = valueSnapshot.val();
@@ -107,9 +110,7 @@ define([
             }));
             this.assign(this.tallyView, '.tally');
             this.assign(this.donutView, '.donuts');
-            _.each(this.views, function (view) {
-                this.$('.horizons').append(view.render().el);
-            }, this);
+            this.$('.horizons').append(children);
             return this;
         }
     });

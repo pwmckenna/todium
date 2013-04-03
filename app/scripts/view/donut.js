@@ -21,7 +21,6 @@ define([
             console.log('onTrackerAdded', dataSnapshot.val());
             var trackerName = dataSnapshot.val();
             var tracker = this.model.root().child('trackers').child(trackerName);
-            console.log(trackerName, tracker);
             tracker.child('stats').once('value', _.bind(function (valueSnapshot) {
                 var val = valueSnapshot.val();
                 if (val) {

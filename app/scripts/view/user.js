@@ -33,14 +33,16 @@ define([
             this.views = {};
         },
         onCampaignAdded: function (dataSnapshot) {
-            console.log('onCampaignAdded', dataSnapshot.val());
             var id = dataSnapshot.val();
-            var campaign = this.model.root().child('campaigns').child(id);
-            var view = new CampaignView({
-                model: campaign
-            });
-            this.views[id] = view;
-            this.$('.campaigns').append(view.render().el);
+            setTimeout(_.bind(function () {
+                console.log('onCampaignAdded', id);
+                var campaign = this.model.root().child('campaigns').child(id);
+                var view = new CampaignView({
+                    model: campaign
+                });
+                this.views[id] = view;
+                this.$('.campaigns').append(view.render().el);
+            }, this));
         },
         onCampaignRemoved: function (dataSnapshot) {
             console.log('onCampaignRemoved', dataSnapshot.val());
