@@ -24,7 +24,7 @@ define([
         initialize: function () {
             this.template = _.template($('#stats_template').html());
             this.views = {};
-            this.donutView = new RatioView({
+            this.ratioView = new RatioView({
                 model: this.model
             });
             this.tallyView = new TallyView({
@@ -41,7 +41,7 @@ define([
                         var prev = this.mean;
                         var lens = _.values(this.toJSON());
                         this.mean = median(lens);
-                        if(prev !== this.mean) {
+                        if (prev !== this.mean) {
                             this.trigger('mean');
                         }
                     }, 1000), this);
@@ -76,7 +76,7 @@ define([
             _.each(this.views, function (view) {
                 view.resize();
             });
-            this.donutView.resize();
+            this.ratioView.resize();
         },
         onTrackerAdded: function (dataSnapshot) {
             console.log('onTrackerAdded', dataSnapshot.val());
@@ -109,7 +109,7 @@ define([
                 name: name,
             }));
             this.assign(this.tallyView, '.tally');
-            this.assign(this.donutView, '.donuts');
+            this.assign(this.ratioView, '.ratio');
             this.$('.horizons').append(children);
             return this;
         }
