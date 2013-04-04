@@ -4,7 +4,7 @@ define([
     'chart'
 ], function (View, _, Chart) {
     'use strict';
-    var DonutView = View.extend({
+    var RatioView = View.extend({
         initialize: function () {
             this.template = _.template($('#donut_template').html());
 
@@ -79,5 +79,5 @@ define([
             return this;
         }
     });
-    return DonutView;
+    return RatioView;
 });

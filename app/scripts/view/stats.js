@@ -1,11 +1,11 @@
 define([
     './view',
     './horizon',
-    './donut',
+    './ratio',
     './tally',
     'backbone',
     'underscore'
-], function (View, HorizonView, DonutView, TallyView, Backbone, _) {
+], function (View, HorizonView, RatioView, TallyView, Backbone, _) {
     'use strict';
 
     var median = function (values) {
@@ -24,7 +24,7 @@ define([
         initialize: function () {
             this.template = _.template($('#stats_template').html());
             this.views = {};
-            this.donutView = new DonutView({
+            this.donutView = new RatioView({
                 model: this.model
             });
             this.tallyView = new TallyView({
