@@ -1,4 +1,4 @@
-define(['firebase', 'auth'], function (Firebase, FirebaseAuthClient) {
+define(['firebase', 'auth', 'underscore', 'backbone'], function (Firebase, FirebaseAuthClient, _, Backbone) {
     'use strict';
     var AuthenticationModel = Backbone.Model.extend({
         initialize: function () {
