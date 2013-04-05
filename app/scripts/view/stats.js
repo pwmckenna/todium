@@ -1,11 +1,12 @@
 define([
     './view',
     './horizon',
-    './ratio',
+    './granular',
+    '../model/granular',
     './tally',
     'backbone',
     'underscore'
-], function (View, HorizonView, RatioView, TallyView, Backbone, _) {
+], function (View, HorizonView, GranularView, GranularModel, TallyView, Backbone, _) {
     'use strict';
 
     var median = function (values) {
@@ -24,8 +25,9 @@ define([
         initialize: function () {
             this.template = _.template($('#stats_template').html());
             this.views = {};
-            this.ratioView = new RatioView({
-                model: this.model
+            var granular = new GranularModel(this.model);
+            this.ratioView = new GranularView({
+                model: granular
             });
             this.tallyView = new TallyView({
                 model: this.model
@@ -109,7 +111,7 @@ define([
                 name: name,
             }));
             this.assign(this.tallyView, '.tally');
-            this.assign(this.ratioView, '.ratio');
+            this.assign(this.ratioView, '.granular');
             this.$('.horizons').append(children);
             return this;
         }

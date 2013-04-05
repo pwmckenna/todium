@@ -1,11 +1,12 @@
 {
   "name": "todium",
   "dependencies": {
-    "backbone": "0.9.9",
-    "underscore": "~1.4.3",
     "Humane-Dates": "git://github.com/zachleat/Humane-Dates.git",
     "bootstrap": "~2.3.1",
     "Chart.js": "git://github.com/nnnick/Chart.js.git",
-    "d3": "~3.0.8"
+    "d3": "~3.0.8",
+    "chartjs": "latest",
+    "backbone": "git://github.com/documentcloud/backbone.git#~1.0.0",
+    "underscore": "git://github.com/documentcloud/underscore.git#~1.4.4"
   }
 }
