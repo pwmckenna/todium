@@ -1,4 +1,8 @@
-define(['underscore', 'backbone'], function (_, Backbone) {
+define([
+    'underscore',
+    'backbone'
+], function (_, Backbone) {
+    'use strict';
     var GranularModel = Backbone.Model.extend({
         constructor: function (firebase) {
             Backbone.Model.prototype.constructor.apply(this, {});
@@ -40,9 +44,9 @@ define(['underscore', 'backbone'], function (_, Backbone) {
                 }
             }
 
-            //if (_.every(this.trackerValueReceived.values(), _.identity)) {
+            if (_.every(this.trackerValueReceived.values(), _.identity)) {
                 this.trigger('change');
-            //}
+            }
         },
         onTrackerAdded: function (dataSnapshot) {
             console.log('onTrackerAdded', dataSnapshot.val());
@@ -56,6 +60,6 @@ define(['underscore', 'backbone'], function (_, Backbone) {
             var trackerName = dataSnapshot.val();
             console.log(trackerName);
         }
-    })
+    });
     return GranularModel;
 });

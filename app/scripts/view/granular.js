@@ -23,7 +23,7 @@ define([
 
 
             var torrentStarts = this.model.get('started').values();
-            if(torrentStarts.length === 0) {
+            if (torrentStarts.length === 0) {
                 return this;
             }
 
