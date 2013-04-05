@@ -4,6 +4,10 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+            google.load("visualization", "1", {packages:["corechart"]});
+        </script>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title></title>
@@ -11,7 +15,6 @@
         <meta name="viewport" content="width=device-width">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
 
         <link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="styles/bootstrap.css">
@@ -108,11 +111,18 @@
             </form>
         </script>
 
-        <script type="text/template" id="ratio_template">
+        <script type="text/template" id="granular_template">
+            <h3>Campaign Events</h3>
             <div style="color:#E2EAE9;">Started - <%= started %></div>
             <div style="color:#F7464A;">Stopped - <%= stopped %></div>
             <div style="color:#4D5360;">Completed - <%= completed %></div>
-            <canvas></canvas>
+            <canvas class="ratio"></canvas>
+
+            <h3>Shares Per Torrent</h3>
+            <div class="sharesper"></div>
+        </script>
+
+        <script type="text/template" id="sharesper_template">
         </script>
 
         <script type="text/template" id="horizon_template">
@@ -122,8 +132,7 @@
         <script type="text/template" id="stats_template">
             <h3>Campaign Overview</h3>
             <div class="tally"></div>
-            <h3>Campaign Events</h3>
-            <div class="ratio"></div>
+            <div class="granular"></div>
             <h3>Popularity comparisons</h3>
             <div class="horizons"></div>
         </script>
