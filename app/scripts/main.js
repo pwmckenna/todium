@@ -69,6 +69,6 @@ require(['jquery', 'model/authentication', 'view/app'], function ($, Authenticat
         var authentication = new AuthenticationModel();
         $('body').append(new AppView({
             model: authentication
-        }).render().el);
+        }).render().$el);
     });
 });
