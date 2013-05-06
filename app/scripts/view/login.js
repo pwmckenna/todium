@@ -44,6 +44,7 @@ define([
             this.login(email, password);
         },
         login: function (email, password) {
+            console.log('login', email, new Date().toString());
             this.model.auth.login('password', {
                 email: email,
                 password: password,

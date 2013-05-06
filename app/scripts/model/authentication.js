@@ -6,13 +6,14 @@ define(['firebase', 'auth', 'underscore', 'backbone'], function (Firebase, Fireb
             this.auth = new FirebaseAuthClient(this.firebase, _.bind(this.onLogin, this));
         },
         login: function (provider) {
+            console.log('login', provider, new Date().toString());
             this.auth.login(provider);
         },
         logout: function () {
             this.auth.logout();
         },
         onLogin: function (error, user) {
-            console.log('onLogin', error, user);
+            console.log('onLogin', error, user, new Date().toString());
             this.set('user', user);
             if (error) {
                 console.log(error);

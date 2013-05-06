@@ -12,10 +12,10 @@ define([
         initialize: function () {
             this.template = _.template($('#trackers_template').html());
             this.views = {};
-            this.model.child('trackers').on('child_added', this.onTrackerAdded, this);
+            this.model.child('trackers').endAt().limit(1).on('child_added', this.onTrackerAdded, this);
         },
         destroy: function () {
-            this.model.child('trackers').off('child_added', this.onTrackerAdded, this);
+            this.model.child('trackers').endAt().limit(1).off('child_added', this.onTrackerAdded, this);
             _.each(this.views, function (view) {
                 view.destroy();
                 view.remove();
@@ -24,6 +24,7 @@ define([
         },
         onTrackerAdded: function (dataSnapshot) {
             var trackerName = dataSnapshot.val();
+            console.log('onTrackerAdded', trackerName);
             setTimeout(_.bind(function () {
                 var tracker = this.model.parent().parent().child('trackers').child(trackerName);
                 var view = new TrackerView({

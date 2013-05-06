@@ -6,6 +6,8 @@ language:
     node_js
 node_js:
     - 0.8
+notifications:
+    irc: "irc.freenode.org#generator-travis-ci"
 branches:
     only:
         - master
@@ -22,7 +24,7 @@ env:
         # travis encrypt GH_OAUTH_TOKEN=XXXXXXXXXXXXXXX
         #
         # User specific env variables
-        - secure: "YozIwm37vubnbYGKHxgFoYxmzKsDlXPNPWhzMyM7Sm2jUrLc4NjI+KmyP1CIIr1DHjeM25INpI2ILUrixOFVCFtVg58/UR5TVPHYc8UlPqGO9lfN+UxSurWYY3vVcQkxWrmOchBzdlfZfU1tUjVbqrynwsfeSSoTMfkz8a6UZLM="
+        - secure: "Ak9cFq2/iuIKfbllwb0TOCzfzTuqSDm5TXvkgixdC32z9A5X26gXR5KQMsiuFuUq4ai5WL8MXpl9z71Ub2AwcfWUKkR2YoD7gLef6eiBJMBGrh8n4xmIb1vPuQq8OVJ6hGAaD/dW/f194wZZwQ4EAZKL5MI85bGFvO75/Lwm9zE="
         - GH_OWNER: pwmckenna
         - GH_PROJECT_NAME: todium
         # This .travis.yml file instructs travis-ci.org to build your master branch using `yeoman build`

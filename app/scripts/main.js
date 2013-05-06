@@ -1,3 +1,5 @@
+'use strict';
+
 require.config({
     paths: {
         hm: 'vendor/hm',
@@ -63,8 +65,17 @@ require.config({
     }
 });
 
-require(['jquery', 'model/authentication', 'view/app'], function ($, AuthenticationModel, AppView) {
-    'use strict';
+require(['jquery', 'firebase', 'model/authentication', 'view/app'], function ($, Firebase, AuthenticationModel, AppView) {
+    Firebase.enableLogging(true);
+    var on = Firebase.prototype.on;
+    Firebase.prototype.on = function () {
+        console.log('on', arguments);
+        on.apply(this, arguments);
+    };
+    Firebase.prototype.child = function () {
+        console.log('child', arguments);
+        on.apply(this, arguments);
+    };
     $(document).ready(function () {
         var authentication = new AuthenticationModel();
         $('body').append(new AppView({

@@ -5,7 +5,7 @@ define([
     './trackers',
     './stats',
     'buttons'
-], function (View, ApiView, OwnersView, TrackersView, StatsView) {
+], function (View, ApiView) {//, OwnersView, TrackersView, StatsView) {
     'use strict';
 
     var CampaignView = View.extend({
@@ -18,15 +18,15 @@ define([
             this.apiView = new ApiView({
                 model: this.model
             });
-            this.ownersView = new OwnersView({
-                model: this.model
-            });
-            this.trackersView = new TrackersView({
-                model: this.model
-            });
-            this.statsView = new StatsView({
-                model: this.model
-            });
+            // this.ownersView = new OwnersView({
+            //     model: this.model
+            // });
+            // this.trackersView = new TrackersView({
+            //     model: this.model
+            // });
+            // this.statsView = new StatsView({
+            //     model: this.model
+            // });
             this.model.child('name').on('value', this.render, this);
         },
         toggleViews: function () {
@@ -47,12 +47,12 @@ define([
                 } else {
                     _this.ownersView.$el.hide();
                 }
-                if (_this.$('.btn.stats').hasClass('active')) {
-                    _this.statsView.$el.show();
-                    _this.statsView.resize();
-                } else {
-                    _this.statsView.$el.hide();
-                }
+                // if (_this.$('.btn.stats').hasClass('active')) {
+                //     _this.statsView.$el.show();
+                //     _this.statsView.resize();
+                // } else {
+                //     _this.statsView.$el.hide();
+                // }
             });
         },
         destroy: function () {
@@ -63,8 +63,8 @@ define([
             this.ownersView.remove();
             this.trackersView.destroy();
             this.trackersView.remove();
-            this.statsView.destroy();
-            this.statsView.remove();
+            // this.statsView.destroy();
+            // this.statsView.remove();
         },
         render: function () {
             console.log('render campaign');
@@ -78,7 +78,7 @@ define([
             this.assign(this.apiView, '.well.api');
             this.assign(this.ownersView, '.well.owners');
             this.assign(this.trackersView, '.well.trackers');
-            this.assign(this.statsView, '.well.stats');
+            //this.assign(this.statsView, '.well.stats');
             this.toggleViews();
             return this;
         }
