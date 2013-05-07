@@ -32,21 +32,21 @@ define([
         toggleViews: function () {
             var _this = this;
             setTimeout(function () {
-                if (_this.$('.btn.trackers').hasClass('active')) {
-                    _this.trackersView.$el.show();
-                } else {
-                    _this.trackersView.$el.hide();
-                }
                 if (_this.$('.btn.api').hasClass('active')) {
                     _this.apiView.$el.show();
                 } else {
                     _this.apiView.$el.hide();
                 }
-                if (_this.$('.btn.owners').hasClass('active')) {
-                    _this.ownersView.$el.show();
-                } else {
-                    _this.ownersView.$el.hide();
-                }
+                // if (_this.$('.btn.trackers').hasClass('active')) {
+                //     _this.trackersView.$el.show();
+                // } else {
+                //     _this.trackersView.$el.hide();
+                // }
+                // if (_this.$('.btn.owners').hasClass('active')) {
+                //     _this.ownersView.$el.show();
+                // } else {
+                //     _this.ownersView.$el.hide();
+                // }
                 // if (_this.$('.btn.stats').hasClass('active')) {
                 //     _this.statsView.$el.show();
                 //     _this.statsView.resize();
@@ -59,10 +59,10 @@ define([
             this.model.child('name').off('value', this.render, this);
             this.apiView.destroy();
             this.apiView.remove();
-            this.ownersView.destroy();
-            this.ownersView.remove();
-            this.trackersView.destroy();
-            this.trackersView.remove();
+            // this.ownersView.destroy();
+            // this.ownersView.remove();
+            // this.trackersView.destroy();
+            // this.trackersView.remove();
             // this.statsView.destroy();
             // this.statsView.remove();
         },
@@ -76,9 +76,9 @@ define([
                 name: name,
             }));
             this.assign(this.apiView, '.well.api');
-            this.assign(this.ownersView, '.well.owners');
-            this.assign(this.trackersView, '.well.trackers');
-            //this.assign(this.statsView, '.well.stats');
+            // this.assign(this.ownersView, '.well.owners');
+            // this.assign(this.trackersView, '.well.trackers');
+            // this.assign(this.statsView, '.well.stats');
             this.toggleViews();
             return this;
         }
